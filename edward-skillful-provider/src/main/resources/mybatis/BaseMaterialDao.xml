@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.provider.dao.BaseMaterialDao">
+  <resultMap id="Base_Result_Map" type="com.provider.model.BaseMaterial">
+    <constructor>
+      <idArg column="material_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="order_no" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="material_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="material_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="material_spec" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="mnemonic_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="material_unit" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="class_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="class_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="planting_sys_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="planting_sys_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Short" jdbcType="SMALLINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="modify_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Criteria_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Criteria_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    material_id, order_no, code, material_code, material_name, material_spec, mnemonic_code, 
+    material_unit, class_code, class_name, planting_sys_code, planting_sys_name, status, 
+    create_time, modify_time
+  </sql>
+  <select id="selectByCriteria" parameterType="com.provider.model.BaseMaterialCriteria" resultMap="Base_Result_Map">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from base_material
+    <if test="_parameter != null">
+      <include refid="Criteria_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="mysqlDialectPage" />
+  </select>
+  <select id="selectById" parameterType="java.lang.Integer" resultMap="Base_Result_Map">
+    select 
+    <include refid="Base_Column_List" />
+    from base_material
+    where material_id = #{materialId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteById" parameterType="java.lang.Integer">
+    delete from base_material
+    where material_id = #{materialId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByCriteria" parameterType="com.provider.model.BaseMaterialCriteria">
+    delete from base_material
+    <if test="_parameter != null">
+      <include refid="Criteria_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.provider.model.BaseMaterial">
+    <selectKey keyProperty="materialId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into base_material (order_no, code, material_code, 
+      material_name, material_spec, mnemonic_code, 
+      material_unit, class_code, class_name, 
+      planting_sys_code, planting_sys_name, status, 
+      create_time, modify_time)
+    values (#{orderNo,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{materialCode,jdbcType=VARCHAR}, 
+      #{materialName,jdbcType=VARCHAR}, #{materialSpec,jdbcType=VARCHAR}, #{mnemonicCode,jdbcType=VARCHAR}, 
+      #{materialUnit,jdbcType=VARCHAR}, #{classCode,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, 
+      #{plantingSysCode,jdbcType=VARCHAR}, #{plantingSysName,jdbcType=VARCHAR}, #{status,jdbcType=SMALLINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.provider.model.BaseMaterial">
+    <selectKey keyProperty="materialId" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into base_material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="materialCode != null">
+        material_code,
+      </if>
+      <if test="materialName != null">
+        material_name,
+      </if>
+      <if test="materialSpec != null">
+        material_spec,
+      </if>
+      <if test="mnemonicCode != null">
+        mnemonic_code,
+      </if>
+      <if test="materialUnit != null">
+        material_unit,
+      </if>
+      <if test="classCode != null">
+        class_code,
+      </if>
+      <if test="className != null">
+        class_name,
+      </if>
+      <if test="plantingSysCode != null">
+        planting_sys_code,
+      </if>
+      <if test="plantingSysName != null">
+        planting_sys_name,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="modifyTime != null">
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null">
+        #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null">
+        #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialSpec != null">
+        #{materialSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="mnemonicCode != null">
+        #{mnemonicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialUnit != null">
+        #{materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="classCode != null">
+        #{classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="plantingSysCode != null">
+        #{plantingSysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="plantingSysName != null">
+        #{plantingSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByCriteria" parameterType="com.provider.model.BaseMaterialCriteria" resultType="java.lang.Long">
+    select count(*) from base_material
+    <if test="_parameter != null">
+      <include refid="Criteria_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByCriteriaSelective" parameterType="map">
+    update base_material
+    <set>
+      <if test="record.materialId != null">
+        material_id = #{record.materialId,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderNo != null">
+        order_no = #{record.orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="record.code != null">
+        code = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialCode != null">
+        material_code = #{record.materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialName != null">
+        material_name = #{record.materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialSpec != null">
+        material_spec = #{record.materialSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mnemonicCode != null">
+        mnemonic_code = #{record.mnemonicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.materialUnit != null">
+        material_unit = #{record.materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.classCode != null">
+        class_code = #{record.classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.className != null">
+        class_name = #{record.className,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plantingSysCode != null">
+        planting_sys_code = #{record.plantingSysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.plantingSysName != null">
+        planting_sys_name = #{record.plantingSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=SMALLINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modifyTime != null">
+        modify_time = #{record.modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Criteria_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByCriteria" parameterType="map">
+    update base_material
+    set material_id = #{record.materialId,jdbcType=INTEGER},
+      order_no = #{record.orderNo,jdbcType=INTEGER},
+      code = #{record.code,jdbcType=VARCHAR},
+      material_code = #{record.materialCode,jdbcType=VARCHAR},
+      material_name = #{record.materialName,jdbcType=VARCHAR},
+      material_spec = #{record.materialSpec,jdbcType=VARCHAR},
+      mnemonic_code = #{record.mnemonicCode,jdbcType=VARCHAR},
+      material_unit = #{record.materialUnit,jdbcType=VARCHAR},
+      class_code = #{record.classCode,jdbcType=VARCHAR},
+      class_name = #{record.className,jdbcType=VARCHAR},
+      planting_sys_code = #{record.plantingSysCode,jdbcType=VARCHAR},
+      planting_sys_name = #{record.plantingSysName,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=SMALLINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      modify_time = #{record.modifyTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Criteria_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByIdSelective" parameterType="com.provider.model.BaseMaterial">
+    update base_material
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="materialCode != null">
+        material_code = #{materialCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialName != null">
+        material_name = #{materialName,jdbcType=VARCHAR},
+      </if>
+      <if test="materialSpec != null">
+        material_spec = #{materialSpec,jdbcType=VARCHAR},
+      </if>
+      <if test="mnemonicCode != null">
+        mnemonic_code = #{mnemonicCode,jdbcType=VARCHAR},
+      </if>
+      <if test="materialUnit != null">
+        material_unit = #{materialUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="classCode != null">
+        class_code = #{classCode,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null">
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="plantingSysCode != null">
+        planting_sys_code = #{plantingSysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="plantingSysName != null">
+        planting_sys_name = #{plantingSysName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=SMALLINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where material_id = #{materialId,jdbcType=INTEGER}
+  </update>
+  <update id="updateById" parameterType="com.provider.model.BaseMaterial">
+    update base_material
+    set order_no = #{orderNo,jdbcType=INTEGER},
+      code = #{code,jdbcType=VARCHAR},
+      material_code = #{materialCode,jdbcType=VARCHAR},
+      material_name = #{materialName,jdbcType=VARCHAR},
+      material_spec = #{materialSpec,jdbcType=VARCHAR},
+      mnemonic_code = #{mnemonicCode,jdbcType=VARCHAR},
+      material_unit = #{materialUnit,jdbcType=VARCHAR},
+      class_code = #{classCode,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
+      planting_sys_code = #{plantingSysCode,jdbcType=VARCHAR},
+      planting_sys_name = #{plantingSysName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=SMALLINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where material_id = #{materialId,jdbcType=INTEGER}
+  </update>
+  <sql id="mysqlDialectPage">
+    <if test="page != null and page.begin != null and page.begin gte 0">
+      offset #{page.begin}
+    </if>
+    <if test="page != null and page.pageSize != null and page.pageSize gte 0">
+      limit #{page.pageSize}
+    </if>
+  </sql>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- 启动@AspectJ配置和自动代理(除切面以外 时候 使用切点) -->
+	<aop:aspectj-autoproxy/>
+	
+	<!--  aop 配置:测试 -->
+<!-- 	<aop:config>
+		<aop:aspect ref="testAop01">生命一个切面
+			<aop:pointcut expression="execution(* com.aop..*(..))" id="pointCut"/>
+			匹配方法执行之前
+			<aop:before pointcut-ref="pointCut" method="before"/>
+			匹配方法执行之后
+			匹配方法执行之后(正常执行)
+			<aop:after-returning pointcut-ref="pointCut" method="afterReturning"/>
+			匹配方法执行之后(异常执行)
+			<aop:after-throwing pointcut-ref="pointCut"  method="afterThrowing"/> 		
+			匹配方法执行之后(正常和异常都执行)	
+			<aop:after pointcut-ref="pointCut" method="after"/>
+			<aop:around pointcut-ref="pointCut" method="around"/>
+		</aop:aspect>
+	</aop:config -->
+	
+<!-- 	<aop:config>
+		<aop:aspect ref="testAop03" order="1">
+			<aop:pointcut expression="execution(* com.aop..*(..))" id="pointCut"/>
+			<aop:before pointcut-ref="pointCut" method="before"/>
+		</aop:aspect>
+	</aop:config> -->
+	
+<!-- 	<aop:config proxy-target-class="true">
+		<aop:aspect>
+			<aop:declare-parents types-matching="com.aop.AopExample" 
+			implement-interface="com.aop.AddInterface" default-impl="com.aop.AddImpl"/>
+		</aop:aspect>
+	</aop:config> -->
+	
+	<!-- java.lang.NoClassDefFoundError: com/aop/a (wrong name: com/aop/A) 在xml配置的类必须是public-->
+	<!-- <bean class="com.aop.a"></bean> -->
+	
+	<!-- 自动扫描 本包和子包-->
+	<context:component-scan base-package="com.aop"/>
+</beans>

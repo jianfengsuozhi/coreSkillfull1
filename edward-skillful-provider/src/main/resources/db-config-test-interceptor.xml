@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd">
+	<!-- 自动扫描 本包和子包-->
+	<context:component-scan base-package="com.proxy"/>
+	
+	<!-- 相当于静态代理 -->
+<!-- 	<bean id="bean" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">  
+            <value>com.proxy.Subject</value>  
+        </property> 
+		 <property name="interceptorNames">  
+            <list>  
+                <value>myInterceptor</value>  
+                <value>realSubject</value>  
+            </list>  
+        </property>  
+	</bean> -->
+	<!--  相当于一个动态代理 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.proxy..*.*(..))" id="testPointCut"/>
+		<aop:advisor pointcut-ref="testPointCut" advice-ref="myInterceptor"/>
+	</aop:config>
+</beans>

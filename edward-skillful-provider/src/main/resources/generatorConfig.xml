@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <properties resource="jdbc.properties"/>
+  <!-- 必须是绝对路径，且不能使用${} -->
+  <classPathEntry location="E:\java\maven repository\mysql\mysql-connector-java\5.1.26\mysql-connector-java-5.1.26.jar" />
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+    <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+    <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+    <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+<!--    	<plugin type="com.self.plugins.RenameModelPlugin">
+      <property name="modelPackage" value="com.api.model" />
+      <property name="criteriaPackage" value="com.provider.criteria" />
+    </plugin> -->
+    
+    <plugin type="com.self.plugins.SqlPagePlugin">
+        <property name="pageCriteriaPackage" value="com.provider.page"/>
+    </plugin>
+	
+    <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+      <property name="searchString" value="Example$" />
+      <property name="replaceString" value="Criteria" />
+    </plugin>
+    
+     <plugin type="com.self.plugins.RenameMapperJavaPlugin">
+      <property name="searchString" value="Mapper$" />
+      <property name="replaceString" value="Dao" />
+      <property name="targetProject" value="src/main/java"/>
+      <property name="targetPackage" value="com.provider.dao"/>
+      <property name="daoInterface" value="com.provider.page.SingleTableDao"/>
+    </plugin>
+    
+    <plugin type="com.self.plugins.RenameMapperXmlPlugin">
+      <property name="searchString" value="Mapper.xml$" />
+      <property name="replaceString" value="Dao.xml" />
+    </plugin>
+    
+<!--     <plugin type="com.self.plugins.MapperConfigPlugin01">
+        <property name="targetPackage" value="com._520it.mybatis"/>
+        <property name="targetProject" value="src/main/resources"/>
+    </plugin> -->
+    
+<!--     <plugin type="com.self.plugins.GenerateServiceAndImpl">
+        <property name="targetProject" value="src/main/java"/>
+        <property name="interfaceTargetPackage" value="com.service"/>
+        <property name="implTargetPackage" value="com.serviceImpl"/>
+        <property name="parentService" value="com.service.ParentService"/>
+        <property name="parentImpl" value="com.serviceImpl.AbstractBaseService"/>
+    </plugin> -->
+    
+    <plugin type="com.self.plugins.OnlyServiceAndImplPlugin">
+    	<property name="targetProject" value="src/main/java"/>
+    	<property name="interfaceTargetPackage" value="com.api.service"/>
+        <property name="implTargetPackage" value="com.provider.serviceImpl"/>
+    </plugin>
+    
+    <!-- 添加方法，主键，实现接口 -->
+<!--     <plugin type="com.self.plugins.ModelAddSetMethodPlugin">
+    </plugin> -->
+    
+    <!-- 去除自动生成的注释 -->
+    <commentGenerator>
+      <property name="suppressAllComments" value="true" />
+      <property name="suppressDate" value="true" />
+    </commentGenerator>
+    <jdbcConnection driverClass="${jdbc.driverClassName}"
+      connectionURL="${jdbc.url}"
+      userId="${jdbc.username}" password="${jdbc.password}">
+    </jdbcConnection>
+
+    <javaTypeResolver>
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+    <!-- generate Model -->
+    <javaModelGenerator targetPackage="com.provider.model"
+      targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+      <property name="constructorBased" value="true" />
+    </javaModelGenerator>
+
+    <!-- generate xml -->
+    <sqlMapGenerator targetPackage="."
+      targetProject="src/main/resources/mybatis">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+    <!-- generate Mapper -->
+    <javaClientGenerator type="XMLMAPPER"
+                         targetPackage="com.provider.dao" targetProject="src/main/java">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+    <!-- =================================================================== -->
+    <!-- 请按照表名的字典顺序维护 -->
+    <!-- =================================================================== -->
+    <table tableName="base_material" domainObjectName="BaseMaterial">
+      <generatedKey column="material_id" identity="true"
+				sqlStatement="Mysql"></generatedKey>
+    </table>
+    
+    <table tableName="base_material_class" domainObjectName="BaseMaterialClass">
+      <generatedKey column="class_id" identity="true"
+				sqlStatement="Mysql"></generatedKey>
+	<!--   <property name="primary" value="team_id"/> -->
+    </table>
+    
+    <table tableName="log" domainObjectName="Log">
+      <generatedKey column="id" identity="true"
+				sqlStatement="Mysql"></generatedKey>
+	<!--   <property name="primary" value="team_id"/> -->
+    </table>
+  </context>
+</generatorConfiguration>

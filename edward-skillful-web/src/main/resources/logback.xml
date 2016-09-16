@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <charset>UTF-8</charset>
+      <pattern>%d %p [%c] - %m%n</pattern>
+    </encoder>
+  </appender>
+  
+	<!--sql log-->
+    <logger name="com.ibatis" level="DEBUG"/>  
+    <logger name="java.sql" level="DEBUG" />  
+
+  <!-- 针对jar和项目 -->
+  <root level="debug">
+    <appender-ref ref="console"/>
+  </root>
+</configuration>
