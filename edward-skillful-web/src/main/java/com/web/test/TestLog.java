@@ -20,4 +20,13 @@ public class TestLog {
 		return "index";
 	}
 
+	@RequestMapping("/list")
+	public String list(){
+		return "list";
+	}
+
+	@RequestMapping("/add")
+	public String add(){
+		return "add";
+	}
 }

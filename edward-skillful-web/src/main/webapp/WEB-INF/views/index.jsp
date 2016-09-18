@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/layouts/basic.jsp" %>
 <html>
 <head>
@@ -9,7 +9,7 @@
     <link href="css/adminStyle.css" rel="stylesheet" type="text/css" />
 
     <title>MOOC网站管理系统</title>
-    <script type="text/javascript" src="js/jquery1.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery1.js"></script>
     <script type="text/javascript">
         $(document).ready(
                 function() {
@@ -228,18 +228,17 @@
     <div class="div1">
         <div class="left_top">
             <img src="${ctx}/images/bbb_01.jpg"><img src="${ctx}/images/bbb_02.jpg"
-                                                     id="2"><img src="${ctx}/images/bbb_03.jpg"><img
+                                              id="2"><img src="${ctx}/images/bbb_03.jpg"><img
                 src="${ctx}/images/bbb_04.jpg">
         </div>
 
         <div class="div2">
             <div class="spgl"></div>
-            物资分类
+            视频管理
         </div>
         <div class="div3">
             <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('addMaterialClass.jsp');">物资分类列表</a></li>
-
+                   onClick="openurl('${ctx}/list.htm');">所有视频列表</a></li>
         </div>
         <div class="div2">
             <div class="spgl"></div>
@@ -316,6 +315,12 @@
             scrolling="auto" marginheight="0" marginwidth="0" align="center"
             style="border: 0px solid #CCC; margin: 0; padding: 0;"></iframe>
 </div>
+
+
+
+
+
+
 
 </body>
 </html>

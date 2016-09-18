@@ -22,4 +22,6 @@ public class BaseMaterialClassAction {
         modelMap.addAttribute("list",baseMaterialClassService.selectAll());
         return "baseMaterialClass/list";
     }
+
+
 }
