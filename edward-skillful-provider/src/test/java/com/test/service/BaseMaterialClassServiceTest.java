@@ -70,7 +70,7 @@ public class BaseMaterialClassServiceTest extends AbstractTest{
 		BaseMaterialClass baseMaterialClass = new BaseMaterialClass();
 		baseMaterialClass.setClassName("修改");
 		baseMaterialClass.setClassId(1);
-		baseMaterialClassService.update(baseMaterialClass);
+//		baseMaterialClassService.update(baseMaterialClass);
 	}
 	
 	@Test
@@ -80,6 +80,6 @@ public class BaseMaterialClassServiceTest extends AbstractTest{
 	
 	@Test
 	public void insertTest() throws MyBusinessException{
-		baseMaterialClassService.insert(baseMaterialClass);
+//		baseMaterialClassService.insert(baseMaterialClass);
 	}
 }

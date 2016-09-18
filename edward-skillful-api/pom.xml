@@ -20,6 +20,11 @@
   			<artifactId>edward-skillful-constantvar</artifactId>
  			 <version>${edward-skillful-constantvar}</version>
   		</dependency>
+      <dependency>
+          <groupId>com.Edward</groupId>
+          <artifactId>edward-skillful-provider</artifactId>
+          <version>${edward-skillful-provider}</version>
+      </dependency>
 	    <!-- Spring Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>

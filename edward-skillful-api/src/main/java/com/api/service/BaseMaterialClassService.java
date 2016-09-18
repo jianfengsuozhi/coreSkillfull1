@@ -2,6 +2,9 @@ package com.api.service;
 
 import com.exception.MyBusinessException;
 import com.provider.model.BaseMaterialClass;
+import com.provider.page.PageList;
+
+import java.util.List;
 
 public interface BaseMaterialClassService {
 	/**
@@ -12,13 +15,11 @@ public interface BaseMaterialClassService {
 	BaseMaterialClass selectById(Integer id);
 	
 	/**
-	 * 修改
+	 * 插入和修改
 	 * @param baseMaterialClass
 	 * @throws MyBusinessException 
 	 */
-	void update(BaseMaterialClass baseMaterialClass) throws MyBusinessException;
-	
 	void save(BaseMaterialClass baseMaterialClass) throws MyBusinessException;
-	
-	void insert(BaseMaterialClass baseMaterialClass) throws MyBusinessException;
+
+	List<BaseMaterialClass> selectAll();
 }
