@@ -17,10 +17,10 @@
 	<!--加载properties  -->
 	<context:property-placeholder location="classpath:config.properties"/>
     <!-- 自动扫描 本包和子包-->
-  <context:component-scan base-package="com.web"/>
+    <context:component-scan base-package="com.web"/>
   	
   	<!--规定模板文件的类型和位置-->
-    <bean id="velocityConfigurer"
+<!--    <bean id="velocityConfigurer"
         class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
     <property name="resourceLoaderPath" value="WEB-INF/views/"/>
     <property name="velocityProperties">
@@ -31,8 +31,8 @@
     </property>
   </bean>
   
-	<!--view resolver
-    对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
+	&lt;!&ndash;view resolver
+    对转向页面的路径解析。prefix：前缀， suffix：后缀 &ndash;&gt;
   <bean id="viewResolver"
         class="org.springframework.web.servlet.view.velocity.VelocityLayoutViewResolver">
     <property name="suffix" value=".vm"/>
@@ -40,14 +40,13 @@
     <property name="toolboxConfigLocation" value="WEB-INF/vm-toolbox.xml"/>
     <property name="contentType" value="text/html;charset=UTF-8"/>
     <property name="layoutUrl" value="layout/default.vm"/>
-  </bean>
-  
-  	<!-- 对转向页面的路径解析。prefix：前缀， suffix：后缀 -->
-<!-- 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-      <property name="prefix" value="" />
-      <property name="suffix" value=".jsp" />
-   </bean> -->
-   
+  </bean>-->
 
-  
+    <!--视图路径解析 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/views/" />
+        <property name="suffix" value=".jsp" />
+        <property name="order" value="999" />
+    </bean>
+   
 </beans>
