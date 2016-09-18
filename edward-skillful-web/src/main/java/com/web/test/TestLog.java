@@ -11,13 +11,13 @@ import com.provider.model.BaseMaterialClass;
 @RequestMapping(value = "/log")
 @Controller
 public class TestLog {
-//	@Resource
-//	private BaseMaterialClassService baseMaterialClassService;
+	@Resource
+	private BaseMaterialClassService baseMaterialClassService;
 	
 	@RequestMapping(value="/index")
 	public String test(){
-//		BaseMaterialClass baseMaterialClass = baseMaterialClassService.selectById(1);
-//		System.out.println(baseMaterialClass);
+		BaseMaterialClass baseMaterialClass = baseMaterialClassService.selectById(1);
+		System.out.println(baseMaterialClass);
 		return "log/index";
 	}
 

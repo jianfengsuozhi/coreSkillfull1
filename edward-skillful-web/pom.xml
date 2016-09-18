@@ -27,6 +27,11 @@
   		<artifactId>edward-skillful-utils</artifactId>
   		<version>${edward-skillful-utils}</version>
   	</dependency>
+      <dependency>
+          <groupId>com.Edward</groupId>
+          <artifactId>edward-skillful-provider</artifactId>
+          <version>${edward-skillful-provider}</version>
+      </dependency>
   	<dependency>
   		<groupId>com.Edward</groupId>
   		<artifactId>edward-skillful-constantvar</artifactId>

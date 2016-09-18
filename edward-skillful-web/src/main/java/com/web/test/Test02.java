@@ -16,5 +16,6 @@ public class Test02 {
         System.out.println("中国人5");
         System.out.println("中国人6");
         System.out.println("中国人7");
+
     }
 }

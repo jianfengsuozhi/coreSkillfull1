@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task.xsd">
+
+    <context:component-scan base-package="com.provider.serviceImpl"/>
+
+    <!-- dataSource 使用apache的dbcp插件连接数据库-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
+          p:driverClassName="${jdbc.driverClassName}"
+          p:url="${jdbc.url}"
+          p:username="${jdbc.username}"
+          p:password="${jdbc.password}"
+          p:maxWait="50000"
+    />
+
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:mybatis/*.xml</value>
+            </list>
+        </property>
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
+          p:basePackage="com.provider.dao"
+          p:markerInterface="com.provider.page.MyBatisRepository"
+          p:sqlSessionFactoryBeanName="sqlSessionFactoryBean"
+    />
+
+    <!-- 配置事务 -->
+    <!-- 事务切面 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="dataSource"/>
+    <aop:config>
+        <aop:pointcut id="allManagerMethod" expression="execution(* com.provider.serviceImpl..*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="allManagerMethod"/>
+    </aop:config>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="insert*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="create*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="modify*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="upload*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="alter*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="distribute*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="revoke*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="revoke*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="cardHandle" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="reset*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="audit*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="refer*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="select*" propagation="REQUIRED" rollback-for="Throwable"/>
+            <tx:method name="*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+</beans>
