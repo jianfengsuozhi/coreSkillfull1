@@ -1,4 +1,4 @@
-package com.provider.page;
+package com.api.page;
 
 import java.io.Serializable;
 

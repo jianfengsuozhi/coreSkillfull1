@@ -39,7 +39,7 @@
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
           p:basePackage="com.provider.dao"
-          p:markerInterface="com.provider.page.MyBatisRepository"
+          p:markerInterface="com.api.page.MyBatisRepository"
           p:sqlSessionFactoryBeanName="sqlSessionFactoryBean"
     />
 

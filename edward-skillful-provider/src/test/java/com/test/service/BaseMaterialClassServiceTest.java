@@ -75,7 +75,7 @@ public class BaseMaterialClassServiceTest extends AbstractTest{
 	
 	@Test
 	public void saveTest() throws MyBusinessException{
-		baseMaterialClassService.save(baseMaterialClass);
+//		baseMaterialClassService.save(baseMaterialClass);
 	}
 	
 	@Test

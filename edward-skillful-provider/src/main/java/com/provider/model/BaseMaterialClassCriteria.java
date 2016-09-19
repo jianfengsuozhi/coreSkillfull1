@@ -1,6 +1,8 @@
 package com.provider.model;
 
-import com.provider.page.PageCriteria;
+
+import com.api.page.PageCriteria;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

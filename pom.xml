@@ -49,6 +49,8 @@
       <servlet.version>3.0.1</servlet.version>
       <jsp-api.version>2.1</jsp-api.version>
       <jstl.version>1.2</jstl.version>
+
+      <guava.version>13.0.1</guava.version>
   </properties>
   
   <dependencyManagement>
@@ -298,6 +300,11 @@
               <artifactId>javax.servlet-api</artifactId>
               <version>${servlet.version}</version>
               <scope>provided</scope>
+          </dependency>
+          <dependency>
+              <groupId>com.google.guava</groupId>
+              <artifactId>guava</artifactId>
+              <version>${guava.version}</version>
           </dependency>
 	  </dependencies>
   </dependencyManagement>

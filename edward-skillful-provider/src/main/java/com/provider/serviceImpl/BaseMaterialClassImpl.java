@@ -1,56 +1,43 @@
 package com.provider.serviceImpl;
 
 
-import javax.annotation.Resource;
-
+import com.api.page.AbstractBaseServiceImpl;
+import com.api.page.Page;
+import com.api.page.PageList;
+import com.api.page.SingleTableDao;
+import com.api.service.BaseMaterialClassService;
+import com.exception.MyIllegalArgumentException;
+import com.provider.dao.BaseMaterialClassDao;
+import com.provider.model.BaseMaterialClass;
 import com.provider.model.BaseMaterialClassCriteria;
-import com.provider.model.BaseMaterialCriteria;
-import com.provider.page.PageList;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.api.service.BaseMaterialClassService;
-import com.exception.MyBusinessException;
-import com.provider.dao.BaseMaterialClassDao;
-import com.provider.model.BaseMaterialClass;
-
-import java.util.List;
+import javax.annotation.Resource;
 
 
 @Service
-public class BaseMaterialClassImpl implements BaseMaterialClassService {
+public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialClass,BaseMaterialClassCriteria> implements BaseMaterialClassService {
 	private Logger logger = LoggerFactory.getLogger(BaseMaterialClassImpl.class);  
 	@Resource
 	private BaseMaterialClassDao baseMaterialClassDao;
 
 	@Override
-	public BaseMaterialClass selectById(Integer id) {
-		return baseMaterialClassDao.selectById(id);
-	}
-
-	private void update(BaseMaterialClass baseMaterialClass) throws MyBusinessException {
-		baseMaterialClassDao.updateByIdSelective(baseMaterialClass);
-//		MyBusinessException.checkTrue(1==1, logger, "测试可检查异常");
+	protected SingleTableDao<BaseMaterialClass, BaseMaterialClassCriteria> getMyBatisRepository() {
+		return baseMaterialClassDao;
 	}
 
 	@Override
-	public void save(BaseMaterialClass baseMaterialClass) throws MyBusinessException {
-		if(null == baseMaterialClass.getClassId()){
-			this.insert(baseMaterialClass);
-		}else{
-			this.update(baseMaterialClass);
-		}
-	}
-	
-	private void insert(BaseMaterialClass baseMaterialClass) throws MyBusinessException {
-		baseMaterialClassDao.insert(baseMaterialClass);
-	}
-
-	@Override
-	public List<BaseMaterialClass> selectAll() {
+	public PageList<BaseMaterialClass> pageList(String className, Page page) {
 		BaseMaterialClassCriteria criteria = new BaseMaterialClassCriteria();
 		BaseMaterialClassCriteria.Criteria innerCriteria = criteria.or();
-		return baseMaterialClassDao.selectByCriteria(criteria);
+		if(StringUtils.isNotBlank(className)){
+			innerCriteria.andClassNameLikeInsensitive("%"+className.trim()+"%");
+		}
+		criteria.setOrderByClause("order_no,class_name");
+		criteria.setPage(page);
+		return this.queryPageList(criteria,page);
 	}
 }

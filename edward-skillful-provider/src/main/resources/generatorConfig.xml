@@ -44,19 +44,19 @@
         <property name="targetProject" value="src/main/resources"/>
     </plugin> -->
     
-<!--     <plugin type="com.self.plugins.GenerateServiceAndImpl">
-        <property name="targetProject" value="src/main/java"/>
-        <property name="interfaceTargetPackage" value="com.service"/>
-        <property name="implTargetPackage" value="com.serviceImpl"/>
-        <property name="parentService" value="com.service.ParentService"/>
-        <property name="parentImpl" value="com.serviceImpl.AbstractBaseService"/>
-    </plugin> -->
+    <plugin type="com.self.plugins.GenerateServiceAndImpl">
+      <property name="targetProject" value="src/main/java"/>
+      <property name="interfaceTargetPackage" value="com.api.service"/>
+      <property name="parentService" value="com.api.page.AbstractBaseService"/>
+      <property name="implTargetPackage" value="com.provider.serviceImpl"/>
+      <property name="parentImpl" value="com.api.page.AbstractBaseServiceImpl"/>
+    </plugin>
     
-    <plugin type="com.self.plugins.OnlyServiceAndImplPlugin">
+<!--    <plugin type="com.self.plugins.OnlyServiceAndImplPlugin">
     	<property name="targetProject" value="src/main/java"/>
     	<property name="interfaceTargetPackage" value="com.api.service"/>
         <property name="implTargetPackage" value="com.provider.serviceImpl"/>
-    </plugin>
+    </plugin>-->
     
     <!-- 添加方法，主键，实现接口 -->
 <!--     <plugin type="com.self.plugins.ModelAddSetMethodPlugin">

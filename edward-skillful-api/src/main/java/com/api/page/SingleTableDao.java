@@ -1,9 +1,9 @@
-package com.provider.page;
+package com.api.page;
 
-
-import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface SingleTableDao<U, V extends PageCriteria> extends MyBatisRepository {
     int countByCriteria(V example);
