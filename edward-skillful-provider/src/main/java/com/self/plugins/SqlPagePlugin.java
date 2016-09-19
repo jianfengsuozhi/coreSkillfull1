@@ -22,25 +22,53 @@ public class SqlPagePlugin extends PluginAdapter{
 	public boolean validate(List<String> warnings) {
 		return true;
 	}
-	
+
+/*	@Override
+	public boolean sqlMapCountByExampleElementGenerated(XmlElement element, IntrospectedTable introspectedTable) {
+		List<Attribute> attributes = element.getAttributes();
+		for (Attribute item : attributes){
+			if("resultType".equals(item.getName())){
+				Attribute attribute = new Attribute("resultType","java.lang.Integer");
+				element.addAttribute(attribute);
+			}
+		}
+		return super.sqlMapCountByExampleElementGenerated(element, introspectedTable);
+	}*/
+
 	@Override
 	public boolean sqlMapDocumentGenerated(Document document,
 			IntrospectedTable introspectedTable) {
-		//mapper
+
 		XmlElement rootElement = document.getRootElement();
-		
+		//sql
 		XmlElement sqlElement = new XmlElement("sql");
 		sqlElement.addAttribute(new Attribute("id", "mysqlDialectPage"));
 		XmlElement ifElement = new XmlElement("if");
 		ifElement.addAttribute(new Attribute("test", "page != null and page.begin != null and page.begin gte 0"));
-		ifElement.addElement(new TextElement("offset #{page.begin}"));
+		ifElement.addElement(new TextElement("limit #{page.begin}"));
 		sqlElement.addElement(ifElement);
 		
 		XmlElement ifElement1 = new XmlElement("if");
 		ifElement1.addAttribute(new Attribute("test", "page != null and page.pageSize != null and page.pageSize gte 0"));
-		ifElement1.addElement(new TextElement("limit #{page.pageSize}"));
+		ifElement1.addElement(new TextElement(", #{page.pageSize}"));
 		sqlElement.addElement(ifElement1);
-		
+
+		//countByCriteria
+		XmlElement countByCriteria = new XmlElement("select");
+		countByCriteria.addAttribute(new Attribute("id","countByCriteria"));
+		String criteriaName = getContext().getJavaModelGeneratorConfiguration().getTargetPackage()+"."+
+				introspectedTable.getTableConfiguration().getDomainObjectName()+"Criteria";
+		countByCriteria.addAttribute(new Attribute("parameterType",criteriaName));
+		countByCriteria.addAttribute(new Attribute("resultType","java.lang.Integer"));
+		countByCriteria.addElement(new TextElement("select count(*) from "+introspectedTable.getTableConfiguration().getTableName()));
+		XmlElement if1 = new XmlElement("if");
+		if1.addAttribute(new Attribute("test","_parameter != null"));
+		XmlElement include = new XmlElement("include");
+		include.addAttribute(new Attribute("refid","Criteria_Where_Clause"));
+		if1.addElement(include);
+		countByCriteria.addElement(if1);
+
+		rootElement.addElement(countByCriteria);
 		rootElement.addElement(sqlElement);
 		return super.sqlMapDocumentGenerated(document, introspectedTable);
 	}
@@ -54,6 +82,7 @@ public class SqlPagePlugin extends PluginAdapter{
 		return super.sqlMapSelectByExampleWithoutBLOBsElementGenerated(element,
 				introspectedTable);
 	}
+
 	@Override
 	public boolean modelExampleClassGenerated(TopLevelClass topLevelClass,
 			IntrospectedTable introspectedTable) {

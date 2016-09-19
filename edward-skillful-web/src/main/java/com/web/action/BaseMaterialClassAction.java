@@ -34,10 +34,12 @@ public class BaseMaterialClassAction {
         return "baseMaterialClass/addOrUpdate";
     }
 
-    @RequestMapping(value = "/insert",method = RequestMethod.POST)
-    public String insert(
+    @RequestMapping(value = "/save",method = RequestMethod.POST)
+    public String save(
             @RequestParam(value = "baseMaterialClass",required = true)BaseMaterialClass baseMaterialClass) throws MyException {
-        baseMaterialClass.setParentHospitalId(1);
+        if (null == baseMaterialClass.getClassId()){
+            baseMaterialClass.setParentHospitalId(1);
+        }
         baseMaterialClassService.save(baseMaterialClass);
         return "redirect:baseMaterialClass/list.htm";
     }
@@ -49,14 +51,7 @@ public class BaseMaterialClassAction {
         return "baseMaterialClass/addOrUpdate";
     }
 
-    @RequestMapping(value = "/modify",method = RequestMethod.POST)
-    public String modify(
-            @RequestParam(value = "baseMaterialClass",required = true)BaseMaterialClass baseMaterialClass) throws MyException {
-        baseMaterialClassService.save(baseMaterialClass);
-        return "redirect:baseMaterialClass/list.htm";
-    }
-
-    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public String delete(
             @RequestParam(value = "classId",required = true)Integer classId) throws MyException {
         baseMaterialClassService.delete(classId);

@@ -87,7 +87,7 @@
 
     <!-- generate xml -->
     <sqlMapGenerator targetPackage="."
-      targetProject="src/main/resources/mybatis">
+      targetProject="src/main/resources/mybatis" >
       <property name="enableSubPackages" value="true" />
     </sqlMapGenerator>
 
@@ -99,12 +99,12 @@
     <!-- =================================================================== -->
     <!-- 请按照表名的字典顺序维护 -->
     <!-- =================================================================== -->
-    <table tableName="base_material" domainObjectName="BaseMaterial">
+    <table tableName="base_material" domainObjectName="BaseMaterial" enableCountByExample="false">
       <generatedKey column="material_id" identity="true"
 				sqlStatement="Mysql"></generatedKey>
     </table>
     
-    <table tableName="base_material_class" domainObjectName="BaseMaterialClass">
+    <table tableName="base_material_class" domainObjectName="BaseMaterialClass" enableCountByExample="false">
       <generatedKey column="class_id" identity="true"
 				sqlStatement="Mysql"></generatedKey>
     </table>

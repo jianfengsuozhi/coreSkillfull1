@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/layouts/basic.jsp" %>
@@ -14,10 +15,10 @@
     <script type="text/javascript" src="${ctx}/Js/bootstrap.js"></script>
     <script type="text/javascript" src="${ctx}/Js/ckform.js"></script>
     <script type="text/javascript" src="${ctx}/Js/common.js"></script>
+    <script type="text/javascript" src="${ctx}/Js/jquerypicture.js"></script>
 
     <style type="text/css">
         body {font-size: 20px;
-            font-size: 20px;
             padding-bottom: 40px;
             background-color:#e9e7ef;
         }
@@ -37,40 +38,30 @@
 
     </style>
 </head>
-<body >
-<form class="form-inline definewidth m20" action="${ctx}/baseMaterialClass/list.htm" method="get">
-    <font color="#777777"><strong>视频名称：</strong></font>
-    <input type="text" name="menuname" id="menuname"class="abc input-default" placeholder="" value="">&nbsp;&nbsp;
-    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
-    <%--<button type="button"  id="addnew"><a href="${ctx}/add.htm">添加视频</a></button>--%>
-    <a href="${ctx}/baseMaterialClass/toAdd.htm">添加视频</a>
+<body>
+<form action="${ctx}/baseMaterialClass/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data">
+    <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
+        <tr>
+            <input type="hidden" name="GoodsPicture" value="" />
+            <td class="tableleft">序号</td>
+            <td><input type="text" name="videosName"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">类别名称</td>
+            <td><input type="text" name="GoodsNormalPrice"/></td>
+        <tr>
+            <td class="tableleft">类别编码</td>
+            <td><input type="text" name="GoodsNormalPrice"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft"></td>
+            <td>
+                <button style="margin-left:5px;"type="submit" class="btn btn-primary" type="button"  >保存</button> &nbsp;&nbsp;
+                <button type="button" class="btn btn-success" name="backid" id="backid">返回列表</button>
+            </td>
+        </tr>
+    </table>
 </form>
-<table class="table table-bordered table-hover definewidth m10">
-    <thead>
-    <tr>
-        <th>视频名称</th>
-
-        <th>分类</th>
-        <th>上传者</th>
-        <th>上传日期</th>
-
-
-        <th>管理菜单</th>
-    </tr>
-    </thead>
-
-    <tr>
-        <td>复仇者联盟</td>
-        <td>电影</td>
-        <td><a href="studentdetail.html">小强</a></td>
-        <td>2016.07.22</td>
-
-        <td> <a href="${ctx}/baseMaterialClass/delete.htm">删除</a></td>
-
-    </tr>
-
-
-</table>
 
 </body>
 </html>

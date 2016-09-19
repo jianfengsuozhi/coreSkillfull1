@@ -9,7 +9,7 @@
     <link href="css/adminStyle.css" rel="stylesheet" type="text/css" />
 
     <title>MOOC网站管理系统</title>
-    <script type="text/javascript" src="${ctx}/js/jquery1.js"></script>
+    <script type="text/javascript" src="${ctx}/Js/jquery1.js"></script>
     <script type="text/javascript">
         $(document).ready(
                 function() {
@@ -234,11 +234,11 @@
 
         <div class="div2">
             <div class="spgl"></div>
-            视频管理
+            物资分类
         </div>
         <div class="div3">
             <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/list.htm');">所有视频列表</a></li>
+                   onClick="openurl('${ctx}/baseMaterialClass/list.htm');">列表</a></li>
         </div>
         <div class="div2">
             <div class="spgl"></div>
