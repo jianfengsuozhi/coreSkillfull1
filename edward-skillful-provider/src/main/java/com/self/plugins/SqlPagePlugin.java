@@ -1,20 +1,15 @@
 package com.self.plugins;
 
-import java.util.Iterator;
-import java.util.List;
-
-import org.mybatis.generator.api.GeneratedJavaFile;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.PluginAdapter;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
-import org.mybatis.generator.api.dom.java.InnerClass;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.Attribute;
 import org.mybatis.generator.api.dom.xml.Document;
 import org.mybatis.generator.api.dom.xml.TextElement;
 import org.mybatis.generator.api.dom.xml.XmlElement;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class SqlPagePlugin extends PluginAdapter{
 
@@ -32,8 +27,8 @@ public class SqlPagePlugin extends PluginAdapter{
 		XmlElement sqlElement = new XmlElement("sql");
 		sqlElement.addAttribute(new Attribute("id", "mysqlDialectPage"));
 		XmlElement ifElement = new XmlElement("if");
-		ifElement.addAttribute(new Attribute("test", "page != null and page.begin != null and page.begin gte 0"));
-		ifElement.addElement(new TextElement("offset #{page.begin}"));
+		ifElement.addAttribute(new Attribute("test", "page != null and page.offSet != null and page.offSet gte 0"));
+		ifElement.addElement(new TextElement("offset #{page.offSet}"));
 		sqlElement.addElement(ifElement);
 		
 		XmlElement ifElement1 = new XmlElement("if");

@@ -7,8 +7,9 @@ import com.provider.dao.BaseMaterialDao;
 import com.provider.model.BaseMaterial;
 import com.provider.model.BaseMaterialCriteria;
 import javax.annotation.Resource;
+import org.springframework.stereotype.Service;
 
-@Resource
+@Service
 public class BaseMaterialImpl extends AbstractBaseServiceImpl<BaseMaterial, BaseMaterialCriteria> implements BaseMaterialService {
     @Resource
     private BaseMaterialDao baseMaterialDao;

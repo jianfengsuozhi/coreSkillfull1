@@ -370,8 +370,8 @@
     where material_id = #{materialId,jdbcType=INTEGER}
   </update>
   <sql id="mysqlDialectPage">
-    <if test="page != null and page.begin != null and page.begin gte 0">
-      offset #{page.begin}
+    <if test="page != null and page.offSet != null and page.offSet gte 0">
+      offset #{page.offSet}
     </if>
     <if test="page != null and page.pageSize != null and page.pageSize gte 0">
       limit #{page.pageSize}

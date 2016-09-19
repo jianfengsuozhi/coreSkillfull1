@@ -81,9 +81,9 @@ public class GenerateServiceAndImpl extends PluginAdapter{
 		 String domainObjectName = introspectedTable.getTableConfiguration().getDomainObjectName();
 		 String intefaceImplName = String.format(implTargetPackage+".%sImpl", domainObjectName);
 		 TopLevelClass topLevelClass = new TopLevelClass(new FullyQualifiedJavaType(intefaceImplName));
-		 //在class添加@Rescouce
-		 topLevelClass.addAnnotation("@Resource");
-		 topLevelClass.addImportedType(new FullyQualifiedJavaType("javax.annotation.Resource"));
+		 //在class添加@Service
+		 topLevelClass.addAnnotation("@Service");
+		 topLevelClass.addImportedType(new FullyQualifiedJavaType("org.springframework.stereotype.Service"));
 
 		 String modelTargetPackage = getContext().getJavaModelGeneratorConfiguration().getTargetPackage();
 		 String modelName = modelTargetPackage +"."+ domainObjectName;
