@@ -45,12 +45,14 @@
     <joda-time.version>2.1</joda-time.version>
     <!-- pinyin4j -->
       <belerweb.version>2.5.0</belerweb.version>
+      <joda-time.version>2.1</joda-time.version>
       <!-- servlet, JSTL -->
       <servlet.version>3.0.1</servlet.version>
       <jsp-api.version>2.1</jsp-api.version>
       <jstl.version>1.2</jstl.version>
 
       <guava.version>13.0.1</guava.version>
+      <mysql.version>5.1.34</mysql.version>
   </properties>
   
   <dependencyManagement>
@@ -305,6 +307,17 @@
               <groupId>com.google.guava</groupId>
               <artifactId>guava</artifactId>
               <version>${guava.version}</version>
+          </dependency>
+          <dependency>
+              <groupId>mysql</groupId>
+              <artifactId>mysql-connector-java</artifactId>
+              <version>${mysql.version}</version>
+          </dependency>
+
+          <dependency>
+              <groupId>joda-time</groupId>
+              <artifactId>joda-time</artifactId>
+              <version>${joda-time.version}</version>
           </dependency>
 	  </dependencies>
   </dependencyManagement>

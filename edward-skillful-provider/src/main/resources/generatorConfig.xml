@@ -6,7 +6,7 @@
 <generatorConfiguration>
   <properties resource="jdbc.properties"/>
   <!-- 必须是绝对路径，且不能使用${} -->
-  <classPathEntry location="E:\java\maven repository\mysql\mysql-connector-java\5.1.26\mysql-connector-java-5.1.26.jar" />
+  <classPathEntry location="target/dependency/mysql-connector-java-5.1.34.jar" />
 
   <context id="DB2Tables" targetRuntime="MyBatis3">
     <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
@@ -18,7 +18,7 @@
     </plugin> -->
     
     <plugin type="com.self.plugins.SqlPagePlugin">
-        <property name="pageCriteriaPackage" value="com.provider.page"/>
+        <property name="pageCriteriaPackage" value="com.api.page"/>
     </plugin>
 	
     <plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
@@ -31,7 +31,7 @@
       <property name="replaceString" value="Dao" />
       <property name="targetProject" value="src/main/java"/>
       <property name="targetPackage" value="com.provider.dao"/>
-      <property name="daoInterface" value="com.provider.page.SingleTableDao"/>
+      <property name="daoInterface" value="com.api.page.SingleTableDao"/>
     </plugin>
     
     <plugin type="com.self.plugins.RenameMapperXmlPlugin">
@@ -50,6 +50,7 @@
       <property name="parentService" value="com.api.page.AbstractBaseService"/>
       <property name="implTargetPackage" value="com.provider.serviceImpl"/>
       <property name="parentImpl" value="com.api.page.AbstractBaseServiceImpl"/>
+      <property name="singleDao" value="com.api.page.SingleTableDao"/>
     </plugin>
     
 <!--    <plugin type="com.self.plugins.OnlyServiceAndImplPlugin">
@@ -106,13 +107,13 @@
     <table tableName="base_material_class" domainObjectName="BaseMaterialClass">
       <generatedKey column="class_id" identity="true"
 				sqlStatement="Mysql"></generatedKey>
-	<!--   <property name="primary" value="team_id"/> -->
     </table>
-    
+	<!--   <property name="primary" value="team_id"/>
+
     <table tableName="log" domainObjectName="Log">
       <generatedKey column="id" identity="true"
 				sqlStatement="Mysql"></generatedKey>
-	<!--   <property name="primary" value="team_id"/> -->
-    </table>
+	&lt;!&ndash;   <property name="primary" value="team_id"/> &ndash;&gt;
+    </table>-->
   </context>
 </generatorConfiguration>

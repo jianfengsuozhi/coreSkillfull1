@@ -11,10 +11,6 @@
   <artifactId>edward-skillful-provider</artifactId>
   <version>${edward-skillful-provider}</version>
   
-  <properties>
-  	<mysql.version>5.1.26</mysql.version>
-  </properties>
-  
   <dependencies>
   	<dependency>
   		<groupId>com.Edward</groupId>
@@ -57,11 +53,6 @@
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
         </dependency>
-	   <dependency>  
-	       <groupId>mysql</groupId>  
-	       <artifactId>mysql-connector-java</artifactId>  
-	       <version>${mysql.version}</version>  
-		   </dependency> 
 	      <dependency>  
             <groupId>org.mybatis.generator</groupId>  
             <artifactId>mybatis-generator-core</artifactId>  

@@ -17,7 +17,7 @@
     <import resource="classpath:spring-database.xml"/>
     <import resource="classpath:propertyConfigurer.xml"/>
     <!-- 自动扫描 本包和子包-->
-    <context:component-scan base-package="com.web"/>
+    <context:component-scan base-package="com.web.action"/>
 
 
   	<!--规定模板文件的类型和位置-->

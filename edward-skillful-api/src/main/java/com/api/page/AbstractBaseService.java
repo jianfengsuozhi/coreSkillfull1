@@ -20,7 +20,7 @@ public interface AbstractBaseService<U> {
      * @param entity
      * @throws MyException
      */
-    void insert(U entity) throws MyException;
+//    void insert(U entity) throws MyException;
 
     /**
      * 根据主键id修改
@@ -28,7 +28,7 @@ public interface AbstractBaseService<U> {
      * @param entity
      * @throws MyException
      */
-    void updateById(U entity) throws MyException;
+//    void updateById(U entity) throws MyException;
 
     /**
      * 分页查询

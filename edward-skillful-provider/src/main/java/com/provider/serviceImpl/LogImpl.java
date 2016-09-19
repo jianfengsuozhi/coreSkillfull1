@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 @Service
 public class LogImpl implements LogService {
-	private Logger logger = LoggerFactory.getLogger(BaseMaterialClassImpl.class);
+	private Logger logger = LoggerFactory.getLogger(LogImpl.class);
     @Resource
     public LogDao logDao;
 

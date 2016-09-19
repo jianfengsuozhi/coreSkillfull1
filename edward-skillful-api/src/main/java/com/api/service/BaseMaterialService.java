@@ -1,4 +1,7 @@
 package com.api.service;
 
-public interface BaseMaterialService {
+import com.api.page.AbstractBaseService;
+import com.provider.model.BaseMaterial;
+
+public interface BaseMaterialService extends AbstractBaseService<BaseMaterial> {
 }
