@@ -41,7 +41,7 @@ public abstract class AbstractBaseServiceImpl<U, V extends PageCriteria> {
 
     public PageList<U> queryPageList(V queryObject, Page page) {
         Preconditions.checkNotNull(queryObject, "queryObject不能为null");
-        int count = getMyBatisRepository().countByCriteria(queryObject);
+        int count = new Long(getMyBatisRepository().countByCriteria(queryObject)).intValue();
         if (0 == count) {
             return PageList.getPageList(new ArrayList<U>(), new PageInfo(page.getPageIndex(), page.getPageSize()));
         }

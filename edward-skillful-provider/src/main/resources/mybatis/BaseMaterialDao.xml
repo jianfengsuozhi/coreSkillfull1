@@ -223,12 +223,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByCriteria" parameterType="com.provider.model.BaseMaterialCriteria" resultType="java.lang.Long">
-    select count(*) from base_material
-    <if test="_parameter != null">
-      <include refid="Criteria_Where_Clause" />
-    </if>
-  </select>
   <update id="updateByCriteriaSelective" parameterType="map">
     update base_material
     <set>
@@ -369,12 +363,18 @@
       modify_time = #{modifyTime,jdbcType=TIMESTAMP}
     where material_id = #{materialId,jdbcType=INTEGER}
   </update>
+  <select id="countByCriteria" parameterType="com.provider.model.BaseMaterialCriteria" resultType="java.lang.Integer">
+    select count(*) from base_material
+    <if test="_parameter != null">
+      <include refid="Criteria_Where_Clause" />
+    </if>
+  </select>
   <sql id="mysqlDialectPage">
-    <if test="page != null and page.offSet != null and page.offSet gte 0">
-      offset #{page.offSet}
+    <if test="page != null and page.begin != null and page.begin gte 0">
+      limit #{page.begin}
     </if>
     <if test="page != null and page.pageSize != null and page.pageSize gte 0">
-      limit #{page.pageSize}
+      , #{page.pageSize}
     </if>
   </sql>
 </mapper>
