@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <base href="${pageContext.request.scheme}://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/">
     <title></title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="${ctx}/Css/bootstrap.css" />
@@ -48,29 +49,24 @@
 <table class="table table-bordered table-hover definewidth m10">
     <thead>
     <tr>
-        <th>视频名称</th>
-
-        <th>分类</th>
-        <th>上传者</th>
-        <th>上传日期</th>
-
-
-        <th>管理菜单</th>
+        <th>序号</th>
+        <th>分类名称</th>
+        <th>分类编码</th>
+        <th>操作</th>
     </tr>
     </thead>
 
-    <tr>
-        <td>复仇者联盟</td>
-        <td>电影</td>
-        <td><a href="studentdetail.html">小强</a></td>
-        <td>2016.07.22</td>
-
-        <td> <a href="${ctx}/baseMaterialClass/delete.htm">删除</a></td>
-
-    </tr>
-
+    <c:forEach items="${pageList}" var="item">
+        <tr>
+                <td>${item.orderNo}</td>
+                <td>${item.className}</td>
+                <td>${item.classCode}</td>
+                <td> <a href="${ctx}/baseMaterialClass/delete.htm?classId=${item.classId}" id="delete">删除</a></td>
+        </tr>
+    </c:forEach>
 
 </table>
+    <skillful:PageBar pageUrl="/baseMaterialClass/list.htm" pageAttrKey="page"/>
 
 </body>
 </html>

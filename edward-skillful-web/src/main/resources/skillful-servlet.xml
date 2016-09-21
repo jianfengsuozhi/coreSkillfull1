@@ -17,7 +17,7 @@
     <import resource="classpath:spring-database.xml"/>
     <import resource="classpath:propertyConfigurer.xml"/>
     <!-- 自动扫描 本包和子包-->
-    <context:component-scan base-package="com.web.action"/>
+    <context:component-scan base-package="com.web.action,com.web.test"/>
 
 
   	<!--规定模板文件的类型和位置-->
@@ -49,5 +49,43 @@
         <property name="suffix" value=".jsp" />
         <property name="order" value="999" />
     </bean>
-   
+
+
+    <!--json -->
+    <!--支持String ， Accept所有类型-->
+    <bean id="stringHttpMessageConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <!--支持Map List 实体对象等等  ，Accept所有类型-->
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=utf-8</value>
+                <value>text/html;charset=utf-8</value>
+                <value>text/json;charset=utf-8</value>
+                <value>application/json;charset=utf-8</value>
+            </list>
+        </property>
+        <property name="objectMapper">
+            <bean class="com.utils.CustomObjectMapper"></bean>
+        </property>
+    </bean>
+    <!-- HandlerMapping -->
+    <!--请求对应的ur和方法l情况-->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+    <!-- HandlerAdapter -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="stringHttpMessageConverter" />
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
 </beans>

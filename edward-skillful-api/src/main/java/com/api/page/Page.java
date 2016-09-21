@@ -129,6 +129,7 @@ public class Page implements Serializable {
         setEnd(getBegin() + getPageSize() - 1);
     }
 
+
     public Integer getTotalRecords() {
 
         return totalRecords;

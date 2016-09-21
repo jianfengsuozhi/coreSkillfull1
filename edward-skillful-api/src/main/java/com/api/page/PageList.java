@@ -10,19 +10,19 @@ import java.util.List;
 public class PageList<T> implements Serializable {
     
     private final List<T> listData;
-    private final PageInfo pageInfo;
+    private final Page page;
 
-    private PageList(List<T> listData, PageInfo pageInfo){
+    private PageList(List<T> listData, Page page){
         this.listData = listData!=null?listData:new LinkedList<T>();
-        this.pageInfo = pageInfo!=null?pageInfo:new PageInfo();
+        this.page = page!=null?page:new Page();
     }
 
-    public static <T> PageList<T> getPageList(List<T> listData, PageInfo pageInfo){
-        return new PageList<T>(listData, pageInfo);
+    public static <T> PageList<T> getPageList(List<T> listData, Page page){
+        return new PageList<T>(listData, page);
     }
 
-    public PageInfo getPageInfo() {
-        return pageInfo;
+    public Page getPage() {
+        return page;
     }
 
     public List<T> getListData() {

@@ -234,11 +234,11 @@
 
         <div class="div2">
             <div class="spgl"></div>
-            物资分类
+            <li><a class="a" href="javascript:void(0);"
+                   onClick="openurl('${ctx}/baseMaterialClass/list.htm');">物资分类</a></li>
         </div>
         <div class="div3">
-            <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/baseMaterialClass/list.htm');">列表</a></li>
+
         </div>
         <div class="div2">
             <div class="spgl"></div>

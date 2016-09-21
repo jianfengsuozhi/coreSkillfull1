@@ -1,14 +1,13 @@
 package com.web.action;
 
 import com.api.page.Page;
+import com.api.page.PageList;
 import com.api.service.BaseMaterialClassService;
 import com.exception.MyException;
 import com.provider.model.BaseMaterialClass;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -25,7 +24,9 @@ public class BaseMaterialClassAction {
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(@RequestParam(value = "className",required = false)String className,
             ModelMap modelMap){
-        modelMap.addAttribute("pageList",baseMaterialClassService.pageList(null,new Page(1,10)));
+        PageList<BaseMaterialClass> pageList = baseMaterialClassService.pageList(null, new Page(1, 10));
+        modelMap.addAttribute("pageList",pageList.getListData());
+        modelMap.addAttribute("page",pageList.getPage());
         return "baseMaterialClass/list";
     }
 
@@ -36,7 +37,7 @@ public class BaseMaterialClassAction {
 
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     public String save(
-            @RequestParam(value = "baseMaterialClass",required = true)BaseMaterialClass baseMaterialClass) throws MyException {
+             @ModelAttribute BaseMaterialClass baseMaterialClass) throws MyException {
         if (null == baseMaterialClass.getClassId()){
             baseMaterialClass.setParentHospitalId(1);
         }
@@ -51,11 +52,11 @@ public class BaseMaterialClassAction {
         return "baseMaterialClass/addOrUpdate";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
-    public String delete(
+    public void   delete(
             @RequestParam(value = "classId",required = true)Integer classId) throws MyException {
         baseMaterialClassService.delete(classId);
-        return "redirect:baseMaterialClass/list.htm";
     }
 
 }

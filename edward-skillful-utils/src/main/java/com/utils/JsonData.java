@@ -1,4 +1,4 @@
-package com.tcmc.dis.web.vo;
+package com.utils;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
@@ -16,7 +16,7 @@ public class JsonData implements Serializable {
     // 0 - 成功， 其他值 - 失败
     private Integer status = STATUS_SUCCESS;
     private String msg;
-    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
+    @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL) //{"name"："name","sex":null} -->{"name"："name"}
     private Object data;
 
     public JsonData() {
@@ -29,14 +29,14 @@ public class JsonData implements Serializable {
     }
 
     /**
-     * 获取给定错误消息的失败状态的JsonMessage
+     * 获取给定错误消息的失败状态的JsonMessage {"status":1,"msg":"操作失败"}
      */
     public static JsonData getFailed(String msg) {
         return new JsonData(STATUS_FAIL, msg, null);
     }
 
     /**
-     * 获取给定结果对象的成功状态的JsonMessage
+     * 获取给定结果对象的成功状态的JsonMessage {"status":0,"msg":"操作成功","data":{"name":"魏德亮"}}
      */
     public static JsonData getSucceed() {
         return new JsonData(STATUS_SUCCESS, STATUS_SUCCESS_MSG, null);

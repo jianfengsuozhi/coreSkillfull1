@@ -1,4 +1,4 @@
-package com.tcmc.dis.web.util;
+package com.utils;
 
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.module.SimpleModule;
@@ -14,7 +14,7 @@ import org.codehaus.jackson.map.ser.std.ToStringSerializer;
 public class TCMCObjectMapper extends org.codehaus.jackson.map.ObjectMapper {
     public TCMCObjectMapper() {
         super();
-        //把java对象的long类型的字段序列化时采用ToStringSerializer序列化器
+        //把java对象的long类型的字段序列化时采用ToStringSerializer(使用toString)序列化器 经测试没什么用
         SimpleModule simpleModule = new SimpleModule("TCMCLongToString Serializer", new Version(0, 1, 1, "FINAL"));
         simpleModule.addSerializer(Long.class, ToStringSerializer.instance);
         simpleModule.addSerializer(Long.TYPE, ToStringSerializer.instance);

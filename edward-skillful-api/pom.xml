@@ -20,6 +20,11 @@
   			<artifactId>edward-skillful-constantvar</artifactId>
  			 <version>${edward-skillful-constantvar}</version>
   		</dependency>
+      <dependency>
+          <groupId>com.Edward</groupId>
+          <artifactId>edward-skillful-utils</artifactId>
+          <version>${edward-skillful-utils}</version>
+      </dependency>
 	    <!-- Spring Dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -90,9 +95,6 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
 
-      <dependency>
-          <groupId>com.google.guava</groupId>
-          <artifactId>guava</artifactId>
-      </dependency>
+
   </dependencies>
 </project>

@@ -34,7 +34,7 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     @Override
     public PageList<BaseMaterialClass> pageList(String className, Page page) {
         BaseMaterialClassCriteria criteria = new BaseMaterialClassCriteria();
-        BaseMaterialClassCriteria.Criteria innerCriteria = criteria.or();
+        BaseMaterialClassCriteria.Criteria innerCriteria = criteria.or().andClassStatusNotEqualTo(MyInterfaceEnum.Status.Delete.getCode());
         if(StringUtils.isNotBlank(className)){
             innerCriteria.andClassNameLikeInsensitive("%"+className.trim()+"%");
         }
@@ -47,7 +47,7 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     public void save(BaseMaterialClass baseMaterialClass) throws MyException {
         MyIllegalArgumentException.checkNull(baseMaterialClass,logger,"baseMaterialClass不能为null");
         MyIllegalArgumentException.checkNull(baseMaterialClass.getParentHospitalId(),logger,"parentHospitalId不能为null");
-        if (null == baseMaterialClass.getClassId()){
+        if (null != baseMaterialClass.getClassId()){
             BaseMaterialClass updateFinalEntity = this.getUpdateFinalEntity(baseMaterialClass);
             this.updateById(updateFinalEntity);
         }else {
