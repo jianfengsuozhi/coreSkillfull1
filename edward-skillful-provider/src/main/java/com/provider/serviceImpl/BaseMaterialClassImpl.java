@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 @Service
 public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialClass, BaseMaterialClassCriteria> implements BaseMaterialClassService {
@@ -47,7 +46,6 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     @Override
     public void save(BaseMaterialClass baseMaterialClass) throws MyException {
         MyIllegalArgumentException.checkNull(baseMaterialClass,logger,"baseMaterialClass不能为null");
-        MyIllegalArgumentException.checkNull(baseMaterialClass.getParentHospitalId(),logger,"parentHospitalId不能为null");
 
         if (null != baseMaterialClass.getClassId()){
             BaseMaterialClass updateFinalEntity = this.getUpdateFinalEntity(baseMaterialClass);
@@ -59,10 +57,10 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
             this.updateById(updateFinalEntity);
         }else {
             this.setInsertColumnValue(baseMaterialClass);
-//            Boolean nameIsUnique = this.nameIsUnique(baseMaterialClass.getClassId(), baseMaterialClass.getClassName(), baseMaterialClass.getParentHospitalId());
-//            if(!nameIsUnique){
-//                throw new MyException("名字不唯一");
-//            }
+            Boolean nameIsUnique = this.nameIsUnique(baseMaterialClass.getClassId(), baseMaterialClass.getClassName(), baseMaterialClass.getParentHospitalId());
+            if(!nameIsUnique){
+                throw new MyException("名字不唯一");
+            }
             this.insert(baseMaterialClass);
         }
     }
@@ -124,7 +122,7 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     private Boolean nameIsUnique(Integer classId,String className,Integer parentHospitalId){
         BaseMaterialClass baseMaterialClass = this.selectByName(className, parentHospitalId);
         //名字唯一:插入时baseMaterialClass,修改时返回值id和classId相同
-        if(null== baseMaterialClass|| null != baseMaterialClass && !baseMaterialClass.getClassId().equals(classId)){
+        if(null== baseMaterialClass|| null != baseMaterialClass && baseMaterialClass.getClassId().equals(classId)){
             return true;
         }
         return false;

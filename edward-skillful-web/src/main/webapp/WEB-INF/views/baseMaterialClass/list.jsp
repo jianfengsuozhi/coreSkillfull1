@@ -44,9 +44,9 @@
             $('#delete').click(function(){
                 $.ajax({
                     type:"get",
-                    contentType : "application/json",
+                    contentType : "application/json", //发送给服务器的内容编码方式 firefox出现json
                     url:$("#delete").attr("href"),
-                    dataType:"json",
+                    dataType:"json", //fixfox出现html
                     data:{classId:$("#classId").val()},
                     success:function(data){
                         if(data.status==0){
@@ -99,7 +99,11 @@
              <%--时间 时间格式转化:一种实现方式--%>
             <td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd"/></td>
             <%--带有 placeholder 文本的搜索字段 <input type="search" name="user_search" placeholder="Search W3School" />--%>
-            <td><button href="${ctx}/baseMaterialClass/delete.htm" id="delete">删除</button></td>
+            <td>
+                <button href="${ctx}/baseMaterialClass/delete.htm" id="delete">删除</button>
+                <a href="${ctx}/baseMaterialClass/toModify.htm?classId=${item.classId}">修改</a>
+                <a href="${ctx}/baseMaterialClass/view.htm?classId=${item.classId}">查看</a>
+            </td>
         </tr>
 
     </c:forEach>

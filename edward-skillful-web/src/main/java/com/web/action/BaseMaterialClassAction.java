@@ -77,4 +77,11 @@ public class BaseMaterialClassAction {
         return JsonData.getSucceed();
     }
 
+    @RequestMapping(value = "/view",method = RequestMethod.GET)
+    public String view(
+            @RequestParam(value = "classId",required = true)Integer classId,ModelMap modelMap){
+        modelMap.addAttribute("baseMaterialClass",baseMaterialClassService.selectById(classId));
+        return "baseMaterialClass/view";
+    }
+
 }

@@ -36,32 +36,6 @@
         }
 
     </style>
-
-    <script type="text/javascript" src="${ctx}/Js/jquery.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $('#button1').click(function(){
-               $.ajax({
-                   cache:true,
-                   type:"POST",
-                   url:$("#form1").attr("action"),
-                   dataType:"json",//使返回数据是json,从而可以data.status fixfox出现html
-                   data:$("#form1").serialize(),/* 要提交的表单,必须使用name属性*/
-                   async:false,
-                   success:function (data) {
-                       if(data.status==0){
-                           //{"status":0,"msg":"操作成功"} 获取值
-                           window.location.href = $("#class").attr("data-list"); //刷新并加载url
-                       }else{
-                           alert(data.msg);
-                       }
-                   }
-               });
-
-            });
-
-        });
-    </script>
 </head>
 <body>
 <input type="hidden" id="class" data-list="${ctx}/baseMaterialClass/list.htm"/>
@@ -70,19 +44,18 @@
         <tr>
             <input type="hidden" name="classId" value="${baseMaterialClass.classId}" />
             <td class="tableleft">序号</td>
-            <td><input type="text" name="orderNo" value="${baseMaterialClass.orderNo}"/></td>
+            <td><span>${baseMaterialClass.orderNo}</span></td>
         </tr>
         <tr>
             <td class="tableleft">类别名称</td>
-            <td><input type="text" name="className" value="${baseMaterialClass.className}"/></td>
+            <td><span>${baseMaterialClass.className}</span></td>
         <tr>
             <td class="tableleft">类别编码</td>
-            <td><input type="text" name="classCode" value="${baseMaterialClass.classCode}"/></td>
+            <td><span>${baseMaterialClass.classCode}</span></td>
         </tr>
         <tr>
             <td class="tableleft"></td>
             <td>
-                <button style="margin-left:5px;" class="btn btn-primary" type="button" id="button1">保存</button> &nbsp;&nbsp;
                 <a href="${ctx}/baseMaterialClass/list.htm">返回</a>
             </td>
         </tr>
