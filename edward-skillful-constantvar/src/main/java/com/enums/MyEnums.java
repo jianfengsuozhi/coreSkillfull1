@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by weideliang on 2016/9/19.
  */
-public interface MyInterfaceEnum {
+public interface MyEnums {
     enum Status {
         Delete((short)-1,"删除"),
         Normal((short)1,"正常");

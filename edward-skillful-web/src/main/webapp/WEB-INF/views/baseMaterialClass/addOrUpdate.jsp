@@ -35,14 +35,46 @@
             }
         }
 
-
     </style>
+
+    <script type="text/javascript" src="${ctx}/Js/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#button1').click(function(){
+               $.ajax({
+                   cache:true,
+                   type:"POST",
+                   url:$("form").attr("action"),
+                   data:$("#form1").serialize(),/* 要提交的表单,必须使用name属性*/
+                   async:false,
+                   success:function (data) {
+                       //{"status":0,"msg":"操作成功"} 获取值
+                       alert(data.status);
+                       if(data.status==0){
+                            /*$.ajax({
+                            type:"get",
+                            contentType : "application/json",
+                            url:$("#class").attr("data-list"),
+                            dataType:"json"
+                            });*/
+                            alert("成功");
+                       }else{
+                           alert("失败");
+                       }
+                   }
+               });
+
+            });
+
+        });
+    </script>
 </head>
 <body>
-<form action="${ctx}/baseMaterialClass/save.htm" method="get" class="definewidth m20" enctype="multipart/form-data">
+<input type="hidden" id="class" data-list="${ctx}/baseMaterialClass/list.htm"/>
+<form action="${ctx}/baseMaterialClass/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>
-            <input type="hidden" name="classId" value="${baseMaterialClass.classId}" />
+            <input type="hidden" name="classId" value="${baseMaterialClass.orderNo}" />
             <td class="tableleft">序号</td>
             <td><input type="text" name="orderNo"/>${baseMaterialClass.orderNo}</td>
         </tr>
@@ -56,7 +88,7 @@
         <tr>
             <td class="tableleft"></td>
             <td>
-                <button style="margin-left:5px;"type="submit" class="btn btn-primary" type="button">保存</button> &nbsp;&nbsp;
+                <button style="margin-left:5px;" class="btn btn-primary" type="button" id="button1">保存</button> &nbsp;&nbsp;
                 <a href="${ctx}/baseMaterialClass/list.htm">返回</a>
             </td>
         </tr>

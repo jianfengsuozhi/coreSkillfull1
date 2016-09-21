@@ -77,7 +77,7 @@
 <body>
     <%--<button id="button1">点击get ajax事件</button>--%>
     <%--<button id="button2">post ajax事件</button>--%>
-    <button id="button3">点击get ajax事件</button>
+    <%--<button id="button3">点击get ajax事件</button>--%>
 </body>
 </body>
 </html>

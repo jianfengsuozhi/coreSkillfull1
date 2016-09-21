@@ -3,10 +3,7 @@ package com.web.test;
 import com.utils.JsonData;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by weideliang on 2016/9/20.
@@ -16,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TestAjax {
 
 
-    @RequestMapping(value = "/ajax2",method = RequestMethod.GET)
-    public String ajax(){
-        return "test/ajax/ajax2";
+    @RequestMapping(value = "/{path}",method = RequestMethod.GET)
+    public String ajax(@PathVariable String path){
+        return "test/ajax/"+path;
     }
 
 

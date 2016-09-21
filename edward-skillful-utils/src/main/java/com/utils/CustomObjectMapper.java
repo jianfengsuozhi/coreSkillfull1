@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * @description 解决Date类型返回json格式为自定义格式
+ * @description 解决Date类型返回json格式为自定义格式 不能解决放在modelMap的date格式
  * @author aokunsang
  * @date 2013-5-28
  */

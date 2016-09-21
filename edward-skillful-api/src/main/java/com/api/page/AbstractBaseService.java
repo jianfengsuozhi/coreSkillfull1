@@ -14,6 +14,7 @@ public interface AbstractBaseService<U> {
      */
     U selectById(Integer id);
 
+
     /**
      * 插入
      *
@@ -38,4 +39,11 @@ public interface AbstractBaseService<U> {
      * @return
      */
 //    PageList<U> queryPageList(V queryObject, Page page);
+
+    /**
+     * 查询实体 如名字唯一
+      * @param queryObject
+     * @return
+     */
+//    U queryEntity(V queryObject);
 }

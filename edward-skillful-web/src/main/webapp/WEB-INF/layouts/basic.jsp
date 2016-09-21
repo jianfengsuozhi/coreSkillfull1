@@ -4,6 +4,7 @@
 <%@ page isELIgnored="false" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--时间格式转换--%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- 从Servlet名之后的路径  --%>

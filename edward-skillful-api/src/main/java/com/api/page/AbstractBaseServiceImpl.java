@@ -1,11 +1,13 @@
 package com.api.page;
 
 import com.exception.MyException;
+import com.exception.MyObjectMultiple;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by weideliang on 2016/9/19.
@@ -36,6 +38,18 @@ public abstract class AbstractBaseServiceImpl<U, V extends PageCriteria> {
         int count = getMyBatisRepository().updateById(entity);
         if (1 != count) {
             throw new MyException("数据库修改失败");
+        }
+    }
+
+    public U queryEntity(V queryObject){
+        Preconditions.checkNotNull(queryObject,"queryObject不能为null");
+        List<U> list = getMyBatisRepository().selectByCriteria(queryObject);
+        if(0 == list.size()){//集合是判断size()与0的关系，不是判断与null关系
+            return null;
+        }else if(1 == list.size()){
+            return list.get(0);
+        }else{
+            throw MyObjectMultiple.create(logger, "对象存在多个");
         }
     }
 

@@ -15,11 +15,17 @@ public interface BaseMaterialClassService extends AbstractBaseService<BaseMateri
      */
     PageList<BaseMaterialClass> pageList(String className, Page page);
 
+
     /**
      * 新增或修改
      * @param baseMaterialClass
      */
     void save(BaseMaterialClass baseMaterialClass) throws MyException;
 
+    /**
+     * 删除
+     * @param classId
+     * @throws MyException
+     */
     void delete(Integer classId) throws MyException;
 }

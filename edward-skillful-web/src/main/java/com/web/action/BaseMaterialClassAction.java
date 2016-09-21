@@ -5,6 +5,9 @@ import com.api.page.PageList;
 import com.api.service.BaseMaterialClassService;
 import com.exception.MyException;
 import com.provider.model.BaseMaterialClass;
+import com.utils.JsonData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +21,7 @@ import javax.annotation.Resource;
 @Controller
 @RequestMapping("/baseMaterialClass")
 public class BaseMaterialClassAction {
+    private Logger logger = LoggerFactory.getLogger(BaseMaterialClassAction.class);
     @Resource
     private BaseMaterialClassService baseMaterialClassService;
 
@@ -35,14 +39,22 @@ public class BaseMaterialClassAction {
         return "baseMaterialClass/addOrUpdate";
     }
 
+    @ResponseBody
     @RequestMapping(value = "/save",method = RequestMethod.POST)
-    public String save(
-             @ModelAttribute BaseMaterialClass baseMaterialClass) throws MyException {
+    public JsonData save(
+             @ModelAttribute BaseMaterialClass baseMaterialClass) {
         if (null == baseMaterialClass.getClassId()){
             baseMaterialClass.setParentHospitalId(1);
         }
-        baseMaterialClassService.save(baseMaterialClass);
-        return "redirect:baseMaterialClass/list.htm";
+        try {
+            baseMaterialClassService.save(baseMaterialClass);
+        } catch (MyException e) {
+            logger.error(e.getMessage());
+            return JsonData.getFailed(e.getMessage());
+        }
+        //若为redirect:baseMaterialClass/list.htm 则地址变成 http://localhost:8089/edward-skillful-web/baseMaterialClass/baseMaterialClass/list.htm
+        //若为redirect:list.htm 则正确
+        return JsonData.getSucceed();
     }
 
     @RequestMapping(value = "/toModify",method = RequestMethod.GET)
@@ -54,9 +66,15 @@ public class BaseMaterialClassAction {
 
     @ResponseBody
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
-    public void   delete(
-            @RequestParam(value = "classId",required = true)Integer classId) throws MyException {
-        baseMaterialClassService.delete(classId);
+    public JsonData delete(
+            @RequestParam(value = "classId",required = true)Integer classId) {
+        try {
+            baseMaterialClassService.delete(classId);
+        } catch (MyException e) {
+            logger.error(e.getMessage());
+            return JsonData.getFailed("删除失败");
+        }
+        return JsonData.getSucceed();
     }
 
 }

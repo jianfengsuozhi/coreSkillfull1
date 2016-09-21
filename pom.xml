@@ -53,6 +53,10 @@
 
       <guava.version>13.0.1</guava.version>
       <mysql.version>5.1.34</mysql.version>
+
+      <!-- apache commons upload -->
+      <commons-fileupload.version>1.2.2</commons-fileupload.version>
+      <commons-io.version>2.2</commons-io.version>
   </properties>
   
   <dependencyManagement>
@@ -318,6 +322,19 @@
               <groupId>joda-time</groupId>
               <artifactId>joda-time</artifactId>
               <version>${joda-time.version}</version>
+          </dependency>
+
+          <!-- Apache Commons Upload -->
+          <dependency>
+              <groupId>commons-fileupload</groupId>
+              <artifactId>commons-fileupload</artifactId>
+              <version>${commons-fileupload.version}</version>
+          </dependency>
+
+          <dependency>
+              <groupId>commons-io</groupId>
+              <artifactId>commons-io</artifactId>
+              <version>${commons-io.version}</version>
           </dependency>
 	  </dependencies>
   </dependencyManagement>

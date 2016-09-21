@@ -5,7 +5,7 @@ import com.api.page.Page;
 import com.api.page.PageList;
 import com.api.page.SingleTableDao;
 import com.api.service.BaseMaterialClassService;
-import com.enums.MyInterfaceEnum;
+import com.enums.MyEnums;
 import com.exception.MyException;
 import com.exception.MyIllegalArgumentException;
 import com.exception.MyObjectNullException;
@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialClass, BaseMaterialClassCriteria> implements BaseMaterialClassService {
@@ -34,7 +35,7 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     @Override
     public PageList<BaseMaterialClass> pageList(String className, Page page) {
         BaseMaterialClassCriteria criteria = new BaseMaterialClassCriteria();
-        BaseMaterialClassCriteria.Criteria innerCriteria = criteria.or().andClassStatusNotEqualTo(MyInterfaceEnum.Status.Delete.getCode());
+        BaseMaterialClassCriteria.Criteria innerCriteria = criteria.or().andClassStatusNotEqualTo(MyEnums.Status.Delete.getCode());
         if(StringUtils.isNotBlank(className)){
             innerCriteria.andClassNameLikeInsensitive("%"+className.trim()+"%");
         }
@@ -47,11 +48,21 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     public void save(BaseMaterialClass baseMaterialClass) throws MyException {
         MyIllegalArgumentException.checkNull(baseMaterialClass,logger,"baseMaterialClass不能为null");
         MyIllegalArgumentException.checkNull(baseMaterialClass.getParentHospitalId(),logger,"parentHospitalId不能为null");
+
         if (null != baseMaterialClass.getClassId()){
             BaseMaterialClass updateFinalEntity = this.getUpdateFinalEntity(baseMaterialClass);
+            //判断名字是否唯一 注意:修改时parentHospitalId从以前的记录获得
+            Boolean nameIsUnique = this.nameIsUnique(updateFinalEntity.getClassId(), updateFinalEntity.getClassName(), updateFinalEntity.getParentHospitalId());
+            if(!nameIsUnique){
+                throw new MyException("名字不唯一");
+            }
             this.updateById(updateFinalEntity);
         }else {
             this.setInsertColumnValue(baseMaterialClass);
+//            Boolean nameIsUnique = this.nameIsUnique(baseMaterialClass.getClassId(), baseMaterialClass.getClassName(), baseMaterialClass.getParentHospitalId());
+//            if(!nameIsUnique){
+//                throw new MyException("名字不唯一");
+//            }
             this.insert(baseMaterialClass);
         }
     }
@@ -89,7 +100,7 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
         if (null == baseMaterialClass.getOrderNo()){
             baseMaterialClass.setOrderNo(1);
         }
-        baseMaterialClass.setClassStatus(MyInterfaceEnum.Status.Normal.getCode());
+        baseMaterialClass.setClassStatus(MyEnums.Status.Normal.getCode());
         baseMaterialClass.setParentClassCode("1");
         baseMaterialClass.setCreateTime(DateTime.now().toDate());
         baseMaterialClass.setModifyTime(DateTime.now().toDate());
@@ -99,7 +110,31 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     public void delete(Integer classId) throws MyException {
         BaseMaterialClass baseMaterialClass = selectById(classId);
         MyObjectNullException.checkNull(baseMaterialClass,logger,"主键为"+classId+"物资分类不存在");
-        baseMaterialClass.setClassStatus(MyInterfaceEnum.Status.Delete.getCode());
+        baseMaterialClass.setClassStatus(MyEnums.Status.Delete.getCode());
         this.updateById(baseMaterialClass);
+    }
+
+    /**
+     * 判断名字是否唯一
+     * @param classId
+     * @param className
+     * @param parentHospitalId
+     * @return
+     */
+    private Boolean nameIsUnique(Integer classId,String className,Integer parentHospitalId){
+        BaseMaterialClass baseMaterialClass = this.selectByName(className, parentHospitalId);
+        //名字唯一:插入时baseMaterialClass,修改时返回值id和classId相同
+        if(null== baseMaterialClass|| null != baseMaterialClass && !baseMaterialClass.getClassId().equals(classId)){
+            return true;
+        }
+        return false;
+    }
+
+    private BaseMaterialClass selectByName(String className,Integer parentHospitalId ){
+        MyIllegalArgumentException.checkTrue(StringUtils.isBlank(className),logger,"className不能为空");
+        MyIllegalArgumentException.checkNull(parentHospitalId,logger,"parentHospitalId不能为null");
+        BaseMaterialClassCriteria criteria = new BaseMaterialClassCriteria();
+        criteria.or().andClassNameLikeInsensitive(className).andParentHospitalIdEqualTo(parentHospitalId);
+        return queryEntity(criteria);
     }
 }
