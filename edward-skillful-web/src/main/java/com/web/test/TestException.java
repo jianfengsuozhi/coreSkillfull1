@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/test/exception")
 public class TestException {
 
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
+    public String index(){
+        return "test/exception/index";
+    }
+
     @RequestMapping(value = "/{no}",method = RequestMethod.GET)
     public void controller(@PathVariable Integer no) throws MyException {
         switch (no){

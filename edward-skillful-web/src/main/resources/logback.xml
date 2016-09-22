@@ -6,10 +6,10 @@
       <charset>UTF-8</charset>
     </encoder>
   </appender>
-  
+
 	<!--sql log-->
-    <logger name="com.ibatis" level="DEBUG"/>  
-    <logger name="java.sql" level="DEBUG" />  
+    <logger name="com.ibatis" level="DEBUG"/>
+    <logger name="java.sql" level="DEBUG" />
 
   <!-- 针对jar和项目 -->
   <root level="debug">
