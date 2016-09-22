@@ -8,11 +8,10 @@
    测试异常
 </head>
 <body>
-    <h1>所有的演示例子</h1>
-    <a href="${ctx}/test/exception/1">不合法参数</a>
-    <a href="${ctx}/test/exception/2">业务异常</a>
-    <a href="${ctx}/test/exception/3">其他异常</a>
-    <a href="${ctx}/test/exception/4">未知异常</a>
+    <a href="${ctx}/test/exception/1.htm">不合法参数</a>
+    <a href="${ctx}/test/exception/2.htm">业务异常</a>
+    <a href="${ctx}/test/exception/3.htm">其他异常</a>
+    <a href="${ctx}/test/exception/4.htm">未知异常</a>
 </body>
 </body>
 </html>

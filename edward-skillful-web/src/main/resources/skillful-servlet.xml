@@ -93,20 +93,21 @@
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     </bean>
 
-    <!--异常处理-->
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <!-- 定义默认的异常处理页面，当该异常类型的注册时使用 -->
-        <property name="defaultErrorView" value="error"></property>
-        <!-- 定义异常处理页面用来获取异常信息的变量名，默认名为exception -->
+    <!--异常处理 有异常时页面显示问题：第一种解决方法-->
+ <!--   <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        &lt;!&ndash; 定义默认的异常处理页面，当该异常类型的注册时使用 &ndash;&gt;
+        &lt;!&ndash;先看满足exceptionMappings,若不满足则是defaultErrorView即error页面&ndash;&gt;
+        <property name="defaultErrorView" value="error"></property>&lt;!&ndash;控制台抛出异常 页面显示/edward-skillful-web/WEB-INF/views/error.jsp&ndash;&gt;
+        &lt;!&ndash; 定义异常处理页面用来获取异常信息的变量名，默认名为exception &ndash;&gt;
         <property name="exceptionAttribute" value="ex"></property>
-        <!-- 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 -->
+        &lt;!&ndash; 定义需要特殊处理的异常，用类名或完全路径名作为key，异常也页名作为值 &ndash;&gt;
         <property name="exceptionMappings">
             <props>
-                <prop key="com.exception.MyIllegalArgumentException">error-myIllegalArgument</prop>
-                <prop key="com.exception.MyBusinessException">error-myBusinessException</prop>
-                <!-- 这里还可以继续扩展对不同异常类型的处理 -->
+                <prop key="com.exception.MyIllegalArgumentException">error-myIllegalArgument</prop>&lt;!&ndash;控制台抛出异常 页面显示:/edward-skillful-web/WEB-INF/views/error-myIllegalArgument.jsp&ndash;&gt;
+                <prop key="com.exception.MyBusinessException">error-myBusinessException</prop>&lt;!&ndash;控制台抛出异常 页面显示:/edward-skillful-web/WEB-INF/views/error-myBusinessException.jsp&ndash;&gt;
+                &lt;!&ndash; 这里还可以继续扩展对不同异常类型的处理 &ndash;&gt;
             </props>
         </property>
-    </bean>
+    </bean>-->
 
 </beans>
