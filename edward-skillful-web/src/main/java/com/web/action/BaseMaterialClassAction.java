@@ -81,7 +81,6 @@ public class BaseMaterialClassAction {
     public String view(
             @RequestParam(value = "classId",required = true)Integer classId,ModelMap modelMap){
         modelMap.addAttribute("baseMaterialClass",baseMaterialClassService.selectById(classId));
-        System.out.println("测试");
         return "baseMaterialClass/view";
     }
 }

@@ -40,7 +40,7 @@ public class TestAjax {
     public JsonData ajax23(){
         User user = new User();
         user.setDate(DateTime.now().toDate()); //Tue Sep 20 19:41:05 CST 2016 {"name":null,"date":1474371665167}
-        user.setId(1234l);
+        user.setId(1234);
         return JsonData.getSucceed(user);
     }
 

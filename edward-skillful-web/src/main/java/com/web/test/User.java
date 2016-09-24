@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by weideliang on 2016/9/20.
  */
 public class User {
-    private long id;
+    private Integer id;
     private String name;
     private Date date;
 
@@ -19,11 +19,11 @@ public class User {
         this.date = date;
     }
 
-    public long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
