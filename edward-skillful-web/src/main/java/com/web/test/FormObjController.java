@@ -1,13 +1,11 @@
 package com.web.test;
 
 import com.provider.model.BaseMaterialClass;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by Edward on 2016/9/24.
  */
-@Controller
 @RequestMapping(value = "/test/data")
 public class FormObjController {
 

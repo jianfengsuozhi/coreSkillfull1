@@ -88,8 +88,8 @@
         </property>
         <property name="customArgumentResolvers">
             <list>
-               <!--<bean class="com.web.test.TestHandlerMethodArgumentResolver"/>&lt;!&ndash;参数处理器&ndash;&gt;-->
-                <bean class="com.web.test.FormObjArgumentResolver"/>
+               <bean class="com.web.test.TestHandlerMethodArgumentResolver"/><!--参数处理器-->
+                <!--<bean class="com.web.test.FormObjArgumentResolver"/>-->
             </list>
         </property>
     </bean>

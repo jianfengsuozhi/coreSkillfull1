@@ -15,6 +15,7 @@ public class TestHandlerMethodArgumentResolver implements HandlerMethodArgumentR
     public boolean supportsParameter(MethodParameter methodParameter) {
         return methodParameter.hasParameterAnnotation(SearchParam.class);
     }
+
     //2 可以修改方法参数值
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
@@ -22,7 +23,9 @@ public class TestHandlerMethodArgumentResolver implements HandlerMethodArgumentR
 //        nativeRequest.getParameterMap();//参数map
 //        nativeRequest.getRequestURI();// /edward-skillful-web/test/data/nameP.htm
         Map<String, String[]> parameterMap = nativeRequest.getParameterMap();
-        parameterMap.get(0);
-        return "魏德亮";
+        String parameterName = methodParameter.getParameterName();
+        String simpleName = methodParameter.getParameterType().getSimpleName();
+        String[] strings = parameterMap.get(parameterName);
+        return strings[0];
     }
 }
