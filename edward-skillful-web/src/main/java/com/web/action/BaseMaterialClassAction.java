@@ -26,11 +26,14 @@ public class BaseMaterialClassAction {
     private BaseMaterialClassService baseMaterialClassService;
 
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public String list(@RequestParam(value = "className",required = false)String className,
+    public String list(
+            @RequestParam(value = "className",required = false)String className,
+            @RequestParam(value = "pageNo",defaultValue = "1")Integer pageNo,
             ModelMap modelMap){
-        PageList<BaseMaterialClass> pageList = baseMaterialClassService.pageList(null, new Page(1, 10));
+        PageList<BaseMaterialClass> pageList = baseMaterialClassService.pageList(className, new Page(pageNo, Page.DefaultPageSize));
         modelMap.addAttribute("pageList",pageList.getListData());
         modelMap.addAttribute("page",pageList.getPage());
+        modelMap.addAttribute("className",className);
         return "baseMaterialClass/list";
     }
 

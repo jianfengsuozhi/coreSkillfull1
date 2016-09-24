@@ -3,196 +3,124 @@ package com.api.page;
 import java.io.Serializable;
 
 /**
- * 分页对象
- *
- *
+ * Created by weideliang on 2016/9/24.
  */
-public class Page implements Serializable {
+public class Page implements Serializable{
+    public static final Integer DefaultPageIndex = 1;
+    public static final Integer DefaultPageSize = 2;
 
-    private static final long serialVersionUID = 3251554346859861728L;
-
-    /**
-     * 总记录数
-     */
-    private Integer totalRecords = -1;
-
-    /**
-     * 当前页
-     */
+    //当前页 和 一页记录数
     private Integer pageIndex;
-
-    /**
-     * 每页条数
-     */
     private Integer pageSize;
 
-    /**
-     * 总页数
-     */
+    //数据库分页查询时开始()
+    private Integer begin;
+
+    //总记录数和总页数
+    private Integer totalRecords;
     private Integer totalPages;
 
-    /**
-     * 分页时起始记录索引(适用于Oracle分页sql）
-     */
-    private Integer begin = 0;
-
-    private Integer end;
-
-    /**
-     * 页码开始
-     */
-    private Integer lower;
-
-    private Integer higher;
-
-    public Integer getLower() {
-
-        lower = pageIndex - 2;
-        if (lower <= 0) {
-            lower = 1;
-        }
-        return lower;
-    }
-
-    public void setLower(Integer lower) {
-
-        this.lower = lower;
-    }
-
-    public Integer getHigher() {
-
-        higher = lower + 4;
-        if (higher >= totalPages) {
-            higher = totalPages > lower ? totalPages : lower;
-        }
-        return higher;
-    }
-
-    public void setHigher(Integer higher) {
-
-        this.higher = higher;
-    }
-
-    public Integer getEnd() {
-
-        return end;
-    }
-
-    public void setEnd(Integer end) {
-
-        this.end = end;
-    }
-
-    public Integer getBegin() {
-
-        return begin;
-    }
-
-    public void setBegin(Integer begin) {
-
-        this.begin = begin;
-    }
-
-    public Integer getTotalPages() {
-
-        return totalPages;
-    }
-
-    public void setTotalPages(Integer totalPages) {
-
-        this.totalPages = totalPages;
-    }
+    //页面页码的开始页和结束页 页面调用
+    private Integer pageLow;
+    private Integer pageHigh;
 
     public Page() {
-
+        this.pageIndex = DefaultPageIndex;
+        this.pageSize = DefaultPageSize;
     }
 
     public Page(Integer pageIndex, Integer pageSize) {
-
-        if (null == pageIndex)
-            pageIndex = 1;
-        if (null == pageSize)
-            pageSize = 10;
-
-        setPageSize(pageSize);
-        setPageIndex(pageIndex);
-
-        if (this.getPageIndex() < 1) {
-            setPageIndex(1);
-        }
-        if ((getPageIndex() - 1) <= 0) {
-            setBegin(0);
-        } else {
-            setBegin((getPageIndex() - 1) * getPageSize());
-        }
-
-        setEnd(getBegin() + getPageSize() - 1);
+        //设置当前页和一页记录数
+        this.SetPageIndexAndPageSize(pageIndex,pageSize);
+        //数据库开始页 从0开始
+        this.begin = (this.getPageIndex() - 1) * this.getPageSize();
     }
 
-
-    public Integer getTotalRecords() {
-
-        return totalRecords;
-    }
-
-    public void setTotalRecords(Integer totalRecords) {
-
-        this.totalRecords = totalRecords;
-        Integer totalpages = calculateTotalPages(getTotalRecords(), getPageSize());
-        setTotalPages(totalpages);
+    private void SetPageIndexAndPageSize(Integer pageIndex, Integer pageSize) {
+        //pageIndex
+        if(null == pageIndex || null != pageIndex && pageIndex < 1){
+            this.pageIndex = 1;
+        }else {
+            this.pageIndex = pageIndex;
+        }
+        //pageSize
+        this.pageSize = (null == pageSize ? DefaultPageSize : pageSize);
     }
 
     public Integer getPageIndex() {
-
         return pageIndex;
     }
 
     public void setPageIndex(Integer pageIndex) {
-
         this.pageIndex = pageIndex;
     }
 
     public Integer getPageSize() {
-
         return pageSize;
     }
 
     public void setPageSize(Integer pageSize) {
-
         this.pageSize = pageSize;
     }
 
-    /**
-     * 计算总页数
-     *
-     * @param totalRecords
-     *            总记录数
-     * @param pageSize
-     *            每页记录数
-     * @return
-     */
-    private Integer calculateTotalPages(Integer totalRecords, Integer pageSize) {
+    public Integer getBegin() {
+        return begin;
+    }
 
-        Integer num = totalRecords / pageSize;
-        if ((totalRecords % pageSize) > 0) {
-            num++;
+    public void setBegin(Integer begin) {
+        this.begin = begin;
+    }
+
+    public Integer getTotalRecords() {
+        return totalRecords;
+    }
+
+    public void setTotalRecords(Integer totalRecords) {
+        this.totalRecords = totalRecords;
+        //计算总页数
+        this.totalPages = (int)Math.ceil(totalRecords/(this.pageSize * 1.0));
+    }
+
+    public Integer getTotalPages() {
+        return totalPages;
+    }
+
+    public void setTotalPages(Integer totalPages) {
+        this.totalPages = totalPages;
+    }
+
+    public Integer getPageLow() {
+        this.pageLow = this.pageIndex - 2;
+        if(this.pageLow < 1){
+            this.pageLow = 1;
         }
-        return num;
+        return pageLow;
     }
 
-    /**
-     * 该页是否有下一页.
-     */
-    public boolean isHasNextPage() {
-
-        return this.getPageIndex() < this.getTotalPages();
+    public void setPageLow(Integer pageLow) {
+        this.pageLow = pageLow;
     }
 
-    /**
-     * 该页是否有上一页.
-     */
-    public boolean isHasPreviousPage() {
-
-        return this.getPageIndex() > 1;
+    public Integer getPageHigh() {
+        this.pageHigh = this.pageLow + 4;
+        if(this.pageHigh > this.totalPages){
+            this.pageHigh = this.totalPages;
+        }
+        return pageHigh;
     }
+
+    public void setPageHigh(Integer pageHigh) {
+        this.pageHigh = pageHigh;
+    }
+
+    //是否有上一页和是否有下一页 页面调用
+    public Boolean getHasPrePage(){
+        return this.pageIndex > 1;
+    }
+
+    public Boolean getHasNexPage(){
+        return this.pageIndex < this.totalPages;
+    }
+
+
 }

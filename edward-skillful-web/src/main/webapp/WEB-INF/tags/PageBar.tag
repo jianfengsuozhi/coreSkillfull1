@@ -39,10 +39,10 @@
       </c:if>
       <c:if test="${pageResult.pageIndex>1}"><a href="<c:url value="${pageUrl}"/>${separator}pageNo=1">首页</a></c:if>
       <c:if test="${pageResult.pageIndex==1}"><span class="disabled">首页</span></c:if>
-      <c:if test="${pageResult.hasPreviousPage}"><a href="<c:url value="${pageUrl}"/>${separator}pageNo=${pageResult.pageIndex -1 }">上一页</a></c:if>
-      <c:if test="${!pageResult.hasPreviousPage}"><span class="disabled">上一页</span></c:if>
-      <c:forEach var="index" begin="${pageResult.lower}"
-        end="${pageResult.higher}" step="1">
+      <c:if test="${pageResult.hasPrePage}"><a href="<c:url value="${pageUrl}"/>${separator}pageNo=${pageResult.pageIndex -1 }">上一页</a></c:if>
+      <c:if test="${!pageResult.hasPrePage}"><span class="disabled">上一页</span></c:if>
+      <c:forEach var="index" begin="${pageResult.pageLow}"
+        end="${pageResult.pageHigh}" step="1">
         <c:choose>
           <c:when test="${pageResult.pageIndex==index}">
             <span class="current">${index}</span>
@@ -59,8 +59,8 @@
           </c:otherwise>
         </c:choose>
       </c:forEach>
-      <c:if test="${pageResult.hasNextPage}"><a href="<c:url value="${pageUrl}"/>${separator}pageNo=${pageResult.pageIndex +1 }">下一页</a></c:if>
-      <c:if test="${!pageResult.hasNextPage}"><span class="disabled">下一页</span></c:if>
+      <c:if test="${pageResult.hasNexPage}"><a href="<c:url value="${pageUrl}"/>${separator}pageNo=${pageResult.pageIndex +1 }">下一页</a></c:if>
+      <c:if test="${!pageResult.hasNexPage}"><span class="disabled">下一页</span></c:if>
       <c:if test="${pageResult.pageIndex<pageResult.totalPages}"><a href="<c:url value="${pageUrl}"/>${separator}pageNo=${pageResult.totalPages}">末页</a></c:if>
       <c:if test="${pageResult.pageIndex==pageResult.totalPages || pageResult.totalPages<2}"><span class="disabled">尾页</span></c:if>
       <span>共${pageResult.totalRecords}条</span>

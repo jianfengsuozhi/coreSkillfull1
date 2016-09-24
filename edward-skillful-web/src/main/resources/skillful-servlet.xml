@@ -86,12 +86,12 @@
                 <ref bean="mappingJacksonHttpMessageConverter" />
             </list>
         </property>
-        <property name="customArgumentResolvers">
+<!--        <property name="customArgumentResolvers">
             <list>
-               <bean class="com.web.test.TestHandlerMethodArgumentResolver"/><!--参数处理器-->
-                <!--<bean class="com.web.test.FormObjArgumentResolver"/>-->
+               &lt;!&ndash;<bean class="com.exception.SearchHandlerMethodArgumentResolver"/>&lt;!&ndash;参数处理器&ndash;&gt;&ndash;&gt;
+                &lt;!&ndash;<bean class="com.web.test.FormObjArgumentResolver"/>&ndash;&gt;
             </list>
-        </property>
+        </property>-->
     </bean>
 
     <!--服务端就既可以接收multipart/form-data 传输的数据，也可以接收application/x-www-form-urlencoded传输的文本数据-->

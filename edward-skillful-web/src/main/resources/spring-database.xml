@@ -26,6 +26,15 @@
           p:username="${jdbc.username}"
           p:password="${jdbc.password}"
           p:maxWait="50000"
+          p:defaultAutoCommit="true"
+          p:logAbandoned="false"
+          p:removeAbandoned="true"
+          p:removeAbandonedTimeout="150"
+          p:testWhileIdle="true"
+          p:timeBetweenEvictionRunsMillis="300000"
+          p:minEvictableIdleTimeMillis="320000"
+          p:testOnBorrow="true"
+          p:testOnReturn="false"
     />
 
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
