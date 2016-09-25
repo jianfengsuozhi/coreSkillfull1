@@ -42,5 +42,18 @@
           <groupId>org.codehaus.jackson</groupId>
           <artifactId>jackson-mapper-asl</artifactId>
       </dependency>
+
+      <!--spring redis-->
+      <!--spring redis-->
+      <dependency>
+          <groupId>org.springframework.data</groupId>
+          <artifactId>spring-data-redis</artifactId>
+          <version>${spring-data-redis.version}</version>
+      </dependency>
+      <dependency>
+          <groupId>redis.clients</groupId>
+          <artifactId>jedis</artifactId>
+          <version>${jedis.version}</version>
+      </dependency>
   </dependencies>
 </project>

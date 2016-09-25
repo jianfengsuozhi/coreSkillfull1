@@ -16,6 +16,7 @@
        >
     <import resource="classpath:spring-database.xml"/>
     <import resource="classpath:propertyConfigurer.xml"/>
+    <import resource="classpath:redis.xml"/>
     <!-- 自动扫描 本包和子包-->
     <context:component-scan base-package="com.web.action,com.web.test"/>
 
