@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd 
+       http://www.springframework.org/schema/security
+       http://www.springframework.org/schema/security/spring-security-3.1.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd"
+       >
+    <!--将bean1中的Date赋值2008-08-15，spring会认为2008-08-15是String，无法转换成Date，会报错！-->
+   <bean id="bean1" class="com.test.Bean1"><!--类必须是src/main/java 若是src/test/java则报错-->
+    <property name="date">
+        <value>2008-08-15</value>
+    </property>
+   </bean>
+
+    <!-- 定义属性编辑器 -->
+    <bean id="customEditorConfigurer" class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="java.util.Date">
+                    <bean class="com.utils.UtilDatePropertyEditor">
+                        <property name="format" value="yyyy-MM-dd"/>
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>
