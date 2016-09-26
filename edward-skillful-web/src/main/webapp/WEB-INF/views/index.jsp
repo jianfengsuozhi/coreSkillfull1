@@ -29,8 +29,6 @@
             margin: 0;
             font-family: 微软雅黑;
             background-image: url(${ctx}/images/.jpg);
-            background-repeat: no-repea;
-            background-size: cover;
             background-attachment: fixed;
             background-color: #DDDDDD
 
@@ -242,16 +240,11 @@
         </div>
         <div class="div2">
             <div class="spgl"></div>
-            文档管理
+            <li><a class="a" href="javascript:void(0);"
+                   onClick="openurl('${ctx}/baseMaterial/list.htm');">物资</a></li>
         </div>
         <div class="div3">
-            <ul>
-                <li><a class="a" href="javascript:void(0);"
-                       onClick="openurl('documentQuery.html');">查看所有文档</a></li>
-                <li><a class="a" href="javascript:void(0);"
-                       onClick="openurl('userdocumentQuery.html');">用户文档列表</a></li>
 
-            </ul>
         </div>
         <div class="div2">
             <div class="spgl"></div>
