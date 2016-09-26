@@ -1,11 +1,12 @@
 package com.web.test;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by weideliang on 2016/9/20.
  */
-public class User {
+public class User implements Serializable{
     private Integer id;
     private String name;
     private Date date;
@@ -41,5 +42,14 @@ public class User {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", date=" + date +
+                '}';
     }
 }
