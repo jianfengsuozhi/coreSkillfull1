@@ -1,14 +1,12 @@
 package com.redis;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * 若key相同,则为修改
@@ -92,7 +90,7 @@ public class RedisJava02 {
         System.out.println(user);*/
 
         //测试list
-/*        ArrayList<String> list = Lists.newArrayList();
+        ArrayList<String> list = Lists.newArrayList();
         list.add("a");
         list.add("b");
         list.add("c");
@@ -100,7 +98,7 @@ public class RedisJava02 {
         List<String> list1 = (List<String>) redisJava02.getList("list1");
         for (String s : list1) {
             System.out.println(s);
-        }*/
+        }
 
         //测试set
 /*        HashSet<String> set = Sets.newHashSet();

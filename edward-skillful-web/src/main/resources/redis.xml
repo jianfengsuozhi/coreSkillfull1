@@ -40,4 +40,8 @@
         </property>
     </bean>
 
+    <bean id="redisUtils" class="com.redis.RedisUtilsImpl">
+        <property name="redisTemplate" ref="redisTemplate"/>
+    </bean>
+
 </beans>
