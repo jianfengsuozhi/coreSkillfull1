@@ -112,13 +112,19 @@ public class RedisUtilsImpl implements RedisUtils{
     }
 
     public void delete(String key){
-        if(redisTemplate.hasKey(key)){
-            redisTemplate.delete(key);
-        }
+        redisTemplate.delete(key);
     }
 
     @Override
     public Boolean exists(String key) {
         return redisTemplate.hasKey(key);
+    }
+
+
+    @Override
+    public void deletePattern(String pattern) {
+        pattern = "*"+pattern.trim()+"*";
+        Set keys = redisTemplate.keys(pattern);
+        redisTemplate.delete(keys);
     }
 }

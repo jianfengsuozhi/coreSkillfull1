@@ -100,7 +100,7 @@ public class RedisJava03 {
     }
 
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("redis.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("redisTest.xml");
         redisTemplate = (RedisTemplate)ctx.getBean("redisTemplate");
 
         RedisJava03 redisJava03 = new RedisJava03();

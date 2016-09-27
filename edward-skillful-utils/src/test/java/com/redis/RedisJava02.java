@@ -77,7 +77,7 @@ public class RedisJava02 {
     }
 
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("redis.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("redisTest.xml");
         redisTemplate = (RedisTemplate)ctx.getBean("redisTemplate");
 
         RedisJava02 redisJava02 = new RedisJava02();

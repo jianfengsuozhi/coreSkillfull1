@@ -24,8 +24,14 @@ public interface RedisUtils {
     public void setMap(String key, Map<String,?> map, Long liveTime);
     public Object getMap(String key);
 
-    //删除
+    //删除 返回值被删除的个数
     public void delete(String key);
+
+    /**
+     * 删除
+     * @param pattern
+     */
+    public void deletePattern(String pattern);
     //清空当前数据库中的所有 key
     public String flushDB();
     //存在
@@ -33,4 +39,6 @@ public interface RedisUtils {
 
     //事务
     public void transfaction(final String key, final String value);
+
+
 }
