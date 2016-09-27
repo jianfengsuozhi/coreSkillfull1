@@ -116,4 +116,9 @@ public class RedisUtilsImpl implements RedisUtils{
             redisTemplate.delete(key);
         }
     }
+
+    @Override
+    public Boolean exists(String key) {
+        return redisTemplate.hasKey(key);
+    }
 }

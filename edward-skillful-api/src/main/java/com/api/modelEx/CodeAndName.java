@@ -1,10 +1,12 @@
 package com.api.modelEx;
 
+import java.io.Serializable;
+
 /**
  * 选择框
  * Created by weideliang on 2016/9/27.
  */
-public class CodeAndName {
+public class CodeAndName implements Serializable{
     private String code;
     private String name;
 

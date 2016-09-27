@@ -14,6 +14,7 @@ import com.google.common.collect.Lists;
 import com.provider.dao.BaseMaterialClassDao;
 import com.provider.model.BaseMaterialClass;
 import com.provider.model.BaseMaterialClassCriteria;
+import com.redis.RedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -29,6 +30,8 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     private Logger logger = LoggerFactory.getLogger(BaseMaterialClassImpl.class);
     @Resource
     private BaseMaterialClassDao baseMaterialClassDao;
+    @Resource
+    private RedisUtils redisUtils;
 
     @Override
     public SingleTableDao<BaseMaterialClass, BaseMaterialClassCriteria> getMyBatisRepository() {
@@ -150,12 +153,17 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
 
     @Override
     public List<CodeAndName> selectAllCodeAndName(Integer parentHospitalId) {
+        String cacheKey = String.format("baseMaterialClass%s", parentHospitalId);
+        if(redisUtils.exists(cacheKey)){
+            return (List<CodeAndName>)redisUtils.get(cacheKey);
+        }
         ArrayList<CodeAndName> lists = Lists.newArrayList();
         List<BaseMaterialClass> baseMaterialClasses = this.selectAll(parentHospitalId);
         for (BaseMaterialClass baseMaterialClass : baseMaterialClasses) {
             CodeAndName codeAndName = new CodeAndName(baseMaterialClass.getClassCode(), baseMaterialClass.getClassName());
             lists.add(codeAndName);
         }
+        redisUtils.set(cacheKey,lists,null);
         return lists;
     }
 

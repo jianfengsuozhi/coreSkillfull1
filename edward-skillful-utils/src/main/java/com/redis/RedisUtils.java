@@ -28,6 +28,8 @@ public interface RedisUtils {
     public void delete(String key);
     //清空当前数据库中的所有 key
     public String flushDB();
+    //存在
+    public Boolean exists(String key);
 
     //事务
     public void transfaction(final String key, final String value);

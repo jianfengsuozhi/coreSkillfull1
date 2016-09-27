@@ -81,7 +81,8 @@ public class BaseMaterialAction {
     @RequestMapping(value = "/toAdd",method = RequestMethod.GET)
     public String toAdd(ServletRequest request,ModelMap modelMap){
         modelMap.addAttribute("params", WebUtility.getParametersStartingWith(request, null));
-        return "baseMaterial/addAndUpdate";
+        modelMap.addAttribute("materialClasses", baseMaterialClassService.selectAllCodeAndName(1));
+        return "baseMaterial/addOrUpdate";
     }
 
     /**
@@ -120,7 +121,8 @@ public class BaseMaterialAction {
         MyObjectNullException.checkNull(baseMaterial,logger,"主键是"+materialId+"的对象不存在");
         modelMap.addAttribute("baseMaterial", baseMaterial);
         modelMap.addAttribute("params", WebUtility.getParametersStartingWith(request, null));
-        return "baseMaterial/addAndUpdate";
+        modelMap.addAttribute("materialClasses", baseMaterialClassService.selectAllCodeAndName(1));
+        return "baseMaterial/addOrUpdate";
     }
 
     /**

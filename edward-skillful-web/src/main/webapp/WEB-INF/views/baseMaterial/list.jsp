@@ -46,8 +46,8 @@
                     type:"get",
                     contentType : "application/json", //发送给服务器的内容编码方式 firefox出现json
                     url:$("#delete").attr("href"),
-                    dataType:"json", //fixfox出现html
-                    data:{classId:$("#classId").val()},
+                    dataType:"json",
+                    data:{materialId:$("#materialId").val()},
                     success:function(data){
                         if(data.status==0){
                            refreshCurrentPage();
@@ -87,6 +87,7 @@
         <th>物资编码</th>
         <th>物资名称</th>
         <th>物资规格</th>
+        <th>助记码</th>
         <th>物资单位</th>
         <th>物资分类名称</th>
         <th>状态</th>
@@ -95,19 +96,24 @@
         <th>操作</th>
     </tr>
     </thead>
-    <c:forEach items="${pageList}" var="item">
+    <c:forEach items="${list}" var="item">
         <tr>
-            <td> <input type="hidden" value="${item.classId}" id="classId"/></td>
-            <td>${item.orderNo}</td>
+            <td>
+                <input type="hidden" value="${item.materialId}" id="materialId"/>
+            ${item.orderNo}</td>
+            <td>${item.materialCode}</td>
+            <td>${item.materialName}</td>
+            <td>${item.materialSpec}</td>
+            <td>${item.mnemonicCode}</td>
+            <td>${item.materialUnit}</td>
             <td>${item.className}</td>
-            <td>${item.classCode}</td>
-             <%--时间 时间格式转化:一种实现方式--%>
+            <td>${item.status}</td>
             <td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd"/></td>
-            <%--带有 placeholder 文本的搜索字段 <input type="search" name="user_search" placeholder="Search W3School" />--%>
+            <td><fmt:formatDate value="${item.modifyTime}" pattern="yyyy-MM-dd"/></td>
             <td>
                 <button href="${ctx}/baseMaterial/delete.htm" id="delete">删除</button>
-                <a href="${ctx}/baseMaterial/toModify.htm?classId=${item.classId}">修改</a>
-                <a href="${ctx}/baseMaterial/view.htm?classId=${item.classId}">查看</a>
+                <a href="${ctx}/baseMaterial/toModify.htm?materialId=${item.materialId}">修改</a>
+                <a href="${ctx}/baseMaterial/view.htm?materialId=${item.materialId}">查看</a>
             </td>
         </tr>
 

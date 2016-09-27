@@ -45,13 +45,12 @@
                    cache:true,
                    type:"POST",
                    url:$("#form1").attr("action"),
-                   dataType:"json",//使返回数据是json,从而可以data.status fixfox出现html
-                   data:$("#form1").serialize(),/* 要提交的表单,必须使用name属性*/
+                   dataType:"json",
+                   data:$("#form1").serialize(),
                    async:false,
                    success:function (data) {
                        if(data.status==0){
-                           //{"status":0,"msg":"操作成功"} 获取值
-                           window.location.href = $("#class").attr("data-list"); //刷新并加载url
+                           window.location.href = $("#class").attr("data-list");
                        }else{
                            alert(data.msg);
                        }
@@ -64,26 +63,49 @@
     </script>
 </head>
 <body>
-<input type="hidden" id="class" data-list="${ctx}/baseMaterialClass/list.htm"/>
-<form action="${ctx}/baseMaterialClass/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
+<input type="hidden" id="class" data-list="${ctx}/baseMaterial/list.htm"/>
+<form action="${ctx}/baseMaterial/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>
-            <input type="hidden" name="classId" value="${baseMaterialClass.classId}" />
+            <input type="hidden" name="materialId" value="${baseMaterial.materialId}" />
             <td class="tableleft">序号</td>
-            <td><input type="text" name="orderNo" value="${baseMaterialClass.orderNo}"/></td>
+            <td><input type="text" name="orderNo" value="${baseMaterial.orderNo}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">类别名称</td>
-            <td><input type="text" name="className" value="${baseMaterialClass.className}"/></td>
+            <td class="tableleft">物资编码</td>
+            <td><input type="text" name="materialCode" value="${baseMaterial.materialCode}"/></td>
+        </tr>
         <tr>
-            <td class="tableleft">类别编码</td>
-            <td><input type="text" name="classCode" value="${baseMaterialClass.classCode}"/></td>
+            <td class="tableleft">物质名称</td>
+            <td><input type="text" name="materialName" value="${baseMaterial.materialName}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">物资规格</td>
+            <td><input type="text" name="materialSpec" value="${baseMaterial.materialSpec}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">助记码</td>
+            <td><input type="text" name="mnemonicCode" value="${baseMaterial.mnemonicCode}"/></td>
+        </tr>
+        <tr>
+            <td class="tableleft">物资单位</td>
+            <td><input type="text" name="materialUnit" value="${baseMaterial.materialUnit}"/></td>
+        <tr>
+            <td class="tableleft">物资分类名称</td>
+            <td>
+                <select name="classCode">
+                    <option value="" selected="selected">全部</option>
+                    <c:forEach var="item" items="${materialClasses}">
+                        <option value="${item.code}" <c:if test="${baseMaterial.classCode == item.code}">selected="selected"</c:if> >${item.name}</option>
+                    </c:forEach>
+                </select>
+            </td>
         </tr>
         <tr>
             <td class="tableleft"></td>
             <td>
                 <button style="margin-left:5px;" class="btn btn-primary" type="button" id="button1">保存</button> &nbsp;&nbsp;
-                <a href="${ctx}/baseMaterialClass/list.htm">返回</a>
+                <a href="${ctx}/baseMaterial/list.htm">返回</a>
             </td>
         </tr>
     </table>
