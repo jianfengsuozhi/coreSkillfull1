@@ -17,49 +17,49 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <context:component-scan base-package="com.provider.serviceImpl"/>   
-	<!--加载properties  -->
-	<bean id="config" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value>classpath:config.properties</value>
-				<value>classpath:jdbc.properties</value>
-			</list>
-		</property>
-	</bean>
-	
-	<!-- dataSource 使用apache的dbcp插件连接数据库-->
+    <context:component-scan base-package="com.provider.serviceImpl"/>
+
+    <!-- dataSource 使用apache的dbcp插件连接数据库-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
           p:driverClassName="${jdbc.driverClassName}"
           p:url="${jdbc.url}"
           p:username="${jdbc.username}"
           p:password="${jdbc.password}"
           p:maxWait="50000"
-            /> 
-            
-  	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+          p:defaultAutoCommit="true"
+          p:logAbandoned="false"
+          p:removeAbandoned="true"
+          p:removeAbandonedTimeout="150"
+          p:testWhileIdle="true"
+          p:timeBetweenEvictionRunsMillis="300000"
+          p:minEvictableIdleTimeMillis="320000"
+          p:testOnBorrow="true"
+          p:testOnReturn="false"
+    />
+
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="mapperLocations">
             <list>
-             <value>classpath:mybatis/*.xml</value>
+                <value>classpath:mybatis/*.xml</value>
             </list>
         </property>
         <property name="dataSource" ref="dataSource"/>
-    </bean>          
-    
+    </bean>
+
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
           p:basePackage="com.provider.dao"
-          p:markerInterface="com.provider.page.MyBatisRepository"
+          p:markerInterface="com.api.page.MyBatisRepository"
           p:sqlSessionFactoryBeanName="sqlSessionFactoryBean"
-            />  
-                 
-	<!-- 配置事务 -->
-	<!-- 事务切面 -->
+    />
+
+    <!-- 配置事务 -->
+    <!-- 事务切面 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
           p:dataSource-ref="dataSource"/>
     <aop:config>
         <aop:pointcut id="allManagerMethod" expression="execution(* com.provider.serviceImpl..*.*(..))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="allManagerMethod"/>
-    </aop:config>  
+    </aop:config>
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="add*" propagation="REQUIRED" rollback-for="Throwable"/>
@@ -82,5 +82,5 @@
             <tx:method name="select*" propagation="REQUIRED" rollback-for="Throwable"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
-    </tx:advice> 
+    </tx:advice>
 </beans>
