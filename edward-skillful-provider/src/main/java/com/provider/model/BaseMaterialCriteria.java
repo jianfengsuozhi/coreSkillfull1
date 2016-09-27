@@ -1096,6 +1096,66 @@ public class BaseMaterialCriteria extends PageCriteria {
             return (Criteria) this;
         }
 
+        public Criteria andParentHospitalIdIsNull() {
+            addCriterion("parent_hospital_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdIsNotNull() {
+            addCriterion("parent_hospital_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdEqualTo(Integer value) {
+            addCriterion("parent_hospital_id =", value, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdNotEqualTo(Integer value) {
+            addCriterion("parent_hospital_id <>", value, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdGreaterThan(Integer value) {
+            addCriterion("parent_hospital_id >", value, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("parent_hospital_id >=", value, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdLessThan(Integer value) {
+            addCriterion("parent_hospital_id <", value, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdLessThanOrEqualTo(Integer value) {
+            addCriterion("parent_hospital_id <=", value, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdIn(List<Integer> values) {
+            addCriterion("parent_hospital_id in", values, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdNotIn(List<Integer> values) {
+            addCriterion("parent_hospital_id not in", values, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdBetween(Integer value1, Integer value2) {
+            addCriterion("parent_hospital_id between", value1, value2, "parentHospitalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andParentHospitalIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("parent_hospital_id not between", value1, value2, "parentHospitalId");
+            return (Criteria) this;
+        }
+
         public Criteria andCodeLikeInsensitive(String value) {
             addCriterion("upper(code) like", value.toUpperCase(), "code");
             return (Criteria) this;

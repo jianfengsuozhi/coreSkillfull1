@@ -53,13 +53,17 @@ public abstract class AbstractBaseServiceImpl<U, V extends PageCriteria> {
         }
     }
 
-    public PageList<U> queryPageList(V queryObject, Page page) {
+    public PageList<U> queryPageList(V queryObject, Page page,String orderByClause) {
         Preconditions.checkNotNull(queryObject, "queryObject不能为null");
         int count = getMyBatisRepository().countByCriteria(queryObject);
         page.setTotalRecords(count);
         if (0 == count) {
             return PageList.getPageList(new ArrayList<U>(), page);
         }
+        //分页
+        queryObject.setPage(page);
+        //排序
+        queryObject.setOrderByClause(orderByClause);
         return PageList.getPageList(getMyBatisRepository().
                 selectByCriteria(queryObject), page);
     }

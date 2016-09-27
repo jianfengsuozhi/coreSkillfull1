@@ -34,9 +34,11 @@ public class BaseMaterial implements Serializable {
 
     private Date modifyTime;
 
+    private Integer parentHospitalId;
+
     private static final long serialVersionUID = 1L;
 
-    public BaseMaterial(Integer materialId, Integer orderNo, String code, String materialCode, String materialName, String materialSpec, String mnemonicCode, String materialUnit, String classCode, String className, String plantingSysCode, String plantingSysName, Short status, Date createTime, Date modifyTime) {
+    public BaseMaterial(Integer materialId, Integer orderNo, String code, String materialCode, String materialName, String materialSpec, String mnemonicCode, String materialUnit, String classCode, String className, String plantingSysCode, String plantingSysName, Short status, Date createTime, Date modifyTime, Integer parentHospitalId) {
         this.materialId = materialId;
         this.orderNo = orderNo;
         this.code = code;
@@ -52,6 +54,7 @@ public class BaseMaterial implements Serializable {
         this.status = status;
         this.createTime = createTime;
         this.modifyTime = modifyTime;
+        this.parentHospitalId = parentHospitalId;
     }
 
     public BaseMaterial() {
@@ -178,6 +181,14 @@ public class BaseMaterial implements Serializable {
         this.modifyTime = modifyTime;
     }
 
+    public Integer getParentHospitalId() {
+        return parentHospitalId;
+    }
+
+    public void setParentHospitalId(Integer parentHospitalId) {
+        this.parentHospitalId = parentHospitalId;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -199,6 +210,7 @@ public class BaseMaterial implements Serializable {
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
         sb.append(", modifyTime=").append(modifyTime);
+        sb.append(", parentHospitalId=").append(parentHospitalId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -1,5 +1,6 @@
 package com.provider.serviceImpl;
 
+import com.api.modelEx.CodeAndName;
 import com.api.page.AbstractBaseServiceImpl;
 import com.api.page.Page;
 import com.api.page.PageList;
@@ -9,6 +10,7 @@ import com.enums.MyEnums;
 import com.exception.MyException;
 import com.exception.MyIllegalArgumentException;
 import com.exception.MyObjectNullException;
+import com.google.common.collect.Lists;
 import com.provider.dao.BaseMaterialClassDao;
 import com.provider.model.BaseMaterialClass;
 import com.provider.model.BaseMaterialClassCriteria;
@@ -19,6 +21,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialClass, BaseMaterialClassCriteria> implements BaseMaterialClassService {
@@ -38,15 +42,13 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
         if(StringUtils.isNotBlank(className)){
             innerCriteria.andClassNameLikeInsensitive("%"+className.trim()+"%");
         }
-        criteria.setOrderByClause("order_no,class_name");
-        criteria.setPage(page);
-        return this.queryPageList(criteria,page);
+        return this.queryPageList(criteria,page,"order_no,class_name");
     }
 
     @Override
     public void save(BaseMaterialClass baseMaterialClass) throws MyException {
         MyIllegalArgumentException.checkNull(baseMaterialClass,logger,"baseMaterialClass不能为null");
-
+        //修改
         if (null != baseMaterialClass.getClassId()){
             BaseMaterialClass updateFinalEntity = this.getUpdateFinalEntity(baseMaterialClass);
             //判断名字是否唯一 注意:修改时parentHospitalId从以前的记录获得
@@ -55,7 +57,7 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
                 throw new MyException("名字不唯一");
             }
             this.updateById(updateFinalEntity);
-        }else {
+        }else { //新增
             this.setInsertColumnValue(baseMaterialClass);
             Boolean nameIsUnique = this.nameIsUnique(baseMaterialClass.getClassId(), baseMaterialClass.getClassName(), baseMaterialClass.getParentHospitalId());
             if(!nameIsUnique){
@@ -132,7 +134,34 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
         MyIllegalArgumentException.checkTrue(StringUtils.isBlank(className),logger,"className不能为空");
         MyIllegalArgumentException.checkNull(parentHospitalId,logger,"parentHospitalId不能为null");
         BaseMaterialClassCriteria criteria = new BaseMaterialClassCriteria();
-        criteria.or().andClassNameLikeInsensitive(className).andParentHospitalIdEqualTo(parentHospitalId);
+        criteria.or().andClassNameLikeInsensitive(className).andParentHospitalIdEqualTo(parentHospitalId).andClassStatusNotEqualTo(MyEnums.Status.Delete.getCode());
         return queryEntity(criteria);
+    }
+
+    @Override
+    public String getClassNameByClassCode(String classCode) {
+        MyIllegalArgumentException.checkTrue(StringUtils.isBlank(classCode),logger,"classCode不能为空");
+        BaseMaterialClassCriteria criteria = new BaseMaterialClassCriteria();
+        criteria.or().andClassCodeEqualTo(classCode);
+        BaseMaterialClass baseMaterialClass = this.queryEntity(criteria);
+        MyObjectNullException.checkNull(baseMaterialClass,logger,"classCode:"+classCode+"的物资分类对象不能为null");
+        return baseMaterialClass.getClassName();
+    }
+
+    @Override
+    public List<CodeAndName> selectAllCodeAndName(Integer parentHospitalId) {
+        ArrayList<CodeAndName> lists = Lists.newArrayList();
+        List<BaseMaterialClass> baseMaterialClasses = this.selectAll(parentHospitalId);
+        for (BaseMaterialClass baseMaterialClass : baseMaterialClasses) {
+            CodeAndName codeAndName = new CodeAndName(baseMaterialClass.getClassCode(), baseMaterialClass.getClassName());
+            lists.add(codeAndName);
+        }
+        return lists;
+    }
+
+    private List<BaseMaterialClass> selectAll(Integer parentHospitalId){
+        BaseMaterialClassCriteria criteria = new BaseMaterialClassCriteria();
+        criteria.or().andParentHospitalIdEqualTo(parentHospitalId).andClassStatusNotEqualTo(MyEnums.Status.Delete.getCode());
+        return baseMaterialClassDao.selectByCriteria(criteria);
     }
 }

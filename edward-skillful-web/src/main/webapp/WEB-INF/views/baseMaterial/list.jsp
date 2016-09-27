@@ -50,13 +50,6 @@
                     data:{classId:$("#classId").val()},
                     success:function(data){
                         if(data.status==0){
-                           /* $.ajax({ 实现跳转功能
-                                type:"get",
-                                contentType : "application/json",
-                                url:$("#list").attr("href"),
-                                dataType:"json"
-
-                            });*/
                            refreshCurrentPage();
                         }else{
                             alert(data.msg);
@@ -73,20 +66,32 @@
     </script>
 </head>
 <body >
-<form class="form-inline definewidth m20" action="${ctx}/baseMaterialClass/list.htm" method="get" id="list">
-    <font color="#777777"><strong>视频名称：</strong></font>
-    <input type="text" name="className" id="menuname"class="abc input-default" placeholder="" value="${className}">&nbsp;&nbsp;
+<form class="form-inline definewidth m20" action="${ctx}/baseMaterial/list.htm" method="get" id="list">
+    <font color="#777777"><strong>物资名称：</strong></font>
+    <input type="text" name="materialName" id="menuname"class="abc input-default" placeholder="" value="${params.materialName}">&nbsp;&nbsp;
+    <font color="#777777"><strong>物资分类：</strong></font>
+    <select name="classCode">
+        <option value="" selected="selected">全部</option>
+        <c:forEach var="item" items="${materialClasses}">
+            <option value="${item.code}" <c:if test="${params.classCode == item.code}">selected="selected"</c:if> >${item.name}</option>
+        </c:forEach>
+    </select>
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
     <%--<button type="button"  id="addnew"><a href="${ctx}/add.htm">添加视频</a></button>--%>
-    <a href="${ctx}/baseMaterialClass/toAdd.htm">添加视频</a>
+    <a href="${ctx}/baseMaterial/toAdd.htm">添加</a>
 </form>
 <table class="table table-bordered table-hover definewidth m10">
     <thead>
     <tr>
         <th>序号</th>
-        <th>分类名称</th>
-        <th>分类编码</th>
+        <th>物资编码</th>
+        <th>物资名称</th>
+        <th>物资规格</th>
+        <th>物资单位</th>
+        <th>物资分类名称</th>
+        <th>状态</th>
         <th>创建时间</th>
+        <th>修改时间</th>
         <th>操作</th>
     </tr>
     </thead>
@@ -100,16 +105,16 @@
             <td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd"/></td>
             <%--带有 placeholder 文本的搜索字段 <input type="search" name="user_search" placeholder="Search W3School" />--%>
             <td>
-                <button href="${ctx}/baseMaterialClass/delete.htm" id="delete">删除</button>
-                <a href="${ctx}/baseMaterialClass/toModify.htm?classId=${item.classId}">修改</a>
-                <a href="${ctx}/baseMaterialClass/view.htm?classId=${item.classId}">查看</a>
+                <button href="${ctx}/baseMaterial/delete.htm" id="delete">删除</button>
+                <a href="${ctx}/baseMaterial/toModify.htm?classId=${item.classId}">修改</a>
+                <a href="${ctx}/baseMaterial/view.htm?classId=${item.classId}">查看</a>
             </td>
         </tr>
 
     </c:forEach>
 
 </table>
-    <skillful:PageBar pageUrl="/baseMaterialClass/list.htm" pageAttrKey="page"/>
+    <skillful:PageBar pageUrl="/baseMaterial/list.htm" pageAttrKey="page"/>
 
 </body>
 </html>
