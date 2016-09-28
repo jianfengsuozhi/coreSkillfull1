@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 
 
 /**
+ * 物资分类
  * Created by Edward on 2016/9/18.
  */
 @Controller

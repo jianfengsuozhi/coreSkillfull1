@@ -9,6 +9,7 @@ import com.exception.MyObjectNullException;
 import com.provider.model.BaseMaterial;
 import com.utils.JsonData;
 import com.utils.WebUtility;
+import com.web.test.SearchParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -17,10 +18,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
- * 物资分类
+ * 物资
  * Created by Edward on 2016/9/26.
  */
 @Controller
@@ -33,14 +35,19 @@ public class BaseMaterialAction {
     private BaseMaterialClassService baseMaterialClassService;
 
     /**
-     * 第一次进入
-     * @param modelMap
-     * @return
+     * 测试四种url
+     * ServletRequest 接口
+     * HttpServletRequest 继承ServletRequest的接口
+     * WebRequest 针对请求拦截器
+     * @param servletRequest
      */
-    @RequestMapping(value = "/defaultList",method = RequestMethod.GET)
-    public String defaultList(ModelMap modelMap,ServletRequest request){
-        this.commonList(null,null,null,modelMap,request);
-        return "baseMaterial/list";
+    public void testURL(ServletRequest servletRequest){
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        System.out.println(request.getRequestURL());// http://localhost:8080/edward-skillful-web/baseMaterial/list.htm
+        System.out.println(request.getRequestURI());// /edward-skillful-web/baseMaterial/list.htm context+servlet
+        System.out.println(request.getServletPath());// /baseMaterial/list.htm 对话
+        System.out.println(request.getContextPath());// /edward-skillful-web 项目
+        System.out.println(request.getRealPath("/"));// D:\java\IdeaProjects\coreSkillfull\edward-skillful-web\target\edward-skillful-web\
     }
 
     /**
@@ -53,7 +60,7 @@ public class BaseMaterialAction {
      */
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(
-            @RequestParam(value = "materialName",required = false)String materialName,
+            @SearchParam(value = "materialName")String materialName,
             @RequestParam(value = "classCode",required = false)String classCode,
             @RequestParam(value = "pageNo",defaultValue = "1")Integer pageNo,
             ModelMap modelMap,ServletRequest request){

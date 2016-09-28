@@ -17,7 +17,7 @@
        http://www.springframework.org/schema/task
        http://www.springframework.org/schema/task/spring-task.xsd">
 
-    <!--加载properties  只能加载一个-所以只能有一个->
+    <!--加载properties  只能加载一个-所以只能有一个-->
     <bean id="config" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
