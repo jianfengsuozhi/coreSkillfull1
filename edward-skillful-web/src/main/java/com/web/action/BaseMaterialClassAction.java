@@ -6,6 +6,7 @@ import com.api.service.BaseMaterialClassService;
 import com.exception.MyException;
 import com.provider.model.BaseMaterialClass;
 import com.utils.JsonData;
+import com.web.util.SearchParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,16 +27,26 @@ public class BaseMaterialClassAction {
     @Resource
     private BaseMaterialClassService baseMaterialClassService;
 
+    @RequestMapping(value = "/defaultList",method = RequestMethod.GET)
+    public String defaultList(@SearchParam BaseMaterialClassSearchCondition condition,ModelMap modelMap){
+        condition.reset();
+        this.commonList(condition,modelMap);
+        return "baseMaterialClass/list";
+    }
+
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(
-            @RequestParam(value = "className",required = false)String className,
-            @RequestParam(value = "pageNo",defaultValue = "1")Integer pageNo,
+            @SearchParam BaseMaterialClassSearchCondition condition,
             ModelMap modelMap){
-        PageList<BaseMaterialClass> pageList = baseMaterialClassService.pageList(className, new Page(pageNo, Page.DefaultPageSize));
+        commonList(condition, modelMap);
+        return "baseMaterialClass/list";
+    }
+
+    private void commonList(BaseMaterialClassSearchCondition condition, ModelMap modelMap) {
+        PageList<BaseMaterialClass> pageList = baseMaterialClassService.pageList(condition.getClassName(), new Page(condition.getPageNo(), Page.DefaultPageSize));
         modelMap.addAttribute("pageList",pageList.getListData());
         modelMap.addAttribute("page",pageList.getPage());
-        modelMap.addAttribute("className",className);
-        return "baseMaterialClass/list";
+        modelMap.addAttribute("condition", condition);
     }
 
     @RequestMapping(value = "/toAdd",method = RequestMethod.GET)
@@ -87,4 +98,33 @@ public class BaseMaterialClassAction {
         modelMap.addAttribute("baseMaterialClass",baseMaterialClassService.selectById(classId));
         return "baseMaterialClass/view";
     }
+
+   public static class BaseMaterialClassSearchCondition {
+       private Integer pageNo = 1;
+       private String className;
+
+       public BaseMaterialClassSearchCondition() {
+
+       }
+
+       public void reset(){
+           setClassName(null);
+       }
+
+       public Integer getPageNo() {
+           return pageNo;
+       }
+
+       public void setPageNo(Integer pageNo) {
+           this.pageNo = pageNo;
+       }
+
+       public String getClassName() {
+           return className;
+       }
+
+       public void setClassName(String className) {
+           this.className = className;
+       }
+   }
 }

@@ -1,6 +1,6 @@
 package com.exception;
 
-import com.web.test.SearchParam;
+import com.web.util.SearchParam;
 import org.springframework.beans.BeanUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;

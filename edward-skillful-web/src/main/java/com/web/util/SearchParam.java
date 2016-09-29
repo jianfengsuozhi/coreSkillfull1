@@ -1,4 +1,4 @@
-package com.web.test;
+package com.web.util;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

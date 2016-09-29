@@ -79,6 +79,14 @@
     <!-- HandlerMapping -->
     <!--请求对应的ur和方法l情况-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
+
+    <bean id="conditionUrl" class="com.web.util.ConditionUrl">
+        <property name="urlConditionMap">
+            <map>
+                <entry key="/baseMaterial/" value="1"></entry>
+            </map>
+        </property>
+    </bean>
     <!-- HandlerAdapter -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">
@@ -89,7 +97,9 @@
         </property>
         <property name="customArgumentResolvers">
             <list>
-                <bean class="com.web.test.TestHandlerMethodArgumentResolver"/>
+                <bean class="com.web.util.SearchParamHandlerMethodArgumentResolver">
+                    <property name="conditionUrl" ref="conditionUrl"/>
+                </bean>
                 <!--<bean class="com.exception.SearchHandlerMethodArgumentResolver"/>&lt;!&ndash;参数处理器&ndash;&gt;-->
             </list>
         </property>

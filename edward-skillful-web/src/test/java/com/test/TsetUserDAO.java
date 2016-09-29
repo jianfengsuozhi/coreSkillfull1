@@ -2,7 +2,8 @@ package com.test;
 
 public class TsetUserDAO {
 	public static void main(String[] args) {
-		System.out.println("1");
+		String str = "/baseMaterial/list.htm";
+		str = str.substring(0, str.lastIndexOf("/") + 1);
 	}
 
 }

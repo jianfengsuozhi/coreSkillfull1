@@ -68,12 +68,12 @@
 <body >
 <form class="form-inline definewidth m20" action="${ctx}/baseMaterial/list.htm" method="get" id="list">
     <font color="#777777"><strong>物资名称：</strong></font>
-    <input type="text" name="materialName" id="menuname"class="abc input-default" placeholder="" value="${params.materialName}">&nbsp;&nbsp;
+    <input type="text" name="materialName" id="menuname"class="abc input-default" placeholder="" value="${condition.materialName}">&nbsp;&nbsp;
     <font color="#777777"><strong>物资分类：</strong></font>
     <select name="classCode">
         <option value="" selected="selected">全部</option>
         <c:forEach var="item" items="${materialClasses}">
-            <option value="${item.code}" <c:if test="${params.classCode == item.code}">selected="selected"</c:if> >${item.name}</option>
+            <option value="${item.code}" <c:if test="${condition.classCode == item.code}">selected="selected"</c:if> >${item.name}</option>
         </c:forEach>
     </select>
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;

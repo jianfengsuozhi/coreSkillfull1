@@ -75,7 +75,7 @@
 <body >
 <form class="form-inline definewidth m20" action="${ctx}/baseMaterialClass/list.htm" method="get" id="list">
     <font color="#777777"><strong>物资分类：</strong></font>
-    <input type="text" name="className" id="menuname"class="abc input-default" placeholder="" value="${className}">&nbsp;&nbsp;
+    <input type="text" name="className" id="menuname"class="abc input-default" placeholder="" value="${condition.className}">&nbsp;&nbsp;
     <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
     <%--<button type="button"  id="addnew"><a href="${ctx}/add.htm">添加视频</a></button>--%>
     <a href="${ctx}/baseMaterialClass/toAdd.htm">添加</a>

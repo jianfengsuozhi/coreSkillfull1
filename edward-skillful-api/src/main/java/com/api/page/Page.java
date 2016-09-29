@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class Page implements Serializable{
     public static final Integer DefaultPageIndex = 1;
-    public static final Integer DefaultPageSize = 4;
+    public static final Integer DefaultPageSize = 2;
 
     //当前页 和 一页记录数
     private Integer pageIndex;

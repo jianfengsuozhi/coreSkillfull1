@@ -233,7 +233,7 @@
         <div class="div2">
             <div class="spgl"></div>
             <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/baseMaterialClass/list.htm');">物资分类</a></li>
+                   onClick="openurl('${ctx}/baseMaterialClass/defaultList.htm');">物资分类</a></li>
         </div>
         <div class="div3">
 
@@ -241,7 +241,7 @@
         <div class="div2">
             <div class="spgl"></div>
             <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/baseMaterial/list.htm');">物资</a></li>
+                   onClick="openurl('${ctx}/baseMaterial/defaultList.htm');">物资</a></li>
         </div>
         <div class="div3">
 
