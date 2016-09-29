@@ -7,12 +7,26 @@
     </encoder>
   </appender>
 
-	<!--sql log-->
+  <!--每天生成一个日志文件，保存30天的日志文件-->
+  <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>logFile.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%d %p [%c] - %m%n</pattern>
+    </encoder>
+  </appender>
+
+  <!--sql log-->
     <logger name="com.ibatis" level="DEBUG"/>
     <logger name="java.sql" level="DEBUG" />
 
   <!-- 针对jar和项目 -->
   <root level="debug">
     <appender-ref ref="console"/>
+    <appender-ref ref="FILE"/>
   </root>
 </configuration>
