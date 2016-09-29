@@ -15,10 +15,12 @@
 </head>
 <body>
 <div class="wrapper">
+    <div style="color: red">${error}</div>
+    <div style="color: green">${logout}</div>
 
     <div class="container">
         <h1>MOOC 后台管理</h1>
-        <form class="form" method="post" action="/j_spring_security_check">
+        <form class="form" method="post" action="${ctx}/login.htm">
             <input type="text" placeholder="Username">
             <input type="password" placeholder="Password"><br>
             <button type="submit" id="login-button"><strong>登陆</strong></button>

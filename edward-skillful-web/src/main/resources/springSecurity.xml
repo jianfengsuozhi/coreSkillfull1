@@ -21,10 +21,13 @@
 	<!--spring security发现还没有登录，spring会引导我们到登录界面-->
 	<security:http auto-config="true">
 		<security:form-login login-page="/login.htm" login-processing-url="/login.htm" username-parameter="username"
-							 password-parameter="password" />
+							 password-parameter="password" authentication-failure-url="/login.htm?error"
+		                     default-target-url="/index.htm"/>
+		<security:logout logout-success-url="/login?logout"/>
+		<security:access-denied-handler error-page="/deny.htm"/>
+		<security:intercept-url pattern="/login.htm" access="IS_AUTHENTICATED_ANONYMOUSLY"/><!--IS_AUTHENTICATED_ANONYMOUSLY:用户不需要登录就可以访问-->
 		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/><!--IS_AUTHENTICATED_ANONYMOUSLY:用户不需要登录就可以访问-->
 		<security:intercept-url pattern="/Css/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-		<security:intercept-url pattern="/login.htm" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/**" access="ROLE_USER"/><!--只有具有Role_User权限的用户才能访问/**-->
 	</security:http>
 
