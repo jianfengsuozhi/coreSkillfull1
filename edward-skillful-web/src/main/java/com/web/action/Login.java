@@ -15,6 +15,7 @@ public class Login {
 
     /**
      * username和password spring自动验证
+     * 作用:去登陆,登出,用户名或密码不正确
      * @param error
      * @param logout
      * @param modelMap

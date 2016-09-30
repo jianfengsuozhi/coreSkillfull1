@@ -10,6 +10,7 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+	<import resource="classpath:db-config.xml"/>
 	<!--
 		auto-config="true"是
 		<security:http>
@@ -18,28 +19,54 @@
 		 <security:logout/>
 		</security:http>的简写
 	-->
-	<!--spring security发现还没有登录，spring会引导我们到登录界面-->
+	<!--spring security 先进入index.htm,发现没有登录，spring会引导我们到登录界面-->
 	<security:http auto-config="true">
 		<security:form-login login-page="/login.htm" login-processing-url="/j_spring_security_check" username-parameter="username"
 							 password-parameter="password" authentication-failure-url="/login.htm?error"
 		                     default-target-url="/index.htm"/>
 		<security:logout logout-success-url="/login.htm?logout" invalidate-session="true" delete-cookies=""/>
-		<security:access-denied-handler error-page="/deny.htm"/>
 		<security:intercept-url pattern="/login.htm" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/login.jsp" access="IS_AUTHENTICATED_ANONYMOUSLY"/><!--IS_AUTHENTICATED_ANONYMOUSLY:用户不需要登录就可以访问-->
 		<security:intercept-url pattern="/*/*.css" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/**/*.js" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/**" access="ROLE_USER"/><!--只有具有Role_User权限的用户才能访问/**-->
+
+		<security:custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
 	</security:http>
 
 
-	<security:authentication-manager>
-		<!--定义用户-->
+<!--	<security:authentication-manager>
+		&lt;!&ndash;定义用户&ndash;&gt;
 		<security:authentication-provider>
 			<security:user-service>
 				<security:user name="user" password="user" authorities="ROLE_USER"/>
 				<security:user name="admin" password="admin" authorities="ROLE_USER,ROLE_ADMIN"/>
 			</security:user-service>
 		</security:authentication-provider>
+	</security:authentication-manager>-->
+
+	<!--在这个类中，你就可以从数据库中读入用户的密码，角色信息，是否锁定，账号是否过期等 -->
+	<bean id="userDetailsService" class="com.web.action.MyUserDetailService"/>
+	<!--对比密码-->
+	<security:authentication-manager alias="authenticationManager">
+		<security:authentication-provider user-service-ref="userDetailsService"/>
 	</security:authentication-manager>
+
+	<!--一个自定义的filter，必须包含 authenticationManager,accessDecisionManager,securityMetadataSource三个属性，
+    我们的所有控制将在这三个类中实现，解释详见具体配置 -->
+	<bean id="myFilter"
+			class="com.web.action.MyFilterSecurityInterceptor">
+		<property name="authenticationManager" ref="authenticationManager" />
+		<property name="accessDecisionManager" ref="myAccessDecisionManagerBean" />
+		<property name="securityMetadataSource" ref="securityMetadataSource" />
+	</bean>
+
+
+	<!--访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源 -->
+	<bean id="myAccessDecisionManagerBean" class="com.web.action.MyAccessDecisionManager"></bean>
+
+	<!--资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色访问 -->
+	<bean id="securityMetadataSource"
+			class="com.web.action.MyInvocationSecurityMetadataSource" />
+
 </beans>

@@ -3,7 +3,9 @@ package com.redis;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.*;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,14 +14,12 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Edward on 2016/9/26.
  */
+@Service
 public class RedisUtilsImpl implements RedisUtils{
     //默认有效时间为30分钟
     public static final Long defaultLiveTime = 30 * 60l;
+    @Resource
     private RedisTemplate redisTemplate;
-
-    public void setRedisTemplate(RedisTemplate redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     //String和对象
     public void set(String key,Object value,Long liveTime){

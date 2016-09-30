@@ -21,8 +21,8 @@
     <div class="container">
         <h1>MOOC 后台管理</h1>
         <form class="form" method="post" action="${ctx}/j_spring_security_check">
-            <input type="text" placeholder="Username" name="username">
-            <input type="password" placeholder="Password" name="password"><br>
+            <input type="text"  name="username">
+            <input type="password"  name="password"><br>
             <button type="submit" id="login-button"><strong>登陆</strong></button>
         </form>
     </div>

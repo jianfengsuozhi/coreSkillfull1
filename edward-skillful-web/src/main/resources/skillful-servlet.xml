@@ -14,11 +14,11 @@
        http://www.springframework.org/schema/mvc 
        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd"
        >
-    <import resource="classpath:db-config.xml"/>
+
     <import resource="classpath:propertyConfigurer.xml"/>
     <import resource="classpath:redis.xml"/>
     <!-- 自动扫描 本包和子包-->
-    <context:component-scan base-package="com.web.action,com.web.test"/>
+    <context:component-scan base-package="com.web.action,com.web.test,com.redis,com.provider.serviceImpl"/>
 
 
   	<!--规定模板文件的类型和位置-->
