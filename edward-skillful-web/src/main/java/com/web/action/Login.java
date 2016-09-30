@@ -13,12 +13,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class Login {
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(
+    /**
+     * username和password spring自动验证
+     * @param error
+     * @param logout
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String toLogin(
             @RequestParam(value = "error",required = false)String error,
             @RequestParam(value = "logout",required = false)String logout, ModelMap modelMap){
         if(null != error){
-            modelMap.addAttribute("error","Invalid username and password!");
+            modelMap.addAttribute("error","Invalid username and password!"); //若验证失败,出现这种提示
         }
         if(null != logout){
             modelMap.addAttribute("logout", "You have been logout!");

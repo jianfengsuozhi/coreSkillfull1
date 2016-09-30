@@ -204,7 +204,7 @@
         }
     </style>
 </head>
-<body>
+<body id="body">
 
 <div class="top1">
     <marquee scrollAmount=2 width=300>数据无价，请谨慎操作！</marquee>
@@ -248,15 +248,11 @@
         </div>
         <div class="div2">
             <div class="spgl"></div>
-            类别管理
+            <li><a class="a" href="javascript:void(0);" id="logout" onclick="window.location.href = '${ctx}/login.htm?logout';">登出</a></li>
         </div>
         <div class="div3">
-            <ul>
-                <li><a class="a" href="javascript:void(0);"
-                       onClick="openurl('classQuery.html');">大类信息</a></li>
-
-            </ul>
         </div>
+
         <div class="div2">
             <div class="yhgl"></div>
             用户管理
