@@ -1,4 +1,4 @@
-package com.web.action;
+package com.web.security;
 
 /**
  * Created by weideliang on 2016/9/30.

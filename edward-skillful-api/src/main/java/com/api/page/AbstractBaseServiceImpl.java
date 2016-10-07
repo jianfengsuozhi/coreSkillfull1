@@ -68,5 +68,13 @@ public abstract class AbstractBaseServiceImpl<U, V extends PageCriteria> {
                 selectByCriteria(queryObject), page);
     }
 
+    public void deletePhy(Integer recordId){
+        Preconditions.checkNotNull(recordId, "recordId不能为null");
+        int count = getMyBatisRepository().deleteById(recordId);
+        if(1 != count){
+            throw MyObjectMultiple.create(logger, "数据库删除失败");
+        }
+    }
+
 
 }

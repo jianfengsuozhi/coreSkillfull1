@@ -246,6 +246,28 @@
         <div class="div3">
 
         </div>
+
+        <div class="div2">
+            <div class="spgl"></div>
+            <li><a class="a" href="javascript:void(0);"
+                   onClick="openurl('${ctx}/user/list.htm');">用户管理</a></li>
+        </div>
+        <div class="div3"/>
+
+        <div class="div2">
+            <div class="spgl"></div>
+            <li><a class="a" href="javascript:void(0);"
+                   onClick="openurl('${ctx}/role/list.htm');">角色管理</a></li>
+        </div>
+        <div class="div3"/>
+
+        <div class="div2">
+            <div class="spgl"></div>
+            <li><a class="a" href="javascript:void(0);"
+                   onClick="openurl('${ctx}/privilege/list.htm');">权限管理</a></li>
+        </div>
+        <div class="div3"/>
+
         <div class="div2">
             <div class="spgl"></div>
             <li><a class="a" href="javascript:void(0);" id="logout" onclick="window.location.href = '${ctx}/login.htm?logout';">登出</a></li>

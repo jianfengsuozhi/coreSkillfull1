@@ -46,4 +46,10 @@ public interface AbstractBaseService<U> {
      * @return
      */
 //    U queryEntity(V queryObject);
+
+    /**
+     * 物理删除
+     * @param recordId
+     */
+    void deletePhy(Integer recordId);
 }

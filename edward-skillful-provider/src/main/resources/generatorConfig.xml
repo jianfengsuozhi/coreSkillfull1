@@ -108,12 +108,31 @@
       <generatedKey column="class_id" identity="true"
 				sqlStatement="Mysql"></generatedKey>
     </table>
-	<!--   <property name="primary" value="team_id"/>
 
-    <table tableName="log" domainObjectName="Log">
-      <generatedKey column="id" identity="true"
+    <table tableName="t_privilege" domainObjectName="Privilege" enableCountByExample="false">
+      <generatedKey column="privilege_id" identity="true"
 				sqlStatement="Mysql"></generatedKey>
-	&lt;!&ndash;   <property name="primary" value="team_id"/> &ndash;&gt;
-    </table>-->
+    </table>
+
+    <table tableName="t_role" domainObjectName="Role" enableCountByExample="false">
+      <generatedKey column="role_id" identity="true"
+				sqlStatement="Mysql"></generatedKey>
+    </table>
+
+    <table tableName="t_role_privilege" domainObjectName="RolePrivilege" enableCountByExample="false">
+      <generatedKey column="record_id" identity="true"
+				sqlStatement="Mysql"></generatedKey>
+    </table>
+
+    <table tableName="t_user" domainObjectName="User" enableCountByExample="false">
+      <generatedKey column="user_id" identity="true"
+				sqlStatement="Mysql"></generatedKey>
+    </table>
+
+    <table tableName="t_user_role" domainObjectName="UserRole" enableCountByExample="false">
+      <generatedKey column="record_id" identity="true"
+				sqlStatement="Mysql"></generatedKey>
+    </table>
+
   </context>
 </generatorConfiguration>

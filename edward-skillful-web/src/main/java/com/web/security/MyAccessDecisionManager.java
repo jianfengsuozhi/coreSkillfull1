@@ -1,4 +1,4 @@
-package com.web.action;
+package com.web.security;
 
 
 import org.springframework.security.access.AccessDecisionManager;
