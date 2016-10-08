@@ -50,13 +50,6 @@
                     data:{classId:$("#classId").val()},
                     success:function(data){
                         if(data.status==0){
-                           /* $.ajax({ 实现跳转功能
-                                type:"get",
-                                contentType : "application/json",
-                                url:$("#list").attr("href"),
-                                dataType:"json"
-
-                            });*/
                            refreshCurrentPage();
                         }else{
                             alert(data.msg);
@@ -74,10 +67,6 @@
 </head>
 <body >
 <form class="form-inline definewidth m20" action="${ctx}/user/list.htm" method="get" id="list">
-    <font color="#777777"><strong>用户：</strong></font>
-    <input type="text" name="className" id="menuname"class="abc input-default" placeholder="" value="${condition.className}">&nbsp;&nbsp;
-    <button type="submit" class="btn btn-primary">查询</button>&nbsp;&nbsp;
-    <%--<button type="button"  id="addnew"><a href="${ctx}/add.htm">添加视频</a></button>--%>
     <a href="${ctx}/user/toAdd.htm">添加</a>
 </form>
 <table class="table table-bordered table-hover definewidth m10">
