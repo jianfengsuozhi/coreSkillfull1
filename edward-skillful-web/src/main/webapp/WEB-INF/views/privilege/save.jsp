@@ -45,12 +45,11 @@
                    cache:true,
                    type:"POST",
                    url:$("#form1").attr("action"),
-                   dataType:"json",//使返回数据是json,从而可以data.status fixfox出现html
-                   data:$("#form1").serialize(),/* 要提交的表单,必须使用name属性*/
+                   dataType:"json",
+                   data:$("#form1").serialize(),
                    async:false,
                    success:function (data) {
                        if(data.status==0){
-                           //{"status":0,"msg":"操作成功"} 获取值
                            window.location.href = $("#class").attr("data-list"); //刷新并加载url
                        }else{
                            alert(data.msg);
@@ -68,16 +67,21 @@
 <form action="${ctx}/privilege/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>
-            <input type="hidden" name="classId" value="${privilege.classId}" />
-            <td class="tableleft">序号</td>
-            <td><input type="text" name="orderNo" value="${privilege.orderNo}"/></td>
+            <input type="hidden" name="privilegeId" value="${privilege.privilegeId}" />
+            <td class="tableleft">权限编码</td>
+            <td><input type="text" name="privilegeCode" value="${privilege.privilegeCode}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">类别名称</td>
-            <td><input type="text" name="className" value="${privilege.className}"/></td>
+            <td class="tableleft">权限名称</td>
+            <td><input type="text" name="privilegeName" value="${privilege.privilegeName}"/></td>
+        </tr>
         <tr>
-            <td class="tableleft">类别编码</td>
-            <td><input type="text" name="classCode" value="${privilege.classCode}"/></td>
+            <td class="tableleft">地址</td>
+            <td><input type="text" name="url" value="${privilege.url}"/></td>
+        </tr>        
+        <tr>
+            <td class="tableleft">备注</td>
+            <td><input type="text" name="remark" value="${privilege.remark}"/></td>
         </tr>
         <tr>
             <td class="tableleft"></td>

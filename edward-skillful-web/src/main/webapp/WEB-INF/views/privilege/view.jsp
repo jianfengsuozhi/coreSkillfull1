@@ -42,16 +42,24 @@
 <form action="${ctx}/privilege/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>
-            <input type="hidden" name="classId" value="${privilege.classId}" />
-            <td class="tableleft">序号</td>
-            <td><span>${privilege.orderNo}</span></td>
+            <td class="tableleft">权限编码</td>
+            <td><span>${privilege.privilegeCode}</span></td>
         </tr>
         <tr>
-            <td class="tableleft">类别名称</td>
-            <td><span>${privilege.className}</span></td>
+            <td class="tableleft">权限名称</td>
+            <td><span>${privilege.privilegeName}</span></td>
+        </tr>
         <tr>
-            <td class="tableleft">类别编码</td>
-            <td><span>${privilege.classCode}</span></td>
+            <td class="tableleft">地址</td>
+            <td><span>${privilege.url}</span></td>
+        </tr>
+        <tr>
+            <td class="tableleft">备注</td>
+            <td><span>${privilege.remark}</span></td>
+        </tr>
+        <tr>
+            <td class="tableleft">创建时间</td>
+            <td><span><fmt:formatDate value="${privilege.createTime}" pattern="yyyy-MM-DD"/> </span></td>
         </tr>
         <tr>
             <td class="tableleft"></td>

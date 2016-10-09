@@ -56,11 +56,11 @@ public class RoleAction {
      */
     @RequestMapping(value = "/toSave",method = RequestMethod.GET)
     public String toSave(
-            @RequestParam(value = "/roleId",required = false)Integer roleId,ModelMap modelMap){
+            @RequestParam(value = "roleId",required = false)Integer roleId,ModelMap modelMap){
         if(null != roleId){
             RoleEx roleEx = new RoleEx();
             roleEx.setRole(roleService.selectById(roleId));
-            roleEx.setPrivilageCodes(rolePrivilegeService.selectPrivilegeCodesByRoleId(roleId));
+            roleEx.setPrivilageCodeAndNames(rolePrivilegeService.selectPrivilegeCodesByRoleId(roleId));
             modelMap.addAttribute("roleEx", roleEx);
         }
         modelMap.addAttribute("codeAndNames", privilegeService.selectCodeAndNames());
@@ -94,7 +94,10 @@ public class RoleAction {
     @RequestMapping(value = "/view",method = RequestMethod.GET)
     public String view(
             @RequestParam(value = "roleId",required = true)Integer roleId,ModelMap modelMap){
-        modelMap.addAttribute("role", roleService.selectById(roleId));
+        RoleEx roleEx = new RoleEx();
+        roleEx.setRole(roleService.selectById(roleId));
+        roleEx.setPrivilageCodeAndNames(rolePrivilegeService.selectPrivilegeCodesByRoleId(roleId));
+        modelMap.addAttribute("roleEx", roleEx);
         return "role/view";
     }
 

@@ -1,5 +1,6 @@
 package com.api.service;
 
+import com.api.modelEx.CodeAndName;
 import com.api.page.AbstractBaseService;
 import com.exception.MyException;
 import com.provider.model.RolePrivilege;
@@ -12,7 +13,7 @@ public interface RolePrivilegeService extends AbstractBaseService<RolePrivilege>
      * @param roleId
      * @return
      */
-    List<String> selectPrivilegeCodesByRoleId(Integer roleId);
+    List<CodeAndName> selectPrivilegeCodesByRoleId(Integer roleId);
 
     /**
      * 保存

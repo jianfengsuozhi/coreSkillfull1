@@ -47,7 +47,7 @@
                     contentType : "application/json", //发送给服务器的内容编码方式 firefox出现json
                     url:$("#delete").attr("href"),
                     dataType:"json", //fixfox出现html
-                    data:{classId:$("#classId").val()},
+                    data:{userId:$("#userId").val()},
                     success:function(data){
                         if(data.status==0){
                            refreshCurrentPage();
@@ -67,31 +67,31 @@
 </head>
 <body >
 <form class="form-inline definewidth m20" action="${ctx}/user/list.htm" method="get" id="list">
-    <a href="${ctx}/user/toAdd.htm">添加</a>
+    <a href="${ctx}/user/toSave.htm">添加</a>
 </form>
 <table class="table table-bordered table-hover definewidth m10">
     <thead>
     <tr>
-        <th>序号</th>
-        <th>分类名称</th>
-        <th>分类编码</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>角色名称</th>
+        <th>是否使用</th>
         <th>创建时间</th>
         <th>操作</th>
     </tr>
     </thead>
-    <c:forEach items="${pageList}" var="item">
+    <c:forEach items="${list}" var="item">
         <tr>
-            <td> <input type="hidden" value="${item.classId}" id="classId"/></td>
-            <td>${item.orderNo}</td>
-            <td>${item.className}</td>
-            <td>${item.classCode}</td>
-             <%--时间 时间格式转化:一种实现方式--%>
+            <td> <input type="hidden" value="${item.userId}" id="userId"/></td>
+            <td>${item.userName}</td>
+            <td>${item.password}</td>
+            <td>${item.roleName}</td>
+            <td>${item.enable}</td>
             <td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd"/></td>
-            <%--带有 placeholder 文本的搜索字段 <input type="search" name="user_search" placeholder="Search W3School" />--%>
             <td>
                 <button href="${ctx}/user/delete.htm" id="delete">删除</button>
-                <a href="${ctx}/user/toModify.htm?classId=${item.classId}">修改</a>
-                <a href="${ctx}/user/view.htm?classId=${item.classId}">查看</a>
+                <a href="${ctx}/user/toSave.htm?userId=${item.userId}">修改</a>
+                <a href="${ctx}/user/view.htm?userId=${item.userId}">查看</a>
             </td>
         </tr>
 
@@ -99,6 +99,5 @@
 
 </table>
     <skillful:PageBar pageUrl="/user/list.htm" pageAttrKey="page"/>
-
 </body>
 </html>

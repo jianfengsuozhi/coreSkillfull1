@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.provider.dao.RolePrivilegeDao">
+  <resultMap id="codeAndNameMap" type="com.api.modelEx.CodeAndName">
+    <constructor>
+      <arg column="privilege_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="privilege_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+ 
+  <select id="selectPrivilegeCodeAndNamesByUserId" resultMap="codeAndNameMap">
+    select
+      p.privilege_code,
+      p.privilege_name
+    from t_privilege as p
+    where p.privilege_code
+    in(
+	  select
+	    rp.privilege_code
+	  from t_role_privilege as rp
+	  where rp.role_id = #{userId}
+    )
+  </select>
+</mapper>

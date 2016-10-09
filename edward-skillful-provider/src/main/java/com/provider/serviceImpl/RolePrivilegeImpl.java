@@ -1,5 +1,6 @@
 package com.provider.serviceImpl;
 
+import com.api.modelEx.CodeAndName;
 import com.api.page.AbstractBaseServiceImpl;
 import com.api.page.SingleTableDao;
 import com.api.service.RolePrivilegeService;
@@ -34,17 +35,9 @@ public class RolePrivilegeImpl extends AbstractBaseServiceImpl<RolePrivilege, Ro
     }
 
     @Override
-    public List<String> selectPrivilegeCodesByRoleId(Integer roleId) {
+    public List<CodeAndName> selectPrivilegeCodesByRoleId(Integer roleId) {
         MyIllegalArgumentException.checkNull(roleId,logger,"userId不能为null");
-        RolePrivilegeCriteria criteria = new RolePrivilegeCriteria();
-        criteria.or().andRoleIdEqualTo(roleId);
-        List<RolePrivilege> rolePrivileges = rolePrivilegeDao.selectByCriteria(criteria);
-
-        LinkedList<String> privilegeCodes = Lists.newLinkedList();
-        for (RolePrivilege rolePrivilege : rolePrivileges) {
-            privilegeCodes.add(rolePrivilege.getPrivilegeCode());
-        }
-        return privilegeCodes;
+        return rolePrivilegeDao.selectPrivilegeCodeAndNamesByUserId(roleId);
     }
 
     @Override

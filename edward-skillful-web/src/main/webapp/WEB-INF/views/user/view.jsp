@@ -42,16 +42,24 @@
 <form action="${ctx}/user/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>
-            <input type="hidden" name="classId" value="${user.classId}" />
-            <td class="tableleft">序号</td>
-            <td><span>${user.orderNo}</span></td>
+            <td class="tableleft">用户名</td>
+            <td><span>${user.userName}</span></td>
         </tr>
         <tr>
-            <td class="tableleft">类别名称</td>
-            <td><span>${user.className}</span></td>
+            <td class="tableleft">密码</td>
+            <td><span>${user.password}</span></td>
+        </tr>
         <tr>
-            <td class="tableleft">类别编码</td>
-            <td><span>${user.classCode}</span></td>
+            <td class="tableleft">角色名称</td>
+            <td><span>${user.roleName}</span></td>
+        </tr>
+        <tr>
+            <td class="tableleft">是否使用</td>
+            <td><span>${user.enable}</span></td>
+        </tr>
+        <tr>
+            <td class="tableleft">是否使用</td>
+            <td><span>${user.createTime}</span></td>
         </tr>
         <tr>
             <td class="tableleft"></td>

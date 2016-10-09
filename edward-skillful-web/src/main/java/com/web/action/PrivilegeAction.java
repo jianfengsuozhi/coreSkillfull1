@@ -36,7 +36,7 @@ public class PrivilegeAction {
             @RequestParam(value = "pageNo",defaultValue = "1")Integer pageNo,
             ModelMap modelMap){
         PageList<Privilege> pageList = privilegeService.selectPageList(new Page(pageNo, Page.DefaultPageSize));
-        modelMap.addAttribute("list", pageList.getPage());
+        modelMap.addAttribute("list", pageList.getListData());
         modelMap.addAttribute("page", pageList.getPage());
         return "privilege/list";
     }

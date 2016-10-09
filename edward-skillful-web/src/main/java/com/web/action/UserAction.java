@@ -48,7 +48,7 @@ public class UserAction {
      * 去新增或修改
      * @return
      */
-    @RequestMapping(value = "/save",method = RequestMethod.GET)
+    @RequestMapping(value = "/toSave",method = RequestMethod.GET)
     public String toSave(
             @RequestParam(value = "userId",required = false)Integer userId,
             ModelMap modelMap){

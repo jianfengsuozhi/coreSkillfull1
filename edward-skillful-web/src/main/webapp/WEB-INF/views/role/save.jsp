@@ -45,12 +45,11 @@
                    cache:true,
                    type:"POST",
                    url:$("#form1").attr("action"),
-                   dataType:"json",//使返回数据是json,从而可以data.status fixfox出现html
-                   data:$("#form1").serialize(),/* 要提交的表单,必须使用name属性*/
+                   dataType:"json",
+                   data:$("#form1").serialize(),
                    async:false,
                    success:function (data) {
                        if(data.status==0){
-                           //{"status":0,"msg":"操作成功"} 获取值
                            window.location.href = $("#class").attr("data-list"); //刷新并加载url
                        }else{
                            alert(data.msg);
@@ -68,16 +67,25 @@
 <form action="${ctx}/role/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>
-            <input type="hidden" name="classId" value="${role.classId}" />
-            <td class="tableleft">序号</td>
-            <td><input type="text" name="orderNo" value="${role.orderNo}"/></td>
+            <input type="hidden" name="role.roleName" value="${roleEx.role.roleId}" />
+            <td class="tableleft">角色名称</td>
+            <td><input type="text" name="role.roleName" value="${roleEx.role.roleName}"/></td>
         </tr>
         <tr>
-            <td class="tableleft">类别名称</td>
-            <td><input type="text" name="className" value="${role.className}"/></td>
+            <td class="tableleft">权限码</td>
+            <td>
+                <c:forEach items="${codeAndNames}" var="item">
+                    <input type="checkbox" name="code" value="${item.code}"
+                    <c:forEach items="${roleEx.privilageCodeAndNames}" var="codeAndName">
+                        <c:if test="${codeAndName.code eq item.code}">checked="checked"</c:if>
+                    </c:forEach>
+                        />${item.name}
+                </c:forEach>
+            </td>
+        </tr>
         <tr>
-            <td class="tableleft">类别编码</td>
-            <td><input type="text" name="classCode" value="${role.classCode}"/></td>
+            <td class="tableleft">备注</td>
+            <td><input type="text" name="role.remark" value="${roleEx.role.remark}"/></td>
         </tr>
         <tr>
             <td class="tableleft"></td>

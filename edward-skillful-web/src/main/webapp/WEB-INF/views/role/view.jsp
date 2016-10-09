@@ -42,16 +42,22 @@
 <form action="${ctx}/role/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>
-            <input type="hidden" name="classId" value="${role.classId}" />
-            <td class="tableleft">序号</td>
-            <td><span>${role.orderNo}</span></td>
+            <td class="tableleft">角色名称</td>
+            <td><span>${roleEx.role.roleName}</span></td>
         </tr>
         <tr>
-            <td class="tableleft">类别名称</td>
-            <td><span>${role.className}</span></td>
+            <td class="tableleft">备注</td>
+            <td>
+                <span>${roleEx.role.remark}</span>
+            </td>
+        </tr>
         <tr>
-            <td class="tableleft">类别编码</td>
-            <td><span>${role.classCode}</span></td>
+            <td class="tableleft">权限码</td>
+            <td>
+                <c:forEach items="${roleEx.privilageCodeAndNames}" var="item">
+                    <span>${item.name}</span>
+                </c:forEach>
+            </td>
         </tr>
         <tr>
             <td class="tableleft"></td>
