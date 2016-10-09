@@ -67,7 +67,7 @@
 <form action="${ctx}/role/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>
-            <input type="hidden" name="role.roleName" value="${roleEx.role.roleId}" />
+            <input type="hidden" name="role.roleId" value="${roleEx.role.roleId}" />
             <td class="tableleft">角色名称</td>
             <td><input type="text" name="role.roleName" value="${roleEx.role.roleName}"/></td>
         </tr>
@@ -75,7 +75,7 @@
             <td class="tableleft">权限码</td>
             <td>
                 <c:forEach items="${codeAndNames}" var="item">
-                    <input type="checkbox" name="code" value="${item.code}"
+                    <input type="checkbox" name="privilageCodes" value="${item.code}"
                     <c:forEach items="${roleEx.privilageCodeAndNames}" var="codeAndName">
                         <c:if test="${codeAndName.code eq item.code}">checked="checked"</c:if>
                     </c:forEach>

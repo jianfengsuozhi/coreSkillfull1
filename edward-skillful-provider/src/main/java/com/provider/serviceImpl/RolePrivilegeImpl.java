@@ -43,11 +43,12 @@ public class RolePrivilegeImpl extends AbstractBaseServiceImpl<RolePrivilege, Ro
     @Override
     public void delete(Integer roleId) {
         MyIllegalArgumentException.checkNull(roleId,logger,"roleId不能为null");
-        rolePrivilegeDao.deleteById(roleId);
+        RolePrivilegeCriteria criteria = new RolePrivilegeCriteria();
+        criteria.or().andRoleIdEqualTo(roleId);
+        rolePrivilegeDao.deleteByCriteria(criteria);
     }
 
-    @Override
-    public void save(RolePrivilege rolePrivilege) throws MyException {
+    private void save(RolePrivilege rolePrivilege) throws MyException {
         MyIllegalArgumentException.checkNull(rolePrivilege,logger,"rolePrivilege对象不能为null");
         if(null == rolePrivilege.getRecordId()){
             rolePrivilege.setCreateTime(DateUtils.getCurDate());
@@ -59,6 +60,22 @@ public class RolePrivilegeImpl extends AbstractBaseServiceImpl<RolePrivilege, Ro
             MyObjectNullException.checkNull(oldRolePrivilege,logger,"主键是:"+rolePrivilege.getRecordId()+"的对象不能为null");
             rolePrivilege.setCreateTime(oldRolePrivilege.getCreateTime());
             this.updateById(rolePrivilege);
+        }
+    }
+
+    @Override
+    public void save(List<String> privilageCodes, Integer roleId) throws MyException {
+        //先删除,在批量保存
+        this.delete(roleId);
+        //插入
+        if(null == privilageCodes){
+            return;
+        }
+        for (String privilageCode : privilageCodes) {
+            RolePrivilege rolePrivilege = new RolePrivilege();
+            rolePrivilege.setRoleId(roleId);
+            rolePrivilege.setPrivilegeCode(privilageCode);
+            this.save(rolePrivilege);
         }
     }
 }

@@ -70,20 +70,26 @@ public class RoleImpl extends AbstractBaseServiceImpl<Role, RoleCriteria> implem
         MyIllegalArgumentException.checkNull(roleEx, logger,"roleEx对象不能为null");
         MyIllegalArgumentException.checkNull(roleEx.getRole(), logger,"role对象不能为null");
         Role role = roleEx.getRole();
-        List<CodeAndName> privilageCodeAndNames = roleEx.getPrivilageCodeAndNames();
         if(null == role.getRoleId()){
             //插入role
-            role.setCreateTime(DateUtils.getCurDate());
-            role.setModifyTime(DateUtils.getCurDate());
-            this.insert(role);
+            this.insertRole(role);
             //插入role_Privilage
-            for (CodeAndName privilage : privilageCodeAndNames) {
-                RolePrivilege rolePrivilege = new RolePrivilege();
-                rolePrivilege.setRoleId(role.getRoleId());
-                rolePrivilege.setPrivilegeCode(privilage.getCode());
-                rolePrivilegeService.save(rolePrivilege);
-            }
+            rolePrivilegeService.save(roleEx.getPrivilageCodes(),role.getRoleId());
+        }else{
+            //修改
+            Role oldRole = this.selectById(role.getRoleId());
+            role.setCreateTime(oldRole.getCreateTime());
+            role.setModifyTime(DateUtils.getCurDate());
+            this.updateById(role);
+            //插入role_Privilage：
+            rolePrivilegeService.save(roleEx.getPrivilageCodes(),role.getRoleId());
         }
+    }
+
+    private void insertRole(Role role) throws MyException {
+        role.setCreateTime(DateUtils.getCurDate());
+        role.setModifyTime(DateUtils.getCurDate());
+        this.insert(role);
     }
 
     @Override

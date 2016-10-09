@@ -11,6 +11,15 @@ import java.util.List;
 public class RoleEx  implements Serializable{
     private Role role;
     private List<CodeAndName> privilageCodeAndNames;
+    private List<String> privilageCodes;
+
+    public List<String> getPrivilageCodes() {
+        return privilageCodes;
+    }
+
+    public void setPrivilageCodes(List<String> privilageCodes) {
+        this.privilageCodes = privilageCodes;
+    }
 
     public List<CodeAndName> getPrivilageCodeAndNames() {
         return privilageCodeAndNames;
