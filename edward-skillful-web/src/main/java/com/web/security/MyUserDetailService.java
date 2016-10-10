@@ -4,6 +4,7 @@ import com.api.modelEx.CodeAndName;
 import com.api.service.RolePrivilegeService;
 import com.api.service.UserService;
 import com.google.common.collect.Lists;
+import com.provider.serviceImpl.RolePrivilegeImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
@@ -27,7 +28,7 @@ public class MyUserDetailService  implements UserDetailsService{
     @Resource
     private UserService userService;
     @Resource
-    private RolePrivilegeService rolePrivilegeService;
+    private RolePrivilegeService rolePrivilegeService = new RolePrivilegeImpl();
 
     /*
     * 根据用户名获取用户详细信息

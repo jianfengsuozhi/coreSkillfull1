@@ -57,13 +57,18 @@ public class PrivilegeImpl extends AbstractBaseServiceImpl<Privilege, PrivilegeC
 
     @Override
     public List<CodeAndName> selectCodeAndNames() {
-        PrivilegeCriteria criteria = new PrivilegeCriteria();
-        List<Privilege> privileges = privilegeDao.selectByCriteria(criteria);
+        List<Privilege> privileges = this.selectAll();
 
         LinkedList<CodeAndName> codeAndNames = Lists.newLinkedList();
         for (Privilege privilege : privileges) {
             codeAndNames.add(new CodeAndName(privilege.getPrivilegeCode(), privilege.getPrivilegeName()));
         }
         return codeAndNames;
+    }
+
+    @Override
+    public List<Privilege> selectAll() {
+        PrivilegeCriteria criteria = new PrivilegeCriteria();
+        return privilegeDao.selectByCriteria(criteria);
     }
 }

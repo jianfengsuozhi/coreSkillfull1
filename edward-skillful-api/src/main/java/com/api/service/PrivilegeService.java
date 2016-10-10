@@ -29,4 +29,10 @@ public interface PrivilegeService extends AbstractBaseService<Privilege> {
      * @return
      */
     List<CodeAndName> selectCodeAndNames();
+
+    /**
+     * 查询所有
+     * @return
+     */
+    List<Privilege> selectAll();
 }
