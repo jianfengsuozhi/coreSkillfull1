@@ -77,9 +77,9 @@
         <tr>
             <td class="tableleft">角色名称</td>
             <td>
-                <select name="roleName">
+                <select name="roleId">
                     <c:forEach items="${roles}" var="item">
-                        <option value="${item.recordId}" <c:if test="${item.recordId==user.userId}">selected="selected"</c:if> >${item.name}</option>
+                        <option value="${item.recordId}" <c:if test="${item.recordId==user.roleId}">selected="selected"</c:if> >${item.name}</option>
                     </c:forEach>
                 </select>
             </td>

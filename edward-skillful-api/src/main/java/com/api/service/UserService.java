@@ -15,6 +15,13 @@ public interface UserService extends AbstractBaseService<User> {
     PageList<User> pageList(Page page);
 
     /**
+     * 查询
+     * @param userName
+     * @return
+     */
+    User select(String userName);
+
+    /**
      * 保存
      * @param user
      */

@@ -22,7 +22,9 @@ public abstract class AbstractBaseServiceImpl<U, V extends PageCriteria> {
 
     public U selectById(Integer id) {
         Preconditions.checkNotNull(id, "id不能为null");
-        return getMyBatisRepository().selectById(id);
+        U record = getMyBatisRepository().selectById(id);
+        Preconditions.checkNotNull(record, "主键是:" + id + "的记录不能为null");
+        return record;
     }
 
     public void insert(U entity) throws MyException {

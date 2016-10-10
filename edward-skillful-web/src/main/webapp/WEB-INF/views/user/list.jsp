@@ -82,11 +82,18 @@
     </thead>
     <c:forEach items="${list}" var="item">
         <tr>
-            <td> <input type="hidden" value="${item.userId}" id="userId"/></td>
-            <td>${item.userName}</td>
+            <td>
+                <input type="hidden" value="${item.userId}" id="userId"/>
+                ${item.userName}
+            </td>
             <td>${item.password}</td>
             <td>${item.roleName}</td>
-            <td>${item.enable}</td>
+            <td>
+                <c:choose>
+                    <c:when test="${item.enable == 1}">可以使用</c:when>
+                    <c:otherwise>不可以使用</c:otherwise>
+                </c:choose>
+            </td>
             <td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd"/></td>
             <td>
                 <button href="${ctx}/user/delete.htm" id="delete">删除</button>

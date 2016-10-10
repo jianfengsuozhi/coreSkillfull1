@@ -55,11 +55,16 @@
         </tr>
         <tr>
             <td class="tableleft">是否使用</td>
-            <td><span>${user.enable}</span></td>
+            <td><span>
+                    <c:choose>
+                        <c:when test="${user.enable == 1}">可以使用</c:when>
+                        <c:otherwise>不可以使用</c:otherwise>
+                    </c:choose>
+            </span></td>
         </tr>
         <tr>
-            <td class="tableleft">是否使用</td>
-            <td><span>${user.createTime}</span></td>
+            <td class="tableleft">创建时间</td>
+            <td><span><fmt:formatDate value="${user.createTime}" pattern="yyyy-MM-dd"/> </span></td>
         </tr>
         <tr>
             <td class="tableleft"></td>
