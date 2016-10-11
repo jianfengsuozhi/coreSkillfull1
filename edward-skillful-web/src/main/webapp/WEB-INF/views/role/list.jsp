@@ -67,7 +67,9 @@
 </head>
 <body >
 <form class="form-inline definewidth m20" action="${ctx}/role/list.htm" method="get" id="list">
-    <a href="${ctx}/role/toSave.htm">添加</a>
+    <sec:authorize access="hasRole('7')">
+        <a href="${ctx}/role/toSave.htm">添加</a>
+    </sec:authorize>
 </form>
 <table class="table table-bordered table-hover definewidth m10">
     <thead>
@@ -87,8 +89,13 @@
             <td>${item.remark}</td>
             <td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd"/></td>
             <td>
-                <button href="${ctx}/role/delete.htm" id="delete">删除</button>
-                <a href="${ctx}/role/toSave.htm?roleId=${item.roleId}">修改</a>
+                <sec:authorize access="hasRole('9')">
+                    <button href="${ctx}/role/delete.htm" id="delete">删除</button>
+                </sec:authorize>
+                <sec:authorize access="hasRole('8')">
+                    <a href="${ctx}/role/toSave.htm?roleId=${item.roleId}">修改</a>
+                </sec:authorize>
+
                 <a href="${ctx}/role/view.htm?roleId=${item.roleId}">查看</a>
             </td>
         </tr>

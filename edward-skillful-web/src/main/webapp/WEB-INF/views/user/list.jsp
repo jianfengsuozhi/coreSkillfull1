@@ -67,7 +67,9 @@
 </head>
 <body >
 <form class="form-inline definewidth m20" action="${ctx}/user/list.htm" method="get" id="list">
-    <a href="${ctx}/user/toSave.htm">添加</a>
+    <sec:authorize access="hasRole('7')">
+        <a href="${ctx}/user/toSave.htm">添加</a>
+    </sec:authorize>
 </form>
 <table class="table table-bordered table-hover definewidth m10">
     <thead>
@@ -96,8 +98,13 @@
             </td>
             <td><fmt:formatDate value="${item.createTime}" pattern="yyyy-MM-dd"/></td>
             <td>
-                <button href="${ctx}/user/delete.htm" id="delete">删除</button>
-                <a href="${ctx}/user/toSave.htm?userId=${item.userId}">修改</a>
+                <sec:authorize access="hasRole('9')">
+                    <button href="${ctx}/user/delete.htm" id="delete">删除</button>
+                </sec:authorize>
+                <sec:authorize access="hasRole('8')">
+                    <a href="${ctx}/user/toSave.htm?userId=${item.userId}">修改</a>
+                </sec:authorize>
+
                 <a href="${ctx}/user/view.htm?userId=${item.userId}">查看</a>
             </td>
         </tr>

@@ -25,7 +25,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             return;
         }
 
-        Iterator<ConfigAttribute> ite=configAttributes.iterator();
+        Iterator<ConfigAttribute> ite = configAttributes.iterator();
         //
         while(ite.hasNext()){
             //得到需要权限中的一个
@@ -34,7 +34,6 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
             //判断userDetailService是否有该url的权限
             for(GrantedAuthority ga : authentication.getAuthorities()){
                 if(needRole.equals(ga.getAuthority())){
-
                     return;
                 }
             }

@@ -18,4 +18,5 @@
     <import resource="propertyConfigurer.xml"/>
     <import resource="redis.xml"/>
     <import resource="springSecurity.xml"/>
+    <import resource="spring-task.xml"/>
 </beans>

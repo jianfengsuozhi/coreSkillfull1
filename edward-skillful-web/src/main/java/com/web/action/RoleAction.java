@@ -11,6 +11,7 @@ import com.provider.model.Role;
 import com.utils.JsonData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -22,9 +23,9 @@ import javax.annotation.Resource;
  */
 @Controller
 @RequestMapping("/role")
+@PreAuthorize("hasAnyRole('5')")
 public class RoleAction {
     private Logger logger = LoggerFactory.getLogger(RoleAction.class);
-
     @Resource
     private RoleService roleService;
     @Resource
@@ -54,6 +55,7 @@ public class RoleAction {
      * @param modelMap
      * @return
      */
+    @PreAuthorize("hasAnyRole('7') or hasAnyRole('8')")
     @RequestMapping(value = "/toSave",method = RequestMethod.GET)
     public String toSave(
             @RequestParam(value = "roleId",required = false)Integer roleId,ModelMap modelMap){
@@ -72,6 +74,7 @@ public class RoleAction {
      * @param roleEx
      * @return
      */
+    @PreAuthorize("hasAnyRole('7') or hasAnyRole('8')")
     @ResponseBody
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     public JsonData save(
@@ -106,6 +109,7 @@ public class RoleAction {
      * @param roleId
      * @return
      */
+    @PreAuthorize("hasAnyRole('9')")
     @ResponseBody
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public JsonData delete(

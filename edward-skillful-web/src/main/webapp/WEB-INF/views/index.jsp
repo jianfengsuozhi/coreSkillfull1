@@ -230,43 +230,53 @@
                 src="${ctx}/images/bbb_04.jpg">
         </div>
 
-        <div class="div2">
-            <div class="spgl"></div>
-            <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/baseMaterialClass/defaultList.htm');">物资分类</a></li>
-        </div>
-        <div class="div3">
+        <%--页面管理,控制页面是否显示，但/role/toSave.htm无权限控制的url在登陆后可以访问--%>
+        <sec:authorize access="hasRole('2')">
+            <div class="div2">
+                <div class="spgl"></div>
+                <li><a class="a" href="javascript:void(0);"
+                       onClick="openurl('${ctx}/baseMaterialClass/defaultList.htm');">物资分类</a></li>
+            </div>
+            <div class="div3">
+            </div>
+        </sec:authorize>
 
-        </div>
-        <div class="div2">
-            <div class="spgl"></div>
-            <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/baseMaterial/defaultList.htm');">物资</a></li>
-        </div>
-        <div class="div3">
+        <sec:authorize access="hasRole('3')">
+            <div class="div2">
+                <div class="spgl"></div>
+                <li><a class="a" href="javascript:void(0);"
+                       onClick="openurl('${ctx}/baseMaterial/defaultList.htm');">物资</a></li>
+            </div>
+            <div class="div3">
+            </div>
+        </sec:authorize>
 
-        </div>
+        <sec:authorize access="hasRole('4')">
+            <div class="div2">
+                <div class="spgl"></div>
+                <li><a class="a" href="javascript:void(0);"
+                       onClick="openurl('${ctx}/user/list.htm');">用户管理</a></li>
+            </div>
+            <div class="div3"></div>
+         </sec:authorize>
 
-        <div class="div2">
-            <div class="spgl"></div>
-            <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/user/list.htm');">用户管理</a></li>
-        </div>
-        <div class="div3"></div>
+        <sec:authorize access="hasRole('5')">
+            <div class="div2">
+                <div class="spgl"></div>
+                <li><a class="a" href="javascript:void(0);"
+                       onClick="openurl('${ctx}/role/list.htm');">角色管理</a></li>
+            </div>
+            <div class="div3"></div>
+        </sec:authorize>
 
-        <div class="div2">
-            <div class="spgl"></div>
-            <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/role/list.htm');">角色管理</a></li>
-        </div>
-        <div class="div3"></div>
-
-        <div class="div2">
-            <div class="spgl"></div>
-            <li><a class="a" href="javascript:void(0);"
-                   onClick="openurl('${ctx}/privilege/list.htm');">权限管理</a></li>
-        </div>
-        <div class="div3"></div>
+        <sec:authorize access="hasRole('6')">
+            <div class="div2">
+                <div class="spgl"></div>
+                <li><a class="a" href="javascript:void(0);"
+                       onClick="openurl('${ctx}/privilege/list.htm');">权限管理</a></li>
+            </div>
+            <div class="div3"></div>
+        </sec:authorize>
 
         <div class="div2">
             <div class="spgl"></div>

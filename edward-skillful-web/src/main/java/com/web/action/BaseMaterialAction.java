@@ -11,6 +11,7 @@ import com.utils.JsonData;
 import com.web.util.SearchParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping("/baseMaterial")
+@PreAuthorize("hasAnyRole('3')")
 public class BaseMaterialAction {
     private Logger logger = LoggerFactory.getLogger(BaseMaterialAction.class);
     @Resource

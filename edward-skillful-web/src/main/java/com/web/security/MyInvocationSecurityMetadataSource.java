@@ -22,9 +22,6 @@ public class MyInvocationSecurityMetadataSource implements FilterInvocationSecur
     @Resource
     private PrivilegeService privilegeService;
 
- /*   //tomcat启动时实例化一次
-    public MyInvocationSecurityMetadataSource() {
-    }*/
     //url -- 权限码
     private void loadResourceDefine() {
         resourceMap = new HashMap<String, Collection<ConfigAttribute>>();
@@ -35,15 +32,6 @@ public class MyInvocationSecurityMetadataSource implements FilterInvocationSecur
             atts.add(ca);
             resourceMap.put(privilege.getUrl(), atts);
         }
-
-/*        Collection<ConfigAttribute> atts = new ArrayList<ConfigAttribute>();
-        ConfigAttribute ca = new SecurityConfig("ROLE_USER");
-        atts.add(ca);
-        resourceMap.put("/index.htm", atts);
-        Collection<ConfigAttribute> attsno =new ArrayList<ConfigAttribute>();
-        ConfigAttribute cano = new SecurityConfig("ROLE_NO");
-        attsno.add(cano);
-        resourceMap.put("/other.htm", attsno);*/
     }
 
     //得到该url所需要的权限  Object: /index.htm
@@ -53,9 +41,9 @@ public class MyInvocationSecurityMetadataSource implements FilterInvocationSecur
             this.loadResourceDefine();
         }
 
-        // 将参数转为url
+        //将参数转为url
         String url = ((FilterInvocation)object).getRequestUrl();
-        Iterator<String>ite = resourceMap.keySet().iterator();
+        Iterator<String> ite = resourceMap.keySet().iterator();
         while (ite.hasNext()) {
             String resURL = ite.next();
             //得到访问该url的所有可能角色

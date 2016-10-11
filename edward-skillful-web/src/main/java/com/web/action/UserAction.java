@@ -9,6 +9,7 @@ import com.provider.model.User;
 import com.utils.JsonData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import javax.annotation.Resource;
  */
 @Controller
 @RequestMapping("/user")
+@PreAuthorize("hasAnyRole('4')")
 public class UserAction {
     private Logger logger = LoggerFactory.getLogger(UserAction.class);
 
@@ -48,6 +50,7 @@ public class UserAction {
      * 去新增或修改
      * @return
      */
+    @PreAuthorize("hasAnyRole('7') or hasAnyRole('8')")
     @RequestMapping(value = "/toSave",method = RequestMethod.GET)
     public String toSave(
             @RequestParam(value = "userId",required = false)Integer userId,
@@ -65,6 +68,7 @@ public class UserAction {
      * @param user
      * @return
      */
+    @PreAuthorize("hasAnyRole('7') or hasAnyRole('8')")
     @ResponseBody
     @RequestMapping(value = "/save",method = RequestMethod.POST)
     public JsonData save(@ModelAttribute User user){
@@ -97,6 +101,7 @@ public class UserAction {
      * @param userId
      * @return
      */
+    @PreAuthorize("hasAnyRole('9')")
     @ResponseBody
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
     public JsonData delete(

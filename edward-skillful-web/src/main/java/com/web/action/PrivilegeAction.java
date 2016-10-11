@@ -8,6 +8,7 @@ import com.provider.model.Privilege;
 import com.utils.JsonData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import javax.annotation.Resource;
  */
 @Controller
 @RequestMapping("/privilege")
+@PreAuthorize("hasAnyRole('6')") //这样做的目的：访问/privilege/** 的url必须拥有这个权限
 public class PrivilegeAction {
     private Logger logger = LoggerFactory.getLogger(PrivilegeAction.class);
 
@@ -47,6 +49,7 @@ public class PrivilegeAction {
      * @param modelMap
      * @return
      */
+    @PreAuthorize("hasAnyRole('7') or hasAnyRole('8')")
     @RequestMapping(value = "/toSave",method = RequestMethod.GET)
     public String toSave(
             @RequestParam(value = "privilegeId",required = false)Integer privilegeId,
@@ -64,6 +67,7 @@ public class PrivilegeAction {
      */
     @ResponseBody
     @RequestMapping(value = "/save",method = RequestMethod.POST)
+    @PreAuthorize("hasAnyRole('7') or hasAnyRole('8')")
     public JsonData save(@ModelAttribute Privilege privilege){
         try {
             privilegeService.save(privilege);
@@ -81,6 +85,7 @@ public class PrivilegeAction {
      */
     @ResponseBody
     @RequestMapping(value = "/delete",method = RequestMethod.GET)
+    @PreAuthorize("hasAnyRole('9')")
     public JsonData delete(
             @RequestParam(value = "privilegeId",required = true)Integer privilegeId){
         try {
