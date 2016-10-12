@@ -13,7 +13,8 @@
     <module>edward-skillful-provider</module>
     <module>edward-skillful-utils</module>
     <module>edward-skillful-web</module>
-  </modules>
+       <module>edward-skillful-dataStructure</module>
+   </modules>
   <name>skillful</name>
   <url>http://maven.apache.org</url>
 
