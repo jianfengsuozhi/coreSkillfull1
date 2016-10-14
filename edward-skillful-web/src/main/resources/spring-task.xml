@@ -16,7 +16,7 @@
 
     <!--定时器-->
     <bean name="job1" class="org.springframework.scheduling.quartz.JobDetailBean">
-        <property name="jobClass" value="com.web.TaskTest.TestTask01" />
+        <property name="jobClass" value="com.web.taskTest.TestTask01" />
         <property name="jobDataAsMap"><!--定义jobClass的属性值-->
             <map>
                 <entry key="timeout" value="5" />

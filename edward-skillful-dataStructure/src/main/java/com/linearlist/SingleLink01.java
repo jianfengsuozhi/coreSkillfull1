@@ -3,7 +3,7 @@ package com.linearlist;
 /**
  * Created by weideliang on 2016/10/13.
  */
-public interface SingleLink<T> {
+public interface SingleLink01<T> {
     //增加
     void addToHeader(T element);
 

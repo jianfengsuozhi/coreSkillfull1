@@ -4,7 +4,7 @@ package com.linearlist;
  * 链表增删和删除时有3种情况：头,尾,中间
  * Created by weideliang on 2016/10/13.
  */
-public class SingleLinkImpl<T> implements SingleLink<T>{
+public class SingleLinkImpl<T> implements SingleLink01<T> {
     private Node<T> header, tail;//头结点和尾结点
     private int size;//结点个数
 

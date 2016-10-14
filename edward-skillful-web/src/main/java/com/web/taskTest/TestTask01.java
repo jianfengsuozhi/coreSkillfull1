@@ -1,4 +1,4 @@
-package com.web.TaskTest;
+package com.web.taskTest;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
