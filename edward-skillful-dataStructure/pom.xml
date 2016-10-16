@@ -11,5 +11,19 @@
 
     <artifactId>dataStructure</artifactId>
 
-
+    <dependency>
+        <groupId>com.Edward</groupId>
+        <artifactId>edward-skillful-api</artifactId>
+        <version>${edward-skillful-api}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.Edward</groupId>
+        <artifactId>edward-skillful-utils</artifactId>
+        <version>${edward-skillful-utils}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.Edward</groupId>
+        <artifactId>edward-skillful-constantvar</artifactId>
+        <version>${edward-skillful-constantvar}</version>
+    </dependency>
 </project>

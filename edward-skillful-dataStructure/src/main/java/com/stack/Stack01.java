@@ -4,11 +4,12 @@ package com.stack;
  * 栈是线性表的特例
  *  利用数组实现
  *  如何保证倒序取:数组倒着取
+ *  栈底和栈顶
  * Created by weideliang on 2016/10/14.
  */
 public class Stack01<T> {
     private Object[] array;
-    private int defaultCapacity = 10;
+    private int defaultCapacity = 20;
     private int capacity;
     private int size;
 
@@ -44,6 +45,13 @@ public class Stack01<T> {
             throw new RuntimeException("栈中没有数据");
         }
         return (T)array[--size];
+    }
+
+    public T peek(){
+        if(0 == size){
+            throw new RuntimeException("栈中没有数据");
+        }
+        return (T)array[size - 1];
     }
 
     /**

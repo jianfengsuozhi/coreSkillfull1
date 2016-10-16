@@ -9,5 +9,6 @@ public class Test04 {
     public static void main(String[] args) {
         Lists.newArrayList();
         System.out.println("完美世界");
+
     }
 }
