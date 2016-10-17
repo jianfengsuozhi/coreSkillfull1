@@ -28,6 +28,12 @@ public class Queue02<T> {
         }
     }
 
+    public void pushAll(T[] elements){
+        for (T element : elements) {
+            this.push(element);
+        }
+    }
+
     public T pop(){
         if(isEmpty()){
             throw new RuntimeException("队列为空");

@@ -37,6 +37,12 @@ public class Stack01<T> {
         array[size++] = element;
     }
 
+    public void pushAll(T[] elements){
+        for (T element : elements) {
+            this.push(element);
+        }
+    }
+
     /**
      * 出栈
      */
