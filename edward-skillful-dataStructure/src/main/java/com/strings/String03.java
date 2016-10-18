@@ -13,9 +13,13 @@ public class String03 {
         for(; i<=(strLength-patternLength); ){//strLength-patternLength 防止k在增加时超过str的长度
             int k = i;//当相同时,继续进行
             for (int j=0; j<patternLength; j++){
-                if(str.charAt(k) != pattern.charAt(j)){
+                if(str.charAt(k) != pattern.charAt(j)){//if()以下的是和遍历算法的主要区别
                     //计算子串的匹配值
                     String substring = pattern.substring(0, j);
+                    if(substring.isEmpty()){//当第一个首字母不匹配时,直接i++
+                        i++;
+                        break;
+                    }
                     int subMatchvalue = String02.calSubPartMatch(substring);
                     //计算位数
                     int moveDigit = substring.length() - subMatchvalue;
@@ -34,7 +38,7 @@ public class String03 {
 
     public static void main(String[] args) {
         String03 string03 = new String03();
-        int abcdabd = string03.index("abc", "bc");
+        int abcdabd = string03.index("abdbdcd", "bc");
         System.out.println(abcdabd);
     }
 }
