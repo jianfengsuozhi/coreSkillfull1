@@ -77,6 +77,4 @@ public abstract class AbstractBaseServiceImpl<U, V extends PageCriteria> {
             throw MyObjectMultiple.create(logger, "数据库删除失败");
         }
     }
-
-
 }

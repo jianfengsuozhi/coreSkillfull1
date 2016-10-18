@@ -9,20 +9,37 @@ package com.strings;
  * Brute-Force：简单的遍历算法
  * Kmp算法：对遍历算法的优化
  *
+ *
  * Created by weideliang on 2016/10/17.
  */
 public class String01 {
-
     /**
-     *  Brute-Force：简单的遍历算法
+     * Brute Force 算法
      * @return
      */
-    public int indexOf_BF(String str,String subStr){
+    public int index(String str,String pattern){
+        int strLength = str.length();
+        int patternLength = pattern.length();
 
-        return 0;
+        for(int i=0; i<=(strLength-patternLength); i++){//strLength-patternLength 防止k在增加时超过str的长度
+            int k = i;//当相同时,继续进行
+            for (int j=0; j<patternLength; j++){
+                if(str.charAt(k) != pattern.charAt(j)){
+                    break;
+                }else {
+                    k++;
+                    if(j == (patternLength -1)){//结束条件
+                        return i;
+                    }
+                }
+            }
+        }
+        return -1;
     }
 
     public static void main(String[] args) {
-
+        String01 string01 = new String01();
+        System.out.println(string01.index("ababc", "abc"));
     }
+
 }
