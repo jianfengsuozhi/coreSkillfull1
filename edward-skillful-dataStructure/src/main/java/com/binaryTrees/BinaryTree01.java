@@ -16,24 +16,25 @@ public class BinaryTree01 {
     }
 
     private BinaryTree01(){
-        root = new TreeNode(1, "rootNode(A)");
+        root = new TreeNode(1, "rootNode(a)");
     }
 
     public void createBinaryTree(){
-        TreeNode b = new TreeNode(2, "B");
-        TreeNode c = new TreeNode(3, "C");
+        TreeNode b = new TreeNode(2, "b");
+        TreeNode c = new TreeNode(3, "c");
         root.leftChild = b;
         root.rightChild = c;
 
-        TreeNode d = new TreeNode(4, "D");
-        TreeNode e = new TreeNode(5, "E");
+        TreeNode d = new TreeNode(4, "d");
+        TreeNode f = new TreeNode(5, "f");
         b.leftChild = d;
-        b.rightChild = e;
+        b.rightChild = f;
 
-        TreeNode f = new TreeNode(6, "F");
-        TreeNode g = new TreeNode(7, "G");
-        c.leftChild = f;
-        c.rightChild = g;
+        TreeNode e = new TreeNode(9, "e");
+        d.rightChild = e;
+
+        TreeNode g = new TreeNode(10, "g");
+        f.leftChild = g;
     }
 
     /**
@@ -46,19 +47,19 @@ public class BinaryTree01 {
         return (null == root || root == element) ? null : this.parent(root,element);
     }
 
-    private TreeNode parent(TreeNode subTree,TreeNode element){
-        if(null == subTree){//截止
+    private TreeNode parent(TreeNode subElement,TreeNode element){
+        if(null == subElement){//截止
             return null;
         }
-        if(element == subTree.leftChild || element == subTree.rightChild){//判断是否相等
-           return subTree;
+        if(element == subElement.leftChild || element == subElement.rightChild){//判断是否相等
+           return subElement;
         }
 
         TreeNode p;
-        if(null != (p = parent(subTree.leftChild,element))){//若左子树没有找到,则查找右子树
+        if(null != (p = parent(subElement.leftChild,element))){//若左子树没有找到,则查找右子树
             return p;
         }else {
-            return parent(subTree.rightChild, element);
+            return parent(subElement.rightChild, element);
         }
     }
 
@@ -78,11 +79,11 @@ public class BinaryTree01 {
         return size(root);
     }
 
-    private int size(TreeNode subTree){
-        if(null == subTree){
+    private int size(TreeNode element){
+        if(null == element){
             return 0;
         }
-        return 1 + size(subTree.leftChild) + size(subTree.rightChild);
+        return 1 + size(element.leftChild) + size(element.rightChild);
     }
 
     /**
@@ -96,6 +97,78 @@ public class BinaryTree01 {
         return Logarithm.log(element.key,2) + 1;
     }
 
+    /**
+     * 左孩子结点
+     * @param element
+     * @return
+     */
+    public TreeNode getLeftChildNode(TreeNode element){
+        return null != element ? element.leftChild : null;
+    }
+
+    /**
+     * 右孩子结点
+     * @param element
+     * @return
+     */
+    public TreeNode getRightChildNode(TreeNode element){
+        return null != element ? element.rightChild : null;
+    }
+
+    /**
+     * 删除结点 TODO
+     * @param element
+     */
+    public void destroy(TreeNode element){
+        if(null != element){
+            //按后序遍历销毁
+            this.destroy(element.leftChild);
+            this.destroy(element.rightChild);
+            element = null;
+        }
+
+    }
+
+    /**
+     * 前序遍历:递归实现
+     */
+    public void preOrder(TreeNode element){
+        if(null != element){//当前元素不为null时,递归结束
+            this.visited(element);
+            this.preOrder(element.leftChild);
+            this.preOrder(element.rightChild);
+        }
+    }
+
+    /**
+     * 中序遍历:递归实现
+     */
+    public void middleOrder(TreeNode element){
+        if(null != element){
+            this.middleOrder(element.leftChild);
+            this.visited(element);
+            this.middleOrder(element.rightChild);
+        }
+    }
+
+    /**
+     * 后序遍历:递归实现
+     */
+    public void postOrder(TreeNode element){
+        if(null != element){
+            this.postOrder(element.leftChild);
+            this.postOrder(element.rightChild);
+            this.visited(element);
+        }
+    }
+
+    /**
+     * 输出当前结点信息
+     * @param element
+     */
+    public void visited(TreeNode element){
+        System.out.println("key:" + element.key + ",data:" + element.data);
+    }
 
     public static void main(String[] args) {
         BinaryTree01 binaryTree01 = new BinaryTree01();
@@ -105,15 +178,25 @@ public class BinaryTree01 {
         System.out.println(binaryTree01.getParent(binaryTree01.getRoot().rightChild.rightChild).key);*/
 
 //        System.out.println(binaryTree01.height(binaryTree01.getRoot().leftChild.leftChild));
-        System.out.println(binaryTree01.size());
+//        System.out.println(binaryTree01.size());
+
+/*        System.out.println("-------------前缀遍历------------");
+        binaryTree01.preOrder(binaryTree01.getRoot());
+        System.out.println("-------------中缀遍历------------");
+        binaryTree01.middleOrder(binaryTree01.getRoot());
+        System.out.println("-------------后缀遍历------------");
+        binaryTree01.postOrder(binaryTree01.getRoot());*/
+
+        binaryTree01.destroy(binaryTree01.root.leftChild.leftChild);
+        binaryTree01.preOrder(binaryTree01.getRoot());
     }
 
 
     private static class TreeNode{
-        private int key = 0;
-        private String data;
-        private TreeNode leftChild;
-        private TreeNode rightChild;
+        private int key = 0;//序号
+        private String data;//数据
+        private TreeNode leftChild;//左孩子结点
+        private TreeNode rightChild;//右孩子结点
 
         public TreeNode() {
         }
