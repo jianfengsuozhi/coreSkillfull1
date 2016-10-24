@@ -1,5 +1,7 @@
 package com.binaryTrees;
 
+import com.stack.Stack01;
+
 /**
  * 完全二叉树
  *  树 二叉树 完全二叉树 满二叉树： 树：唯一根结点,不相交  二叉树：最多只有两个结点  完全二叉树：若有序号则和满二叉树序号相同 满二叉树：完美的二叉树
@@ -163,6 +165,87 @@ public class BinaryTree01 {
     }
 
     /**
+     * 前序遍历非递归实现
+     */
+    public void nonRecuPreOrder(){
+        Stack01<TreeNode> stack01 = new Stack01<TreeNode>();
+        stack01.push(root);
+
+        TreeNode current = null;
+        while(!stack01.isEmpty()){
+            current = stack01.pop();
+            visited(current);
+
+            if(null != current.rightChild){
+                stack01.push(current.rightChild);
+            }
+
+            if(null != current.leftChild){
+                stack01.push(current.leftChild);
+            }
+        }
+        System.out.println();
+    }
+
+    /**
+     * 中序遍历非递归实现
+     */
+    public void nonRecuMidOrder(){
+        Stack01<TreeNode> stack01 = new Stack01<TreeNode>();
+        TreeNode current = root;
+
+        while(null != current || !stack01.isEmpty()){
+            //到达二叉树的最左端
+            while (null != current){
+                stack01.push(current);
+                current = current.leftChild;
+            }
+
+            if(!stack01.isEmpty()){
+                current = stack01.pop();
+                visited(current);
+                current = current.rightChild;
+            }
+        }
+        System.out.println();
+    }
+
+    /**
+     * 后序遍历的非递归实现
+     */
+    public void nonRecuPostOrder(){
+        Stack01<TreeNode> stack01 = new Stack01<TreeNode>();
+        TreeNode current = root;
+        TreeNode rNode = null;//上一个节点
+
+        while(null != current || !stack01.isEmpty()){
+            //到达二叉树的最左端
+            while (null != current){
+                stack01.push(current);
+                current = current.leftChild;
+            }
+
+            current = stack01.pop();
+
+            //当前节点没有右孩子或者上一个节点是当前节点的右孩子则访问当前节点
+            while (current != null && (null == current.rightChild || current.rightChild == rNode)){
+                visited(current);
+                rNode = current;
+
+                if(stack01.isEmpty()){
+                    System.out.println();
+                    return;
+                }
+
+                current = stack01.pop();
+            }
+
+            stack01.push(current);
+            current = current.rightChild;
+        }
+    }
+
+    /**
      * 输出当前结点信息
      * @param element
      */
@@ -182,13 +265,22 @@ public class BinaryTree01 {
 
 /*        System.out.println("-------------前缀遍历------------");
         binaryTree01.preOrder(binaryTree01.getRoot());
-        System.out.println("-------------中缀遍历------------");
+        System.out.println("非递归遍历");
+        binaryTree01.nonRecuPreOrder();*/
+/*        System.out.println("-------------中缀遍历------------");
         binaryTree01.middleOrder(binaryTree01.getRoot());
-        System.out.println("-------------后缀遍历------------");
-        binaryTree01.postOrder(binaryTree01.getRoot());*/
+        System.out.println("--------------非递归中序遍历-----------");
+        binaryTree01.nonRecuMidOrder();*/
+/*        System.out.println("-------------后缀遍历------------");
+        binaryTree01.postOrder(binaryTree01.getRoot());
+        System.out.println("--------后缀遍历非递归实现---------");
+        binaryTree01.nonRecuPostOrder();*/
 
-        binaryTree01.destroy(binaryTree01.root.leftChild.leftChild);
-        binaryTree01.preOrder(binaryTree01.getRoot());
+//        binaryTree01.destroy(binaryTree01.root.leftChild.leftChild);
+//        binaryTree01.preOrder(binaryTree01.getRoot());
+
+
+
     }
 
 
