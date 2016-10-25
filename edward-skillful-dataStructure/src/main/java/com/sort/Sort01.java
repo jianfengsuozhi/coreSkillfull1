@@ -61,19 +61,24 @@ public class Sort01 {
     }
 
     /**
-     * 直接插入排序：如打扑克牌
+     * 直接插入排序
      * @param arr
      */
     public void directInsertSort(Integer[] arr){
         int j;//位置
         int t;//待排序算法
         for(int i=1; i<arr.length; i++){
-            if(arr[i] < arr[i-1]){
-                t = arr[i];
-
+            if(arr[i-1] > arr[i]){
+                t = arr[i];//暂存数值
+                for(j=i-1; j>=0 && arr[j]>t; j--){//整体向后移动
+                    arr[j + 1] = arr[j];//向后移动一位
+                }
+                arr[j+1] = t;//for循环里的arr[j]
             }
         }
     }
+
+
 
     public static void main(String[] args) {
         Sort01 sort01 = new Sort01();
@@ -86,7 +91,8 @@ public class Sort01 {
         //选择排序
 //        sort01.simpleSelectSort(p);
 
-
+        //直接插入排序
+        sort01.directInsertSort(p);
 
         for (int i : p) {
             System.out.println(i);
