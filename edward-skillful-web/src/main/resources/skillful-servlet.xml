@@ -86,6 +86,7 @@
             </map>
         </property>
     </bean>
+
     <!-- HandlerAdapter -->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">

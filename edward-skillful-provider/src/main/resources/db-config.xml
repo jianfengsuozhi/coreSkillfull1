@@ -21,8 +21,8 @@
     <!-- dataSource 使用apache的dbcp插件连接数据库-->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"
           p:driverClassName="com.mysql.jdbc.Driver"
-          p:url="jdbc:mysql://60.205.178.36:3306/wdl?characterEncoding=utf-8"
-          p:username="wdl"
+          p:url="jdbc:mysql://127.0.0.1:3306/skillful?characterEncoding=utf-8"
+          p:username="root"
           p:password="123456"
           p:maxWait="50000"
           p:defaultAutoCommit="true"

@@ -13,10 +13,10 @@
       p.privilege_code,
       p.privilege_name
     from t_privilege as p
-    where p.privilege_code
+    where p.privilege_id
     in(
 	  select
-	    rp.privilege_code
+	    rp.privilege_id
 	  from t_role_privilege as rp
 	  where rp.role_id = #{userId}
     )
