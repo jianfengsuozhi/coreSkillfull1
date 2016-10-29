@@ -10,7 +10,7 @@ import java.util.Set;
  * redis命令 http://redisdoc.com/
  * Created by Edward on 2016/9/26.
  */
-public interface RedisUtils {
+public interface RedisUtils01 {
     //String和object
     public void set(String key,Object value,Long liveTime);
     public Object get(String key);
@@ -39,6 +39,4 @@ public interface RedisUtils {
 
     //事务
     public void transfaction(final String key, final String value);
-
-
 }

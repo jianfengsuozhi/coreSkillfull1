@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * Created by Edward on 2016/9/26.
  */
 @Service
-public class RedisUtilsImpl implements RedisUtils{
+public class RedisUtils01Impl implements RedisUtils01 {
     //默认有效时间为30分钟
     public static final Long defaultLiveTime = 30 * 60l;
     @Resource
@@ -127,4 +127,5 @@ public class RedisUtilsImpl implements RedisUtils{
         Set keys = redisTemplate.keys(pattern);
         redisTemplate.delete(keys);
     }
+
 }

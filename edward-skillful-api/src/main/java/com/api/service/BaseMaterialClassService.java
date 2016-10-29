@@ -44,4 +44,5 @@ public interface BaseMaterialClassService extends AbstractBaseService<BaseMateri
      * @throws MyException
      */
     void delete(Integer classId) throws MyException;
+
 }

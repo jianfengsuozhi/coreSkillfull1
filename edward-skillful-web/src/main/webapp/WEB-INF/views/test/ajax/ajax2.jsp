@@ -15,7 +15,7 @@
          *   参数: get http://localhost:8089/edward-skillful-web/test/ajax/ajax21.htm?name=%E9%AD%8F%E5%BE%B7%E4%BA%AE 放在url后面
          *         post http://localhost:8089/edward-skillful-web/test/ajax/ajax22.htm 其他地方
          *    实践: get(查询,删除),post(增，修改)
-         *       限制 前提form提交 <input type="hidden" name="_method" value="put"/>
+         *       限制 前提form提交 <input type="hidden" name="_method" value="set"/>
          *  {"status":0,"msg":"操作成功","data":{"id":"1234","name":null,"date":1474373891990}}
          *  加 {"status":0,"msg":"操作成功","data":{"id":1234,"name":null,"date":"2016-09-20 20:21:05"}}
          */

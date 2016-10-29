@@ -11,7 +11,7 @@ public class RedisJava04 {
 
     public static void main(String[] args) {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("redisTest.xml");
-        RedisUtils redisUtils = ctx.getBean("redisUtils", RedisUtils.class);
+        RedisUtils01 redisUtils = ctx.getBean("redisUtils", RedisUtils01.class);
         redisUtils.deletePattern("1");
         redisUtils.deletePattern("1");
     }

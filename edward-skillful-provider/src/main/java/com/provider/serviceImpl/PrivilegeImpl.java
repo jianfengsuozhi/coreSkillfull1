@@ -1,5 +1,6 @@
 package com.provider.serviceImpl;
 
+import com.api.cache.CacheInfo;
 import com.api.modelEx.CodeAndName;
 import com.api.page.AbstractBaseServiceImpl;
 import com.api.page.Page;
@@ -15,6 +16,7 @@ import com.provider.model.PrivilegeCriteria;
 import com.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -67,6 +69,7 @@ public class PrivilegeImpl extends AbstractBaseServiceImpl<Privilege, PrivilegeC
     }
 
     @Override
+    @Cacheable(CacheInfo.PrivilegeCodesKey)//同自己写的
     public List<Privilege> selectAll() {
         PrivilegeCriteria criteria = new PrivilegeCriteria();
         return privilegeDao.selectByCriteria(criteria);

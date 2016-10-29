@@ -55,5 +55,5 @@
 	<!-- <bean class="com.aop.a"></bean> -->
 	
 	<!-- 自动扫描 本包和子包-->
-	<context:component-scan base-package="com.aop"/>
+	<context:component-scan base-package="com"/>
 </beans>

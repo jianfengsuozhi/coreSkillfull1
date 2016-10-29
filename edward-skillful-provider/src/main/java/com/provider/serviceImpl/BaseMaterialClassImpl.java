@@ -14,7 +14,7 @@ import com.google.common.collect.Lists;
 import com.provider.dao.BaseMaterialClassDao;
 import com.provider.model.BaseMaterialClass;
 import com.provider.model.BaseMaterialClassCriteria;
-import com.redis.RedisUtils;
+import com.redis.RedisUtils01;
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
     @Resource
     private BaseMaterialClassDao baseMaterialClassDao;
     @Resource
-    private RedisUtils redisUtils;
+    private RedisUtils01 redisUtils;
 
     @Override
     public SingleTableDao<BaseMaterialClass, BaseMaterialClassCriteria> getMyBatisRepository() {
