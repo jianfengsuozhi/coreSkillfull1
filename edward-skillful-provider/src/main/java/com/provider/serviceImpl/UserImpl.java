@@ -16,6 +16,8 @@ import com.provider.model.UserCriteria;
 import com.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,6 +37,7 @@ public class UserImpl extends AbstractBaseServiceImpl<User, UserCriteria> implem
     }
 
     @Override
+
     public User select(String userName) {
         UserCriteria criteria = new UserCriteria();
         criteria.or().andUserNameEqualTo(userName);

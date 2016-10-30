@@ -22,4 +22,10 @@ public interface RedisUtils02 {
      * @return
      */
     Object get(String key);
+
+    /**
+     * 删除
+     * @param key
+     */
+    void delete(String key);
 }

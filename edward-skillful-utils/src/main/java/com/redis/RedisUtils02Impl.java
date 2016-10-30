@@ -16,12 +16,17 @@ import java.util.Date;
  * Created by weideliang on 2016/10/29.
  */
 @Service
-public class RedisUtils02Impl implements RedisUtils02{
+public class RedisUtils02Impl implements RedisUtils02 {
     final Logger logger = LoggerFactory.getLogger(RedisUtils02Impl.class);
     private static final long DEFAULT_EXPIRY = 60 * 1000 * 30;
     private RedisTemplate<byte[], byte[]> redisTemplate;
+    private String name;
     public void setRedisTemplate(RedisTemplate<byte[], byte[]> redisTemplate) {
         this.redisTemplate = redisTemplate;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -30,6 +35,11 @@ public class RedisUtils02Impl implements RedisUtils02{
             expireDate = new Date(new Date().getTime() + DEFAULT_EXPIRY);
         }
         this.save(key,value,expireDate);
+    }
+
+    @Override
+    public void delete(String key) {
+        this.set(key,null,null);
     }
 
     @Override
