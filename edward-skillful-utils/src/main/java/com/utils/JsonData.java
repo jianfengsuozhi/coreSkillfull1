@@ -1,5 +1,6 @@
 package com.utils;
 
+
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import java.io.Serializable;

@@ -4,8 +4,11 @@ import com.api.page.Page;
 import com.api.page.PageList;
 import com.api.service.BaseMaterialClassService;
 import com.exception.MyException;
+import com.google.common.collect.Maps;
 import com.provider.model.BaseMaterialClass;
+import com.utils.DateUtils;
 import com.utils.JsonData;
+import com.utils.WebUtility;
 import com.web.util.SearchParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +18,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
+import java.util.LinkedHashMap;
 
 
 /**
@@ -99,6 +106,26 @@ public class BaseMaterialClassAction {
             @RequestParam(value = "classId",required = true)Integer classId,ModelMap modelMap){
         modelMap.addAttribute("baseMaterialClass",baseMaterialClassService.selectById(classId));
         return "baseMaterialClass/view";
+    }
+
+    /**
+     * 下载
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping(value = "/download",method = {RequestMethod.POST,RequestMethod.GET})
+    public JsonData download(
+            HttpServletRequest request,
+            HttpServletResponse response
+    ){
+        Date date = DateUtils.getCurDate();
+        String exportName = DateUtils.toStr("yyyyMMdd", date) + "--" + DateUtils.toStr("yyyyMMdd", date) + "物资类别信息.xls";
+        LinkedHashMap<String, Object> maps = Maps.newLinkedHashMap();
+        maps.put("materialClassList", baseMaterialClassService.selectAll());
+        maps.put("isFirstPage", true);
+        WebUtility.exportToDownload(response,request,maps,exportName,"bms-template.xls",1);
+        return JsonData.getSucceed();
     }
 
    public static class BaseMaterialClassSearchCondition {

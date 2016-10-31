@@ -6,6 +6,7 @@
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--时间格式转换--%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="tagUtil" uri="/WEB-INF/tld/siteMap.tld" %>
 
 <%-- 从Servlet名之后的路径  --%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />

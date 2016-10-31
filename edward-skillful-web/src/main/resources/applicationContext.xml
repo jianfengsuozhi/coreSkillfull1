@@ -16,9 +16,16 @@
 >
     <import resource="db-config.xml"/>
     <import resource="propertyConfigurer.xml"/>
+    <import resource="tabConfig.xml"/>
     <import resource="redis.xml"/>
     <import resource="springSecurity.xml"/>
     <!--<import resource="spring-task.xml"/>-->
+
+    <!-- site map support -->
+    <bean id="siteMapTapSupport" class="com.web.util.SiteMapTag.SiteMapTapSupport">
+        <property name="redisTemplate" ref="redisTemplate"/>
+        <property name="tabHelper" ref="tabUrlHelper"/>
+    </bean>
 
 
 </beans>

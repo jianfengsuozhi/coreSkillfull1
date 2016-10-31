@@ -19,9 +19,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -49,6 +46,13 @@ public class BaseMaterialClassImpl extends AbstractBaseServiceImpl<BaseMaterialC
             innerCriteria.andClassNameLikeInsensitive("%"+className.trim()+"%");
         }
         return this.queryPageList(criteria,page,"order_no,class_name");
+    }
+
+    @Override
+    public List<BaseMaterialClass> selectAll() {
+        BaseMaterialClassCriteria criteria = new BaseMaterialClassCriteria();
+        criteria.or().andClassStatusNotEqualTo(MyEnums.Status.Delete.getCode());
+        return baseMaterialClassDao.selectByCriteria(criteria);
     }
 
     @Override

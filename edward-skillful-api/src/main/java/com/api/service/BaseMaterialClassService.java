@@ -33,6 +33,12 @@ public interface BaseMaterialClassService extends AbstractBaseService<BaseMateri
      List<CodeAndName> selectAllCodeAndName(Integer parentHospitalId);
 
     /**
+     * 查询所有物资类别
+     * @return
+     */
+    List<BaseMaterialClass> selectAll();
+
+    /**
      * 新增或修改
      * @param baseMaterialClass
      */

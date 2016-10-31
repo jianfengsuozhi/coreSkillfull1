@@ -1,0 +1,45 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+  xsi:schemaLocation="
+  http://www.springframework.org/schema/beans
+  http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="tabUrlHelper"
+        class="com.web.util.TabUrlHelper">
+    <property name="tabs">
+      <list>
+        <!-- ============================================================= 首页 -->
+        <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="首页"  p:authorities="1" p:url="/index.htm"/>
+
+        <!-- ============================================================= 物资分类-->
+        <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="物资分类"  p:authorities="2" p:url="/baseMaterialClass/defaultList.htm"/>
+        <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="物资分类"  p:authorities="2" p:url="/baseMaterialClass/list.htm">
+          <property name="children">
+            <list>
+              <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="新增" p:authorities="10" p:url="/baseMaterialClass/toAdd.htm"/>
+              <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="修改" p:authorities="11" p:url="/baseMaterialClass/toModify.htm"/>
+              <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="查看" p:authorities="12" p:url="/baseMaterialClass/view.htm"/>
+            </list>
+          </property>
+        </bean>
+
+        <!-- ============================================================= 物资 -->
+        <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="物资"  p:authorities="3" p:url="/baseMaterial/defaultList.htm"/>
+
+        <!-- ============================================================= 用户管理 -->
+        <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="用户管理"  p:authorities="4" p:url="/user/list.htm"/>
+
+        <!-- ============================================================= 角色管理 -->
+        <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="角色管理"  p:authorities="5" p:url="/role/list.htm"/>
+
+        <!-- ============================================================= 权限管理 -->
+        <bean class="com.web.util.TabUrlHelper.TabNode" p:tabName="权限管理"  p:authorities="6" p:url="/privilege/list.htm"/>
+      </list>
+    </property>
+  </bean>
+
+ </beans>
+
+
+

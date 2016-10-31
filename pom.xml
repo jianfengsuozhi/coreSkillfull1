@@ -63,6 +63,8 @@
       <jedis.version>2.1.0</jedis.version>
       <!-- quartz -->
       <quartz.version>1.8.5</quartz.version>
+      <!-- jxls -->
+      <jxls.version>1.0.3</jxls.version>
   </properties>
   
   <dependencyManagement>
@@ -305,7 +307,6 @@
               <groupId>javax.servlet.jsp</groupId>
               <artifactId>jsp-api</artifactId>
               <version>${jsp-api.version}</version>
-              <scope>provided</scope>
           </dependency>
           <dependency>
               <groupId>javax.servlet</groupId>
@@ -316,7 +317,6 @@
               <groupId>javax.servlet</groupId>
               <artifactId>javax.servlet-api</artifactId>
               <version>${servlet.version}</version>
-              <scope>provided</scope>
           </dependency>
           <dependency>
               <groupId>com.google.guava</groupId>
@@ -370,6 +370,13 @@
               <groupId>org.quartz-scheduler</groupId>
               <artifactId>quartz-jobs</artifactId>
               <version>2.2.0</version>
+          </dependency>
+
+          <!-- jxls -->
+          <dependency>
+              <groupId>net.sf.jxls</groupId>
+              <artifactId>jxls-core</artifactId>
+              <version>${jxls.version}</version>
           </dependency>
 	  </dependencies>
   </dependencyManagement>

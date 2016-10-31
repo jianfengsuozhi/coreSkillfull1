@@ -65,6 +65,10 @@
 </head>
 <body>
 <input type="hidden" id="class" data-list="${ctx}/baseMaterialClass/list.htm"/>
+<!--面包屑开始-->
+<div class="div-middle pos-rel">
+    <%@ include file="/WEB-INF/layouts/bread.jsp" %>
+</div>
 <form action="${ctx}/baseMaterialClass/save.htm" method="post" class="definewidth m20" enctype="multipart/form-data" id="form1">
     <table class="table table-bordered table-hover m10" style="margin-left:10px;margin-top:3px;">
         <tr>

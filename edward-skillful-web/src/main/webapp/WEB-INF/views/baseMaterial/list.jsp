@@ -66,6 +66,11 @@
     </script>
 </head>
 <body >
+<!--面包屑开始-->
+<div class="div-middle pos-rel">
+    <%@ include file="/WEB-INF/layouts/bread.jsp" %>
+</div>
+<!--面包屑结束-->
 <form class="form-inline definewidth m20" action="${ctx}/baseMaterial/list.htm" method="get" id="list">
     <font color="#777777"><strong>物资名称：</strong></font>
     <input type="text" name="materialName" id="menuname"class="abc input-default" placeholder="" value="${condition.materialName}">&nbsp;&nbsp;
