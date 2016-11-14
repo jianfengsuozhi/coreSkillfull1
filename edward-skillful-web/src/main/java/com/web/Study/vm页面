@@ -1,0 +1,35 @@
+boolean 值:vm #if($!{item.isDropDown}) 通过控制class="hide"有无来控制显示还是隐藏
+
+#if(!${baseContactCompany.contactCompanyId}) 新增公司往来单位 #else 修改公司往来单位 #end 如果有值则新增 无值则修改
+
+select选择：
+1 map
+<select name="nature" class="w150">
+    <option>---请选择----</option>
+    #foreach($item in $natureEnum.entrySet())
+        <option value="$!{item.key}" #if($!{baseContactCompany.nature}==$!{item.key}) selected #end>$!{item.value}</option>
+    #end
+</select>
+
+2 list
+<select name="" id="province" class="w150 m-r10" >
+    <option>---请选择----</option>
+    #foreach($item in $provincesList)
+        <option value="$!{item.code}" #if($!{provinceCode}==$!{item.code}) selected #end >$!{item.name}</option>
+     #end
+</select>
+
+map 单选
+<input type="radio" name="status" id="statusStartUse" value="1"  checked="checked">启用</label>
+<label class="chose-hover brd-f m-r10" for="statusStopUse">
+    <input type="radio" name="status" value="-1" #if($!{baseContactCompany.status}==-1) checked="checked" #end>停用</label>
+
+复选框选择:
+#foreach($accountClass in $allAccountClasses)
+<label class="chose-hover brd-f m-r20" for="typeStatus1">
+    <input class="typeStatus" type="checkbox" name="accountClassIds" id="typeStatus1"
+           value="$!{accountClass.accountId}"
+        #foreach($useAccountClass in $useAccountClasses)
+            #if($!{accountClass.accountId}==${useAccountClass.id}) checked="checked" #end
+        #end>$!{accountClass.financialName}</label>
+#end
