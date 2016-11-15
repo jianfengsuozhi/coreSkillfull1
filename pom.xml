@@ -14,6 +14,7 @@
     <module>edward-skillful-utils</module>
     <module>edward-skillful-web</module>
        <module>edward-skillful-dataStructure</module>
+       <module>sprigStudy</module>
    </modules>
   <name>skillful</name>
   <url>http://maven.apache.org</url>
