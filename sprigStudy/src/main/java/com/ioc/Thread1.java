@@ -31,6 +31,19 @@ public class Thread1 implements Runnable{
         }
     }
 
+    public synchronized  static   void testClassSyn(){
+        for(int i=0; i<10; i++){
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println(Thread.currentThread().getName()+"   loop:"+i);
+        }
+    }
+
+
+
     public void testNotSyn(){
         for(int i=0; i<10; i++){
             try {
@@ -63,7 +76,8 @@ public class Thread1 implements Runnable{
             @Override
             public void run() {
 //                thread1.testNotSyn();
-                thread1.testSyn();
+//                thread1.testSyn();
+                Thread1.testClassSyn();//类锁方法和对象锁方法 交错进行
             }
         },"b");
 

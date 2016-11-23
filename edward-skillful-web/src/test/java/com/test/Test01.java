@@ -11,5 +11,7 @@ public class Test01 {
 		Long l2 = 228l;
 		//false 有时会为true
 		System.out.println(l1 == l2);
+
+
 	}
 }
