@@ -119,8 +119,8 @@ public class BaseMaterialClassAction {
             HttpServletRequest request,
             HttpServletResponse response
     ){
-        Date date = DateUtils.getCurDate();
-        String exportName = DateUtils.toStr("yyyyMMdd", date) + "--" + DateUtils.toStr("yyyyMMdd", date) + "物资类别信息.xls";
+        Date date = DateUtils.now();
+        String exportName = DateUtils.date2Str(date,"yyyyMMdd") + "--" + DateUtils.date2Str(date,"yyyyMMdd") + "物资类别信息.xls";
         LinkedHashMap<String, Object> maps = Maps.newLinkedHashMap();
         maps.put("materialClassList", baseMaterialClassService.selectAll());
         maps.put("isFirstPage", true);

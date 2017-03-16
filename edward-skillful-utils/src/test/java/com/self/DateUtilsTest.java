@@ -1,9 +1,6 @@
 package com.self;
 
-import com.utils.DateUtils;
 import org.joda.time.DateTime;
-
-import java.util.Date;
 
 /**
  * DateUtils 如获取当前时间，格式转化为String
@@ -26,6 +23,6 @@ public class DateUtilsTest {
 		System.out.println(DateTime.now().dayOfMonth());
 
 		//格式转换和变成string
-		DateUtils.toStr("yyyy-MM-dd",new Date());
+//		DateUtils.toStr("yyyy-MM-dd",new Date());
 	}
 }

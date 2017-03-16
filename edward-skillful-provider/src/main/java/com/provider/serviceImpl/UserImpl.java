@@ -55,13 +55,13 @@ public class UserImpl extends AbstractBaseServiceImpl<User, UserCriteria> implem
         MyIllegalArgumentException.checkNull(user,logger,"user对象不能为null");
         MyIllegalArgumentException.checkNull(user.getRoleId(),logger,"roleId不能为null");
         if(null == user.getUserId()){
-            user.setCreateTime(DateUtils.getCurDate());
-            user.setModifyTime(DateUtils.getCurDate());
+            user.setCreateTime(DateUtils.now());
+            user.setModifyTime(DateUtils.now());
             this.setUserRoleNameByRoleId(user.getRoleId(),user);
 
             this.insert(user);
         }else {
-            user.setModifyTime(DateUtils.getCurDate());
+            user.setModifyTime(DateUtils.now());
             User oldUser = this.selectById(user.getUserId());
             user.setCreateTime(oldUser.getCreateTime());
             this.setUserRoleNameByRoleId(user.getRoleId(),user);

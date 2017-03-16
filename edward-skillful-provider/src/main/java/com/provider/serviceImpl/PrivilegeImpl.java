@@ -45,11 +45,11 @@ public class PrivilegeImpl extends AbstractBaseServiceImpl<Privilege, PrivilegeC
     public void save(Privilege privilege) throws MyException {
         MyIllegalArgumentException.checkNull(privilege,logger,"privilege对象不能为null");
         if(null == privilege.getPrivilegeId()){
-            privilege.setCreateTime(DateUtils.getCurDate());
-            privilege.setModifyTime(DateUtils.getCurDate());
+            privilege.setCreateTime(DateUtils.now());
+            privilege.setModifyTime(DateUtils.now());
             this.insert(privilege);
         }else{
-            privilege.setModifyTime(DateUtils.getCurDate());
+            privilege.setModifyTime(DateUtils.now());
             Privilege oldPrivilege = this.selectById(privilege.getPrivilegeId());
             privilege.setCreateTime(oldPrivilege.getCreateTime());
 

@@ -79,7 +79,7 @@ public class RoleImpl extends AbstractBaseServiceImpl<Role, RoleCriteria> implem
             //修改
             Role oldRole = this.selectById(role.getRoleId());
             role.setCreateTime(oldRole.getCreateTime());
-            role.setModifyTime(DateUtils.getCurDate());
+            role.setModifyTime(DateUtils.now());
             this.updateById(role);
             //插入role_Privilage：
             rolePrivilegeService.save(roleEx.getPrivilageCodes(),role.getRoleId());
@@ -87,8 +87,8 @@ public class RoleImpl extends AbstractBaseServiceImpl<Role, RoleCriteria> implem
     }
 
     private void insertRole(Role role) throws MyException {
-        role.setCreateTime(DateUtils.getCurDate());
-        role.setModifyTime(DateUtils.getCurDate());
+        role.setCreateTime(DateUtils.now());
+        role.setModifyTime(DateUtils.now());
         this.insert(role);
     }
 

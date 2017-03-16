@@ -51,11 +51,11 @@ public class RolePrivilegeImpl extends AbstractBaseServiceImpl<RolePrivilege, Ro
     private void save(RolePrivilege rolePrivilege) throws MyException {
         MyIllegalArgumentException.checkNull(rolePrivilege,logger,"rolePrivilege对象不能为null");
         if(null == rolePrivilege.getRecordId()){
-            rolePrivilege.setCreateTime(DateUtils.getCurDate());
-            rolePrivilege.setModifyTime(DateUtils.getCurDate());
+            rolePrivilege.setCreateTime(DateUtils.now());
+            rolePrivilege.setModifyTime(DateUtils.now());
             this.insert(rolePrivilege);
         }else {
-            rolePrivilege.setModifyTime(DateUtils.getCurDate());
+            rolePrivilege.setModifyTime(DateUtils.now());
             RolePrivilege oldRolePrivilege = this.selectById(rolePrivilege.getRecordId());
             MyObjectNullException.checkNull(oldRolePrivilege,logger,"主键是:"+rolePrivilege.getRecordId()+"的对象不能为null");
             rolePrivilege.setCreateTime(oldRolePrivilege.getCreateTime());

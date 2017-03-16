@@ -52,7 +52,7 @@ public class TestCookie {
     @RequestMapping(value = "/addSession",method = RequestMethod.GET)
     public void addSession(HttpServletRequest request, HttpServletResponse response){
         HttpSession session = request.getSession();//请求头 Cookie:JSESSIONID=B8857794C7D84A6FF6D038E7C74089A2 sessionId都放在Cookie
-        session.setAttribute("user",new User("tom", DateUtils.getCurDate()));
+        session.setAttribute("user",new User("tom", DateUtils.now()));
     }
 
     @ResponseBody

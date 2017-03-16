@@ -110,7 +110,7 @@ public class BaseMaterialImpl extends AbstractBaseServiceImpl<BaseMaterial, Base
         finalMaterial.setPlantingSysCode(baseMaterial.getPlantingSysCode());//ToDO
         finalMaterial.setPlantingSysName(baseMaterial.getPlantingSysName());//ToDO
         //变化值
-        finalMaterial.setModifyTime(DateUtils.getCurDate());
+        finalMaterial.setModifyTime(DateUtils.now());
         finalMaterial.setCode(baseMaterial.getMaterialCode());
     }
 
@@ -127,8 +127,8 @@ public class BaseMaterialImpl extends AbstractBaseServiceImpl<BaseMaterial, Base
         }
         baseMaterial.setClassName(baseMaterialClassService.getClassNameByClassCode(baseMaterial.getClassCode()));
         baseMaterial.setStatus(MyEnums.Status.Normal.getCode());
-        baseMaterial.setCreateTime(DateUtils.getCurDate());
-        baseMaterial.setModifyTime(DateUtils.getCurDate());
+        baseMaterial.setCreateTime(DateUtils.now());
+        baseMaterial.setModifyTime(DateUtils.now());
         baseMaterial.setCode(baseMaterial.getMaterialCode());
     }
 
