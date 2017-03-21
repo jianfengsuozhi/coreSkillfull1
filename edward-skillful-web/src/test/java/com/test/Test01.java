@@ -1,6 +1,9 @@
 package com.test;
 
+import com.google.common.collect.Lists;
+
 import java.util.Date;
+import java.util.List;
 
 public class Test01 extends Date{
 	public static void main(String[] args) {
@@ -24,10 +27,13 @@ public class Test01 extends Date{
 			System.out.println("B");
 		}
 	}*/
-		Test01 test01 = new Test01();
+/*		Test01 test01 = new Test01();
 		test01.testSuper();
-		System.out.println(test01.getClass().getSuperclass().getName());
-
+		System.out.println(test01.getClass().getSuperclass().getName());*/
+		List<Long> aa = Lists.newArrayList();
+		aa.add(1l);
+		aa.add(2l);
+		boolean contains = aa.contains(1l);
 	}
 	public void testSuper(){
 		System.out.println(super.getClass().getName());
